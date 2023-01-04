@@ -1,17 +1,27 @@
-//Cucumber Testing Payment
-
-package org.acme;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import io.quarkus.test.junit.QuarkusTest;
-
 Feature: Payment
 Scenario: Successful payment
     Given a customer with id "cid1"
     And a merchant with id "mid1"
     When the merchant initiates a payment for 10 kr by the customer
     Then the payment is successful
+
+Scenario: List of payments
+    Given a successful payment of "10" kr from customer "cid1" to merchant "mid1"
+    When the manager asks for at list of payments
+    Then the list contains a list of payments where customer "cid1" paid "10" kr to merchant "mid1"
+Scenario: Customer is not known
+    Given a customer with id "cid2"
+    And a merchant with id "mid1"
+    When the merchant initiates a payment for "10" kr by the customer
+    Then the payment is not successful
+    And an error message is returned saying "customer with id cid2 is unknown"
+
+Scenario: Merchant is not known
+    Given a customer with id "cid1"
+    And a merchant with id "mid2"
+    When the merchant initiates a payment for "10" kr by the customer
+    Then the payment is not successful
+    And an error message is returned saying "merchant with id mid2 is unknown"
 
 
 
