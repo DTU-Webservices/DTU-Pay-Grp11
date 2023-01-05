@@ -7,12 +7,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.Set;
 
 
 @Path("/payment")
 public class PaymentResource {
 
-    private PaymentService service = new PaymentService();
+    private final PaymentService service = new PaymentService();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -25,6 +27,14 @@ public class PaymentResource {
     public Payment getPaymentXml() {
         return service.getPayment();
     }
+
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPaymentsJson() {
+        return Response.ok(service.getPayments()).build();
+    }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
