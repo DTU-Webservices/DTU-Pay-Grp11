@@ -1,0 +1,51 @@
+package org.acme;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+
+@Path("/payment")
+public class PaymentResource {
+
+    private PaymentService service = new PaymentService();
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payment getPaymentJson() {
+        return service.getPayment();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Payment getPaymentXml() {
+        return service.getPayment();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void pay(Payment p) {
+        service.pay(p);
+    }
+
+/*
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response payJson(Payment p) throws URISyntaxException {
+        if (service.validatePayment(p)) {
+            service.pay(p);
+            System.out.println("Payment successful");
+            return Response.created(new URI("/payment")).build();
+        } else {
+            System.out.println("Payment failed");
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        }
+    }
+
+ */
+}
