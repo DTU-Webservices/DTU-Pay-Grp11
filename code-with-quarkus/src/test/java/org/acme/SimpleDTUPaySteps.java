@@ -13,6 +13,7 @@ public class SimpleDTUPaySteps {
     Payment payment = new Payment("10","123","456");
     boolean successful;
 
+    // Scenario: Customer pays merchant
     @Given("a customer with id {string}")
     public void aCustomerWithId(String arg0) {
         this.cid = cid;
@@ -33,6 +34,7 @@ public class SimpleDTUPaySteps {
     public void thePaymentIsSuccessful() {
         assertTrue(successful);
     }
+
 
     @Given("a successful payment of {string} kr from customer {string} to merchant {string}")
     public void aSuccessfulPaymentOfKrFromCustomerToMerchant(String arg0, String arg1, String arg2) {
@@ -55,4 +57,5 @@ public class SimpleDTUPaySteps {
     @And("an error message is returned saying {string}")
     public void anErrorMessageIsReturnedSaying(String arg0) {
     }
+
 }

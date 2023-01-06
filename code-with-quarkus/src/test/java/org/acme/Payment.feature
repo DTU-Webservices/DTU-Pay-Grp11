@@ -9,6 +9,7 @@ Scenario: List of payments
     Given a successful payment of "10" kr from customer "cid1" to merchant "mid1"
     When the manager asks for at list of payments
     Then the list contains a list of payments where customer "cid1" paid "10" kr to merchant "mid1"
+
 Scenario: Customer is not known
     Given a customer with id "cid2"
     And a merchant with id "mid1"
