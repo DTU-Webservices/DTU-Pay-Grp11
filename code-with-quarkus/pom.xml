@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.acme</groupId>
   <artifactId>code-with-quarkus</artifactId>
@@ -45,6 +46,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-docker</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
@@ -73,14 +78,12 @@
       <artifactId>cucumber-picocontainer</artifactId>
       <version>7.10.1</version>
     </dependency>
-    <!-- This is JUnit 5 aka Jupiter -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.9.1</version>
       <scope>test</scope>
     </dependency>
-    <!--  These two dependencies allow to run JUnit 4 tests and Cucumber tests. -->
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
@@ -98,7 +101,6 @@
       <artifactId>resteasy-client</artifactId>
       <version>6.2.2.Final</version>
     </dependency>
-
   </dependencies>
   <build>
     <plugins>
@@ -132,6 +134,7 @@
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <!--suppress UnresolvedMavenProperty -->
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
         </configuration>
@@ -149,6 +152,7 @@
               <systemPropertyVariables>
                 <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                <!--suppress UnresolvedMavenProperty -->
                 <maven.home>${maven.home}</maven.home>
               </systemPropertyVariables>
             </configuration>
