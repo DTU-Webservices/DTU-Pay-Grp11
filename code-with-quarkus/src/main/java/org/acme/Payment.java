@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @NoArgsConstructor // Needed for JSON deserialization and XML serialization and deserialization
 @AllArgsConstructor
 
-public class Payment extends ArrayList<Payment> {
+public class Payment {
     private String amount;
     private String cid;
     private String mid;
