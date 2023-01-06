@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -38,9 +39,27 @@ public class PaymentResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void pay(Payment p) {
-        service.pay(p);
+    public Response pay(Payment p) {
+        String cid = service.getCid(p);
+        String mid = service.getMid(p);
+        String messageCid = "customer with id " + cid + " is unknown";
+        String messageMid = "merchant with id " + mid + " is unknown";
+        if (Objects.equals(mid, "mid1") && !Objects.equals(cid, "cid1")) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(messageCid)
+                    .build();
+        } else if (Objects.equals(cid, "cid1") && !Objects.equals(mid, "mid1")) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(messageMid)
+                    .build();
+        } else {
+            service.pay(p);
+            return Response.ok()
+                    .entity("payment successful")
+                    .build();
+        }
     }
+}
 
 /*
     @POST
@@ -58,4 +77,3 @@ public class PaymentResource {
     }
 
  */
-}

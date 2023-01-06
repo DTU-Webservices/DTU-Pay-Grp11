@@ -10,9 +10,9 @@ public class PaymentService {
     private final Set<Payment> payments = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
     public PaymentService() {
-        payments.add(new Payment("100", "1234567890", "1234567890"));
-        payments.add(new Payment("100", "123456227890", "1234567890"));
-        payments.add(new Payment("100", "123456227890", "1234567890"));
+        //payments.add(new Payment("100", "1234567890", "1234567890"));
+        //payments.add(new Payment("100", "123456227890", "1234567890"));
+        //payments.add(new Payment("100", "123456227890", "1234567890"));
         System.out.println("PaymentService Created");
     }
 
@@ -30,5 +30,17 @@ public class PaymentService {
 
     public boolean validatePayment(Payment p) {
         return true;
+    }
+
+    public String getCid(Payment p) {
+    	return p.getCid();
+    }
+
+    public String getMid(Payment p) {
+    	return p.getMid();
+    }
+
+    public String getAmount(Payment p) {
+    	return p.getAmount();
     }
 }
