@@ -1,5 +1,8 @@
 package org.acme;
 
+import dtu.ws.fastmoney.BankServiceException_Exception;
+import dtu.ws.fastmoney.User;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -8,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +20,35 @@ import java.util.Set;
 public class PaymentResource {
 
     private final PaymentService service = new PaymentService();
+
+    @POST
+    @Path("/createAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createAccount(User user) {
+    	try {
+    		String acc = service.createBankAccount(user, BigDecimal.valueOf(1000));
+    		return Response.ok()
+                    .entity(acc)
+                    .build();
+    	} catch (BankServiceException_Exception e) {
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
+    }
+
+    @POST
+    @Path("/retireAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response retireAccount(String accountId) {
+    	try {
+    		service.retireAccount(accountId);
+    		return Response.ok()
+                    .build();
+    	} catch (BankServiceException_Exception e) {
+    		return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
+    	}
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

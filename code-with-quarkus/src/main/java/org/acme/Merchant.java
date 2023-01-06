@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // Needed for JSON deserialization and XML serialization and deserialization
 @AllArgsConstructor
 
-public class Payment {
-    private String amount;
-    private String cid;
+public class Merchant {
+    private String name;
+    private String cpr;
+    private String address;
     private String mid;
 }
