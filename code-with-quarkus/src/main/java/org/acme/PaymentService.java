@@ -1,15 +1,10 @@
 package org.acme;
 
-import dtu.ws.fastmoney.BankService;
-import dtu.ws.fastmoney.BankServiceException_Exception;
-import dtu.ws.fastmoney.BankServiceService;
-import dtu.ws.fastmoney.User;
+import dtu.ws.fastmoney.*;
+import org.json.XML;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class PaymentService {
 
@@ -34,18 +29,26 @@ public class PaymentService {
 
 
     public String createBankAccount(User user, BigDecimal balance) throws BankServiceException_Exception {
-        return bank.createAccountWithBalance(user, balance);
+        String accountId = bank.createAccountWithBalance(user, balance);
+        System.out.println("AccountID: " + accountId);
+        return accountId;
     }
 
     public void retireAccount(String accountId) throws BankServiceException_Exception {
-    	bank.retireAccount(accountId);
+        try {
+            bank.retireAccount(accountId);
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void transferMoney(String from, String to, BigDecimal amount) throws BankServiceException_Exception {
         bank.transferMoneyFromTo(from, to, amount, "Transfer");
     }
 
-
+    public List<AccountInfo> getAccounts() throws BankServiceException_Exception {
+    	return bank.getAccounts();
+    }
 
     public Payment getPayment() {
         return payments.iterator().next();
@@ -66,6 +69,18 @@ public class PaymentService {
 
     public String getMid(Payment p) {
     	return p.getMid();
+    }
+
+    public void addCustomer(Customer c) {
+    	customers.add(c);
+    }
+    public Customer getCustomer(String cid) {
+    	for (Customer c : customers) {
+    		if (c.getCid().equals(cid)) {
+    			return c;
+    		}
+    	}
+    	return null;
     }
 
 

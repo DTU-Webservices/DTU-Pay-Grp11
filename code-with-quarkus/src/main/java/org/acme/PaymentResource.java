@@ -2,13 +2,10 @@ package org.acme;
 
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.User;
+import io.quarkus.vertx.http.runtime.devmode.Json;
+import org.json.JSONObject;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
@@ -24,26 +21,47 @@ public class PaymentResource {
     @POST
     @Path("/createAccount")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createAccount(User user) {
+    public Response createAccount(String userJson) {
     	try {
-    		String acc = service.createBankAccount(user, BigDecimal.valueOf(1000));
+            JSONObject obj = new JSONObject(userJson);
+
+            String balance = obj.getString("balance");
+            System.out.println("Balance: " + balance);
+
+            JSONObject userObj = obj.getJSONObject("user");
+            System.out.println(userObj);
+
+            String cprNumber = userObj.getString("cprNumber");
+            String firstName = userObj.getString("firstName");
+            String lastName = userObj.getString("lastName");
+
+            User user = new User();
+            user.setCprNumber(cprNumber);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+
+    		String acc = service.createBankAccount(user, BigDecimal.valueOf(Integer.parseInt(balance)));
     		return Response.ok()
                     .entity(acc)
                     .build();
     	} catch (BankServiceException_Exception e) {
+            e.printStackTrace();
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     }
 
-    @POST
+    @DELETE
     @Path("/retireAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response retireAccount(String accountId) {
     	try {
-    		service.retireAccount(accountId);
+            JSONObject obj = new JSONObject(accountId);
+            String acc = obj.getString("accountId");
+    		service.retireAccount(acc);
     		return Response.ok()
                     .build();
     	} catch (BankServiceException_Exception e) {
+            e.printStackTrace();
     		return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .build();
@@ -67,6 +85,13 @@ public class PaymentResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPaymentsJson() {
         return Response.ok(service.getPayments()).build();
+    }
+
+    @GET
+    @Path("/accounts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAccountsJson() throws BankServiceException_Exception {
+        return Response.ok(service.getAccounts()).build();
     }
 
 

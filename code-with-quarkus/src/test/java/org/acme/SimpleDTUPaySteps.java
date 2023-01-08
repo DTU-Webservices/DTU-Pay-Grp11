@@ -1,11 +1,15 @@
 package org.acme;
 
+import dtu.ws.fastmoney.BankServiceException_Exception;
+import dtu.ws.fastmoney.User;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.After;
 import org.junit.jupiter.api.Assertions;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,6 +19,7 @@ public class SimpleDTUPaySteps {
     String cid, mid;
     PaymentService dtuPay = new PaymentService();
     Payment payment = new Payment("10","cid1","mid1");
+    String accountID;
     boolean successful;
 
     // Scenario: Customer pays merchant
@@ -75,12 +80,20 @@ public class SimpleDTUPaySteps {
     }
 
     @Given("a customer with a bank account with balance {int}")
-    public void aCustomerWithABankAccountWithBalance(int arg0) {
-
+    public void aCustomerWithABankAccountWithBalance(int arg0) throws BankServiceException_Exception {
+        User user = new User();
+        user.setCprNumber("111111-1111");
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        accountID = dtuPay.createBankAccount(user, new BigDecimal(arg0));
+        if (accountID != null) {
+            assertTrue(true);
+        }
     }
 
     @And("that the customer is registered with DTU Pay")
     public void thatTheCustomerIsRegisteredWithDTUPay() {
+        dtuPay.addCustomer(new Customer());
     }
 
     @Given("a merchant with a bank account with balance {int}")
@@ -101,5 +114,10 @@ public class SimpleDTUPaySteps {
 
     @And("the balance of the merchant at the bank is {int} kr")
     public void theBalanceOfTheMerchantAtTheBankIsKr(int arg0) {
+    }
+
+    @After
+    public void tearDownBankTest() throws BankServiceException_Exception {
+        dtuPay.retireAccount(accountID);
     }
 }
