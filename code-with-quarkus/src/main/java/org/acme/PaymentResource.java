@@ -50,6 +50,27 @@ public class PaymentResource {
     	}
     }
 
+    @POST
+    @Path("/transferMoney")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response transferMoney(String transferJson) {
+    	try {
+            JSONObject obj = new JSONObject(transferJson);
+
+            String amount = obj.getString("amount");
+            String from = obj.getString("fromAccountId");
+            String to = obj.getString("toAccountId");
+
+            service.transferMoney(from, to, BigDecimal.valueOf(Integer.parseInt(amount)));
+    		return Response.ok()
+                    .entity("Transfer successful")
+                    .build();
+    	} catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
+    }
+
     @DELETE
     @Path("/retireAccount")
     @Consumes(MediaType.APPLICATION_JSON)
