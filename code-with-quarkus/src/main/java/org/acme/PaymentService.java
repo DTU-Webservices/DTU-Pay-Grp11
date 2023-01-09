@@ -20,9 +20,6 @@ public class PaymentService {
     private boolean isUserSet = false;
 
     public PaymentService() {
-        payments.add(new Payment("100", "1234567890", "1234567890"));
-        payments.add(new Payment("100", "123456227890", "1234567890"));
-        payments.add(new Payment("100", "123456222227890", "1234562227890"));
         System.out.println("PaymentService Created");
     }
 

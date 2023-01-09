@@ -2,7 +2,6 @@ package org.acme;
 
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.User;
-import io.quarkus.vertx.http.runtime.devmode.Json;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -17,6 +16,7 @@ import java.util.Set;
 public class PaymentResource {
 
     private final PaymentService service = new PaymentService();
+    private final CustomerService customerService = new CustomerService();
 
     @POST
     @Path("/createAccount")
@@ -39,8 +39,14 @@ public class PaymentResource {
             user.setCprNumber(cprNumber);
             user.setFirstName(firstName);
             user.setLastName(lastName);
-
     		String acc = service.createBankAccount(user, BigDecimal.valueOf(Integer.parseInt(balance)));
+            Customer customer = new Customer();
+            customer.setFirstname(firstName);
+            customer.setLastname(lastName);
+            customer.setCpr(cprNumber);
+            customer.setBankAddress(acc);
+            customer.setCid(acc);
+            customerService.addCustomer(customer);
     		return Response.ok()
                     .entity(acc)
                     .build();
@@ -49,6 +55,27 @@ public class PaymentResource {
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     }
+
+    @POST
+    @Path("/getCustomer")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getCustomerByCpr(String cpr) {
+        String cus = customerService.getCustomer(cpr);
+        return Response.ok()
+                .entity(cus)
+                .build();
+    }
+
+    @GET
+    @Path("/getCustomers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomers() {
+        String cus = customerService.getCustomers().toString();
+        return Response.ok()
+                .entity(cus)
+                .build();
+    }
+
 
     @POST
     @Path("/transferMoney")
