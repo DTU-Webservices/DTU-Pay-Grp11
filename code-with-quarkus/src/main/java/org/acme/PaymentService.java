@@ -1,7 +1,6 @@
 package org.acme;
 
 import dtu.ws.fastmoney.*;
-import org.json.XML;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -12,7 +11,7 @@ public class PaymentService {
 
     private final Set<Payment> payments = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
-    private final Set<Customer> customers = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    private final Set<Account> customers = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
     private final Set<Merchant> merchants = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
@@ -38,6 +37,7 @@ public class PaymentService {
             e.printStackTrace();
         }
     }
+
 
     public void transferMoney(String from, String to, BigDecimal amount) throws BankServiceException_Exception {
         bank.transferMoneyFromTo(from, to, amount, "Transfer");
@@ -68,11 +68,11 @@ public class PaymentService {
     	return p.getMid();
     }
 
-    public void addCustomer(Customer c) {
+    public void addCustomer(Account c) {
     	customers.add(c);
     }
-    public Customer getCustomer(String cid) {
-    	for (Customer c : customers) {
+    public Account getCustomer(String cid) {
+    	for (Account c : customers) {
     		if (c.getCid().equals(cid)) {
     			return c;
     		}

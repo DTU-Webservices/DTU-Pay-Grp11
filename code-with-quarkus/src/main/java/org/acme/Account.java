@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // Needed for JSON deserialization and XML serialization and deserialization
 @AllArgsConstructor
 
-public class Customer {
+public class Account {
     private String firstname;
     private String lastname;
 

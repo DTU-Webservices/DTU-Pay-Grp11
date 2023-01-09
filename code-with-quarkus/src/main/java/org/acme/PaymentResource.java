@@ -9,14 +9,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 
 @Path("/payment")
 public class PaymentResource {
 
     private final PaymentService service = new PaymentService();
-    private final CustomerService customerService = new CustomerService();
+    private final AccountService accountService = new AccountService();
 
     @POST
     @Path("/createAccount")
@@ -40,13 +39,13 @@ public class PaymentResource {
             user.setFirstName(firstName);
             user.setLastName(lastName);
     		String acc = service.createBankAccount(user, BigDecimal.valueOf(Integer.parseInt(balance)));
-            Customer customer = new Customer();
+            Account customer = new Account();
             customer.setFirstname(firstName);
             customer.setLastname(lastName);
             customer.setCpr(cprNumber);
             customer.setBankAddress(acc);
             customer.setCid(acc);
-            customerService.addCustomer(cprNumber ,customer);
+            accountService.addCustomer(cprNumber ,customer);
     		return Response.ok()
                     .entity(acc)
                     .build();
@@ -57,13 +56,13 @@ public class PaymentResource {
     }
 
     @POST
-    @Path("/getCustomer")
+    @Path("/getAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getCustomerByCpr(String cpr) {
         try {
             JSONObject obj = new JSONObject(cpr);
             String cprNumber = obj.getString("cprNumber");
-            String cus = customerService.getCustomer(cprNumber);
+            String cus = accountService.getCustomer(cprNumber);
             return Response.ok()
                     .entity(cus)
                     .build();
@@ -75,10 +74,10 @@ public class PaymentResource {
     }
 
     @GET
-    @Path("/getCustomers")
+    @Path("/getAccounts")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomers() {
-        String cus = customerService.getCustomers().toString();
+        String cus = accountService.getCustomers().toString();
         return Response.ok()
                 .entity(cus)
                 .build();
@@ -95,15 +94,34 @@ public class PaymentResource {
             String amount = obj.getString("amount");
             String from = obj.getString("fromAccountId");
             String to = obj.getString("toAccountId");
-
-            service.transferMoney(from, to, BigDecimal.valueOf(Integer.parseInt(amount)));
-    		return Response.ok()
-                    .entity("Transfer successful")
-                    .build();
+            if (accountService.getCustomer(from) != null && accountService.getCustomer(to) != null) {
+                service.transferMoney(from, to, BigDecimal.valueOf(Integer.parseInt(amount)));
+                return Response.ok()
+                        .entity("Transfer successful")
+                        .build();
+            }
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Account Not Found").build();
     	} catch (BankServiceException_Exception e) {
             e.printStackTrace();
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
+    }
+
+    @GET
+    @Path("/retireAllRegisteredAccount")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response retireAllAccounts() {
+        try {
+            accountService.retireRegisteredAccounts();
+            return Response.ok()
+                    .build();
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
+        }
     }
 
     @DELETE

@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SimpleDTUPaySteps {
     String cid, mid;
     PaymentService dtuPay = new PaymentService();
+    AccountService service = new AccountService();
     Payment payment = new Payment("10","cid1","mid1");
     String accountID;
     boolean successful;
@@ -81,23 +82,43 @@ public class SimpleDTUPaySteps {
 
     @Given("a customer with a bank account with balance {int}")
     public void aCustomerWithABankAccountWithBalance(int arg0) throws BankServiceException_Exception {
-        User user = new User();
-        user.setCprNumber("111111-1111");
-        user.setFirstName("John");
-        user.setLastName("Doe");
-        accountID = dtuPay.createBankAccount(user, new BigDecimal(arg0));
-        if (accountID != null) {
-            assertTrue(true);
+        try {
+            User user = new User();
+            user.setCprNumber("5343535424353235");
+            user.setFirstName("TRfsdgdED");
+            user.setLastName("Dgfgdsg");
+            accountID = dtuPay.createBankAccount(user, new BigDecimal(arg0));
+            if (accountID != null) {
+                assertTrue(true);
+                cid = accountID;
+            }
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     @And("that the customer is registered with DTU Pay")
     public void thatTheCustomerIsRegisteredWithDTUPay() {
-        dtuPay.addCustomer(new Customer());
+        dtuPay.addCustomer(new Account());
     }
 
     @Given("a merchant with a bank account with balance {int}")
-    public void aMerchantWithABankAccountWithBalance(int arg0) {
+    public void aMerchantWithABankAccountWithBalance(int arg0) throws BankServiceException_Exception {
+
+        try {
+            User user = new User();
+            user.setCprNumber("53442423353543543");
+            user.setFirstName("OGGfsgdG");
+            user.setLastName("DGfsgdGG");
+            accountID = dtuPay.createBankAccount(user, new BigDecimal(arg0));
+            if (accountID != null) {
+                assertTrue(true);
+                mid = accountID;
+            }
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @And("that the merchant is registered with DTU Pay")
@@ -118,6 +139,7 @@ public class SimpleDTUPaySteps {
 
     @After
     public void tearDownBankTest() throws BankServiceException_Exception {
-        dtuPay.retireAccount(accountID);
+        dtuPay.retireAccount(mid);
+        dtuPay.retireAccount(cid);
     }
 }
