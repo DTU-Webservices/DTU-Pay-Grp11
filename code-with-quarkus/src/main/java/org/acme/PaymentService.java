@@ -27,12 +27,14 @@ public class PaymentService {
 
 
     public String createBankAccount(User user, BigDecimal balance) throws BankServiceException_Exception {
+
+        String accountId = bank.createAccountWithBalance(user, balance);
         Account account = new Account();
         account.setFirstname(user.getFirstName());
         account.setLastname(user.getLastName());
         account.setCpr(user.getCprNumber());
+        account.setBankAddress(accountId);
         accountService.addCustomer(user.getCprNumber(), account);
-        String accountId = bank.createAccountWithBalance(user, balance);
         System.out.println("AccountID: " + accountId);
         return accountId;
     }

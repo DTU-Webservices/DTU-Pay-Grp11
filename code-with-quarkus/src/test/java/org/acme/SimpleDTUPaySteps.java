@@ -84,9 +84,9 @@ public class SimpleDTUPaySteps {
     public void aCustomerWithABankAccountWithBalance(int arg0) throws BankServiceException_Exception {
         try {
             User user = new User();
-            user.setCprNumber("5343535424353235");
-            user.setFirstName("TRfsdgdED");
-            user.setLastName("Dgfgdsg");
+            user.setCprNumber("888844-4444");
+            user.setFirstName("Ted");
+            user.setLastName("Banks");
             accountID = dtuPay.createBankAccount(user, new BigDecimal(arg0));
             if (accountID != null) {
                 assertTrue(true);
@@ -108,9 +108,9 @@ public class SimpleDTUPaySteps {
 
         try {
             User user = new User();
-            user.setCprNumber("53442423353543543");
-            user.setFirstName("OGGfsgdG");
-            user.setLastName("DGfsgdGG");
+            user.setCprNumber("654321-1234");
+            user.setFirstName("Rob");
+            user.setLastName("Tanks");
             accountID = dtuPay.createBankAccount(user, new BigDecimal(arg0));
             if (accountID != null) {
                 assertTrue(true);
@@ -137,9 +137,16 @@ public class SimpleDTUPaySteps {
     public void theBalanceOfTheMerchantAtTheBankIsKr(int arg0) {
     }
 
+    @Then("delete all accounts")
+    public void deleteAllAccounts() throws BankServiceException_Exception {
+        dtuPay.retireAccount(cid);
+        dtuPay.retireAccount(mid);
+    }
+
     @After
     public void tearDownBankTest() throws BankServiceException_Exception {
-        dtuPay.retireAccount(mid);
-        dtuPay.retireAccount(cid);
+        service.retireRegisteredAccounts();
     }
+
+
 }

@@ -8,6 +8,7 @@ Feature: Payment
         Then the payment is successful
         And the balance of the customer at the bank is 900 kr
         And the balance of the merchant at the bank is 2100 kr
+        Then delete all accounts
 
     Scenario: List of payments
         Given a successful payment of "10" kr from customer "cid1" to merchant "mid1"

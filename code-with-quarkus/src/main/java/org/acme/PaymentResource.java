@@ -39,13 +39,6 @@ public class PaymentResource {
             user.setFirstName(firstName);
             user.setLastName(lastName);
     		String acc = service.createBankAccount(user, BigDecimal.valueOf(Integer.parseInt(balance)));
-            Account account = new Account();
-            account.setFirstname(firstName);
-            account.setLastname(lastName);
-            account.setCpr(cprNumber);
-            account.setBankAddress(acc);
-            account.setCid(acc);
-            accountService.addCustomer(cprNumber ,account);
     		return Response.ok()
                     .entity(acc)
                     .build();
