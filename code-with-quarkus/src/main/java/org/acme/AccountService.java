@@ -40,7 +40,7 @@ public class AccountService {
     }
 
     public String getAccountId(String cpr) {
-        String notFound = "Customer Not Found";
+        String notFound = "Account Not Found";
         String result = registeredUser.get(cpr).getBankAddress();
         if (cpr != null) {
             return result;

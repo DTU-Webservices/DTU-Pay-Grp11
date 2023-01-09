@@ -100,7 +100,7 @@ public class SimpleDTUPaySteps {
 
     @And("that the customer is registered with DTU Pay")
     public void thatTheCustomerIsRegisteredWithDTUPay() {
-        dtuPay.addCustomer(new Account());
+
     }
 
     @Given("a merchant with a bank account with balance {int}")

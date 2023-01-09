@@ -9,11 +9,13 @@ public class PaymentService {
 
     BankService bank = new BankServiceService().getBankServicePort();
 
+    AccountService accountService = new AccountService();
+
     private final Set<Payment> payments = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
-    private final Set<Account> customers = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    //private final Set<Account> customers = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
-    private final Set<Merchant> merchants = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    //private final Set<Merchant> merchants = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
     private User user = new User();
     private boolean isUserSet = false;
@@ -25,6 +27,11 @@ public class PaymentService {
 
 
     public String createBankAccount(User user, BigDecimal balance) throws BankServiceException_Exception {
+        Account account = new Account();
+        account.setFirstname(user.getFirstName());
+        account.setLastname(user.getLastName());
+        account.setCpr(user.getCprNumber());
+        accountService.addCustomer(user.getCprNumber(), account);
         String accountId = bank.createAccountWithBalance(user, balance);
         System.out.println("AccountID: " + accountId);
         return accountId;
@@ -66,18 +73,6 @@ public class PaymentService {
 
     public String getMid(Payment p) {
     	return p.getMid();
-    }
-
-    public void addCustomer(Account c) {
-    	customers.add(c);
-    }
-    public Account getCustomer(String cid) {
-    	for (Account c : customers) {
-    		if (c.getCid().equals(cid)) {
-    			return c;
-    		}
-    	}
-    	return null;
     }
 
 
