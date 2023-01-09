@@ -4,46 +4,33 @@ import java.util.*;
 
 public class CustomerService {
 
-    private final Set<Customer> customers = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    //private final Set<Customer> customers = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    private final HashMap<String, Customer> registeredUser = new HashMap<String, Customer>();
 
     public CustomerService() {
         System.out.println("CustomerService Created");
     }
 
-/*
-    public Customer getCustomer() {
-        return customers.iterator().next();
+    public HashMap<String, Customer> getCustomers() {
+        return registeredUser;
     }
 
- */
-
-
-    public Set<Customer> getCustomers() {
-        return customers;
+    public void addCustomer(String cpr, Customer c) {
+        registeredUser.put(cpr, c);
     }
 
-    public void addCustomer(Customer c) {
-        customers.add(c);
-    }
-
-    public void removeCustomer(Customer c) {
-        customers.remove(c);
-    }
-
-    public void removeCustomerByCpr(String cpr) {
-        customers.removeIf(c -> c.getCpr().equals(cpr));
+    public void removeCustomer(String cpr) {
+        registeredUser.remove(cpr);
     }
 
     public String getCustomer(String cpr) {
         String notFound = "Customer Not Found";
-        for (Customer c : customers) {
-            if (c.getCpr().equals(cpr)) {
-                System.out.println(cpr);
-                return c.toString();
-            }
+        Customer result = registeredUser.get(cpr);
+        if (cpr != null) {
+            return result.toString();
+        } else {
+            return notFound;
         }
-
-        return notFound;
     }
 
 

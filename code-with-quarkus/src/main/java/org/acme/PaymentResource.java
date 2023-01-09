@@ -46,7 +46,7 @@ public class PaymentResource {
             customer.setCpr(cprNumber);
             customer.setBankAddress(acc);
             customer.setCid(acc);
-            customerService.addCustomer(customer);
+            customerService.addCustomer(cprNumber ,customer);
     		return Response.ok()
                     .entity(acc)
                     .build();
@@ -60,10 +60,18 @@ public class PaymentResource {
     @Path("/getCustomer")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getCustomerByCpr(String cpr) {
-        String cus = customerService.getCustomer(cpr);
-        return Response.ok()
-                .entity(cus)
-                .build();
+        try {
+            JSONObject obj = new JSONObject(cpr);
+            String cprNumber = obj.getString("cprNumber");
+            String cus = customerService.getCustomer(cprNumber);
+            return Response.ok()
+                    .entity(cus)
+                    .build();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
     }
 
     @GET
