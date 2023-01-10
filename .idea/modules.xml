@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DTU-Pay-Grp11.iml" filepath="$PROJECT_DIR$/.idea/DTU-Pay-Grp11.iml" />
-      <module fileurl="file://$PROJECT_DIR$/code-with-quarkus/code-with-quarkus.iml" filepath="$PROJECT_DIR$/code-with-quarkus/code-with-quarkus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/customer.iml" filepath="$PROJECT_DIR$/dtu-customer-service/customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/end-to-end-tests/e2e.iml" filepath="$PROJECT_DIR$/end-to-end-tests/e2e.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dtu-merchant-service/merchant.iml" filepath="$PROJECT_DIR$/dtu-merchant-service/merchant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dtu-pay-service/pay.iml" filepath="$PROJECT_DIR$/dtu-pay-service/pay.iml" />
     </modules>
   </component>
 </project>

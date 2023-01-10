@@ -7,17 +7,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="code-with-quarkus" />
+        <module name="merchant" />
+        <module name="pay" />
+        <module name="e2e" />
+        <module name="customer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="code-with-quarkus" target="11" />
+      <module name="customer" target="11" />
       <module name="dtupay_client" target="11" />
+      <module name="e2e" target="11" />
+      <module name="merchant" target="11" />
+      <module name="pay" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="code-with-quarkus" options="-parameters" />
+      <module name="customer" options="-parameters" />
+      <module name="e2e" options="-parameters" />
+      <module name="merchant" options="-parameters" />
+      <module name="pay" options="-parameters" />
     </option>
   </component>
 </project>
