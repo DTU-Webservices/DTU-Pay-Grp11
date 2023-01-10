@@ -8,6 +8,10 @@
         <option value="$PROJECT_DIR$/dtu-pay/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-customer/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-merchant/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-customer-service/pom.xml" />
+        <option value="$PROJECT_DIR$/tokenMangement/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-tokenManagement-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-report-service/pom.xml" />
       </list>
     </option>
   </component>
