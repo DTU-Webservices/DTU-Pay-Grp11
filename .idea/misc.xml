@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/tokenMangement/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-tokenManagement-service/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-report-service/pom.xml" />
+        <option value="$PROJECT_DIR$/messaging-utils/pom.xml" />
       </list>
     </option>
   </component>

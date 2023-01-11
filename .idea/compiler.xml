@@ -9,7 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="moneyTransfer" />
         <module name="tokenManagement" />
+        <module name="code-with-quarkus" />
         <module name="report" />
+        <module name="messaging-utils" />
         <module name="merchant" />
         <module name="e2e" />
         <module name="facade" />
@@ -17,11 +19,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="code-with-quarkus" target="11" />
       <module name="customer" target="11" />
       <module name="dtupay_client" target="11" />
       <module name="e2e" target="11" />
       <module name="facade" target="11" />
       <module name="merchant" target="11" />
+      <module name="messaging-utils" target="11" />
       <module name="moneyTransfer" target="11" />
       <module name="report" target="11" />
       <module name="tokenManagement" target="11" />
@@ -29,6 +33,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="code-with-quarkus" options="-parameters" />
       <module name="customer" options="-parameters" />
       <module name="e2e" options="-parameters" />
       <module name="facade" options="-parameters" />
