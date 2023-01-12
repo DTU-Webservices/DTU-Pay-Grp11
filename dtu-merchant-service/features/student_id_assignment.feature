@@ -1,7 +1,11 @@
 Feature: Student Id Assignment feature
 
-  Scenario: Student Id Assignment
-    When a "StudentRegistrationRequested" event for a student is received
-    Then the "StudentIdAssigned" event is sent with the same correlation id
-    And the student gets a student id
-  
+  Scenario: Merchant Bank Account Assigned
+    When a "MerchantBankAccRequested" event for a payment is received
+    Then the "MerchantBankAccAssigned" event is sent
+    And the payment gets a merchant bank account id
+
+  Scenario: Amount for Payment Assigned
+    When a "AmountRequested" event for a payment is received
+    Then the "AmountAssigned" event is sent
+    And the payment gets an amount assigned

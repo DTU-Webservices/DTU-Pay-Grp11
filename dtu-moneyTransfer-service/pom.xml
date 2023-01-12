@@ -53,12 +53,12 @@
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
-      <dependency>
+    <dependency>
           <groupId>org.json</groupId>
           <artifactId>json</artifactId>
           <version>20160212</version>
-      </dependency>
-      <dependency>
+    </dependency>
+    <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
@@ -121,6 +121,12 @@
       <groupId>jakarta.platform</groupId>
       <artifactId>jakarta.jakartaee-api</artifactId>
       <version>10.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>hubert.dtu.dk</groupId>
+      <artifactId>messaging-utilities</artifactId>
+      <version>3.3</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>

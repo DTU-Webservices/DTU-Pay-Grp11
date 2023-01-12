@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DTU-Pay-Grp11.iml" filepath="$PROJECT_DIR$/.idea/DTU-Pay-Grp11.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/code-with-quarkus.iml" filepath="$PROJECT_DIR$/dtu-customer-service/code-with-quarkus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/code-with-quarkus (2).iml" filepath="$PROJECT_DIR$/dtu-customer-service/code-with-quarkus (2).iml" />
+      <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/code-with-quarkus (1).iml" filepath="$PROJECT_DIR$/dtu-customer-service/code-with-quarkus (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (2).iml" filepath="$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (2).iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (3).iml" filepath="$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (3).iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/customer.iml" filepath="$PROJECT_DIR$/dtu-customer-service/customer.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-merchant-new/dtu-merchant-new.iml" filepath="$PROJECT_DIR$/dtu-merchant-new/dtu-merchant-new.iml" />
