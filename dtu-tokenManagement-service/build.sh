@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 mvn clean package
-docker-compose build dtu-tokenManagement-service
+docker-compose build token-generation-service

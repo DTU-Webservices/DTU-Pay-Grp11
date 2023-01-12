@@ -7,8 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="token-generation-service" />
         <module name="moneyTransfer" />
-        <module name="tokenManagement" />
         <module name="code-with-quarkus" />
         <module name="report" />
         <module name="messaging-utils" />
@@ -28,6 +28,7 @@
       <module name="messaging-utils" target="11" />
       <module name="moneyTransfer" target="11" />
       <module name="report" target="11" />
+      <module name="token-generation-service" target="11" />
       <module name="tokenManagement" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -40,6 +41,7 @@
       <module name="merchant" options="-parameters" />
       <module name="moneyTransfer" options="-parameters" />
       <module name="report" options="-parameters" />
+      <module name="token-generation-service" options="-parameters" />
       <module name="tokenManagement" options="-parameters" />
     </option>
   </component>

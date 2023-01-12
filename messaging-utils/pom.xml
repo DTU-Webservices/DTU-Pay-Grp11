@@ -6,8 +6,8 @@
 
     <groupId>org.example</groupId>
     <artifactId>messaging-utils</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>message-utilities</name>
+    <version>3.3</version>
+    <name>message-utils</name>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>

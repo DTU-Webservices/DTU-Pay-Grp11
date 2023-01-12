@@ -1,9 +1,8 @@
-Feature: Customer token generation feature
+Feature: Token Generation Feature
 
-  Scenario: Customer token generation
-    Given that a customer is registered with DTUPay
-    And the customer has one or less tokens
-    When the customer requests a token
-    Then "TokenGenerationRequested" event is published
-    When the CustomerTokenAssigned event is received with customer token amount not exceeding 6 tokens
-    Then the customer tokens are registered
+  Scenario: Token generation
+    Given there is a token with empty id
+    When the token is being registered
+    Then the "TokenGenerationRequested" event is published
+    When the TokenIdAssigned event is received with non-empty id
+    Then the token is registered and the id is set

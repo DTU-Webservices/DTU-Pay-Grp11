@@ -1,5 +1,5 @@
 FROM adoptopenjdk:11-jre-hotspot
 COPY target/lib /usr/src/lib
-COPY target/dtu-tokenManagement-service-1.0.0-runner.jar /usr/src/
+COPY target/token-generation-service-1.0.0-runner.jar /usr/src/
 WORKDIR /usr/src/
-CMD java -Xmx64m -jar dtu-tokenManagement-service-1.0.0-runner.jar
+CMD java -Xmx64m -jar token-generation-service-1.0.0-runner.jar

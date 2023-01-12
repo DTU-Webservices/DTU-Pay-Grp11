@@ -1,5 +1,5 @@
 version: '3'
 services:
-  token-management-service:
-    image: token-management
+  token-generation-service:
+    image: token-generation-service
     build: .

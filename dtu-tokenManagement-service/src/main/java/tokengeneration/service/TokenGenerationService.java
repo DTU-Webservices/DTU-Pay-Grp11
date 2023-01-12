@@ -11,16 +11,16 @@ import messaging.Event;
 
 public class TokenGenerationService {
     public static final String TOKEN_GENERATION_REQUESTED = "TokenGenerationRequested";
-    public static final String CUSTOMER_TOKEN_ASSIGNED = "CustomerTokenAssigned";
+    public static final String TOKEN_ASSIGNED = "TokenAssigned";
     private MessageQueue queue;
     private Map<CorrelationId, CompletableFuture<Token>> correlations = new ConcurrentHashMap<>();
 
     public TokenGenerationService(MessageQueue q) {
         queue = q;
-        queue.addHandler(CUSTOMER_TOKEN_ASSIGNED, this::handleCustomerTokenAssigned);
+        queue.addHandler(TOKEN_ASSIGNED, this::handleTokenIdAssigned);
     }
 
-    public Token generateToken(Token t) {
+    public Token generate(Token t) {
         var correlationId = CorrelationId.randomId();
         correlations.put(correlationId,new CompletableFuture<>());
         Event event = new Event(TOKEN_GENERATION_REQUESTED, new Object[] { t, correlationId });
@@ -28,7 +28,8 @@ public class TokenGenerationService {
         return correlations.get(correlationId).join();
     }
 
-    public void handleCustomerTokenAssigned(Event e) {
+
+    public void handleTokenIdAssigned(Event e) {
         var t = e.getArgument(0, Token.class);
         var correlationid = e.getArgument(1, CorrelationId.class);
         correlations.get(correlationid).complete(t);
