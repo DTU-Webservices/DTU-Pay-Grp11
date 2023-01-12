@@ -3,7 +3,7 @@ call ./build.bat
 cd ..
 
 # Build the services
-cd dtu-merchant-new
+cd dtu-merchant-service
 call ./build.bat
 cd..
 

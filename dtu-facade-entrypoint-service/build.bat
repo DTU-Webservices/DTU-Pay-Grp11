@@ -1,2 +1,2 @@
-quarkus build
-docker-compose build dtu-facade-entrypoint-service
+call quarkus build
+call docker-compose build dtu-facade-entrypoint-service

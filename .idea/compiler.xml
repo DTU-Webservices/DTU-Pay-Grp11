@@ -10,20 +10,24 @@
         <module name="moneyTransfer" />
         <module name="code-with-quarkus" />
         <module name="tokenManagement" />
+        <module name="code-with-quarkus (3)" />
         <module name="code-with-quarkus (2)" />
         <module name="messaging-utils" />
         <module name="report" />
         <module name="merchant" />
         <module name="e2e" />
         <module name="facade" />
-        <module name="merchant2" />
+        <module name="dtu-merchant-new" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="code-with-quarkus" target="11" />
+      <module name="code-with-quarkus (1)" target="11" />
       <module name="code-with-quarkus (2)" target="11" />
+      <module name="code-with-quarkus (3)" target="11" />
       <module name="customer" target="11" />
+      <module name="dtu-merchant-new" target="11" />
       <module name="dtupay_client" target="11" />
       <module name="e2e" target="11" />
       <module name="facade" target="11" />
@@ -39,8 +43,11 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="code-with-quarkus" options="-parameters" />
+      <module name="code-with-quarkus (1)" options="-parameters" />
       <module name="code-with-quarkus (2)" options="-parameters" />
+      <module name="code-with-quarkus (3)" options="-parameters" />
       <module name="customer" options="-parameters" />
+      <module name="dtu-merchant-new" options="-parameters" />
       <module name="e2e" options="-parameters" />
       <module name="facade" options="-parameters" />
       <module name="merchant" options="-parameters" />

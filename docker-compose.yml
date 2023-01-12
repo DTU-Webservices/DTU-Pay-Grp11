@@ -4,14 +4,14 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
     
-  student-registration-service:
-    image: dtu-facade-entrypoint-service
+  dtu-facade-entrypoint-service:
+    image: dtu-facade-entrypoint
     container_name: dtu-facade-entrypoint-service
     ports:
      - "8080:8080"
     
-  student-id-service:
-    image: dtu-merchant-service
+  dtu-merchant-service:
+    image: dtu-merchant
     container_name: dtu-merchant-service
 
  
