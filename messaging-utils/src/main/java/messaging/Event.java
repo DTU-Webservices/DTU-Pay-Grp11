@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
+/**
+ * @Source Hubert Baumeister Correlation Example provided in 02267
+ */
+
 public class Event implements Serializable {
 
 	private static final long serialVersionUID = 4986172999588690076L;

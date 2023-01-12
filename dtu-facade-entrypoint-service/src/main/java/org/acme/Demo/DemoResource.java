@@ -10,8 +10,15 @@ public class DemoResource {
 
     DemoService ds = new DemoServiceFactory().getDemoService();
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Demo hello() {
-        return ds.getDemoMessage();
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return ds.getDemoMessage().getDemoMessage();
+    }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test() {
+        return "Hello this is a testAAAA";
     }
 }

@@ -10,3 +10,5 @@ cd..
 cd dtu-facade-entrypoint-service
 call ./build.bat
 cd..
+
+call ./deploy.bat
