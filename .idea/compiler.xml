@@ -8,23 +8,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="moneyTransfer" />
-        <module name="tokenManagement" />
         <module name="code-with-quarkus" />
-        <module name="report" />
+        <module name="tokenManagement" />
+        <module name="code-with-quarkus (2)" />
         <module name="messaging-utils" />
+        <module name="report" />
         <module name="merchant" />
         <module name="e2e" />
         <module name="facade" />
+        <module name="merchant2" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="code-with-quarkus" target="11" />
+      <module name="code-with-quarkus (2)" target="11" />
       <module name="customer" target="11" />
       <module name="dtupay_client" target="11" />
       <module name="e2e" target="11" />
       <module name="facade" target="11" />
       <module name="merchant" target="11" />
+      <module name="merchant-run" target="11" />
+      <module name="merchant2" target="11" />
       <module name="messaging-utils" target="11" />
       <module name="moneyTransfer" target="11" />
       <module name="report" target="11" />
@@ -34,10 +39,13 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="code-with-quarkus" options="-parameters" />
+      <module name="code-with-quarkus (2)" options="-parameters" />
       <module name="customer" options="-parameters" />
       <module name="e2e" options="-parameters" />
       <module name="facade" options="-parameters" />
       <module name="merchant" options="-parameters" />
+      <module name="merchant-run" options="-parameters" />
+      <module name="merchant2" options="-parameters" />
       <module name="moneyTransfer" options="-parameters" />
       <module name="report" options="-parameters" />
       <module name="tokenManagement" options="-parameters" />

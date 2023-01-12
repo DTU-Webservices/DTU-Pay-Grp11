@@ -46,6 +46,13 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>hubert.dtu.dk</groupId>
+      <artifactId>messaging-utilities</artifactId>
+      <version>3.3</version>
+      <scope>compile</scope>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>

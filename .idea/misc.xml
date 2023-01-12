@@ -13,6 +13,9 @@
         <option value="$PROJECT_DIR$/dtu-tokenManagement-service/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-report-service/pom.xml" />
         <option value="$PROJECT_DIR$/messaging-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-facade-entrypoint-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-moneyTransfer-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-merchant-new/pom.xml" />
       </list>
     </option>
   </component>
