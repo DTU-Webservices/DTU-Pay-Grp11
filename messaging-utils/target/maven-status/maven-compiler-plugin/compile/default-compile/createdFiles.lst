@@ -1,0 +1,4 @@
+messaging\implementations\RabbitMqQueue.class
+messaging\CorrelationId.class
+messaging\MessageQueue.class
+messaging\Event.class
