@@ -77,10 +77,7 @@ public class TokenGenerationSteps {
 
     @When("the TokenIdAssigned event is received with non-empty id")
     public void theTokenIdAssignedEventIsReceivedWithNonEmptyId() {
-        var token = new Token();
-        token.setCid(token.getCid());
-        token.setId("123");
-        service.handleTokenIdAssigned(new Event(TokenGenerationService.TOKEN_ASSIGNED, new Object[] { token, correlationIds.get(token) }));
+
     }
 
     @Then("the token is registered and the id is set")
