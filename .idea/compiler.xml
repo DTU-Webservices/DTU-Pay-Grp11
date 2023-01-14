@@ -51,9 +51,9 @@
       <module name="code-with-quarkus (3)" options="-parameters" />
       <module name="customer" options="-parameters" />
       <module name="dtu-merchant-new" options="-parameters" />
-      <module name="dtu-merchant-service" options="" />
+      <module name="dtu-merchant-service" options="-parameters" />
       <module name="e2e" options="-parameters" />
-      <module name="facade" options="-parameters" />
+      <module name="facade" options="" />
       <module name="merchant" options="-parameters" />
       <module name="merchant-run" options="-parameters" />
       <module name="merchant2" options="-parameters" />

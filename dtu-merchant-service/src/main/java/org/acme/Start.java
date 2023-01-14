@@ -10,5 +10,6 @@ public class Start {
     private void start() {
         var mq = new RabbitMqQueue("rabbitMq");
         new DemoRecService(mq);
+        new MerchantBankService(mq);
     }
 }
