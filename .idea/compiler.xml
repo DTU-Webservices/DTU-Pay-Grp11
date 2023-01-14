@@ -18,9 +18,9 @@
         <module name="dtu-merchant-service" />
         <module name="messaging-utils" />
         <module name="report" />
-        <module name="e2e" />
         <module name="dtu-merchant-new" />
         <module name="customer" />
+        <module name="e2e-test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -33,6 +33,7 @@
       <module name="dtu-merchant-service" target="11" />
       <module name="dtupay_client" target="11" />
       <module name="e2e" target="11" />
+      <module name="e2e-test" target="11" />
       <module name="facade" target="11" />
       <module name="merchant" target="11" />
       <module name="merchant-run" target="11" />
@@ -53,7 +54,7 @@
       <module name="dtu-merchant-new" options="-parameters" />
       <module name="dtu-merchant-service" options="-parameters" />
       <module name="e2e" options="-parameters" />
-      <module name="facade" options="" />
+      <module name="facade" options="-parameters" />
       <module name="merchant" options="-parameters" />
       <module name="merchant-run" options="-parameters" />
       <module name="merchant2" options="-parameters" />

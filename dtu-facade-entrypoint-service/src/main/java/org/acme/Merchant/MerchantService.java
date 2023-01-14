@@ -10,6 +10,13 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ *
+ * @author Kristoffer T. Pedersen s205354.
+ * @author Lauritz Pepke sxxxxxx.
+ */
+
+
 public class MerchantService {
 
     private static final String MERCHANT_REGISTER_REQ = "MerchantAccRegisterReq";

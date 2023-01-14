@@ -1,4 +1,4 @@
-package org.acme;
+package e2eTest;
 
 import lombok.Data;
 
