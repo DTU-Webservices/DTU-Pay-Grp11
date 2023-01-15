@@ -11,22 +11,16 @@ public class MerchantBankService {
     private static final String MERCHANT_ACC_REGISTER = "MerchantAccRegistered";
     private static final String MERCHANT_GET_ACCOUNT = "MerchantAccGet";
 
+    private static final String MERCHANT_ACCOUNT_RESPONSE = "MerchantAccResponse";
+
     MessageQueue queue;
 
     public MerchantBankService(MessageQueue q) {
         this.queue = q;
         this.queue.addHandler("MerchantAccRegisterReq", this::handleMerchantAccountRegister);
-        //this.queue.addHandler("AmountRequested", this::handleAmountRequested);
         this.queue.addHandler("MerchantAccGetReq", this::handleMerchantAccountGet);
+        this.queue.addHandler("GetMerchantAccForTransferReq", this::handleMerchantAccountGetForTransfer);
     }
-
-//    public void handleAmountRequested(Event ev) {
-//        var p = ev.getArgument(0, Payment.class);
-//        //temporary value
-//        p.setAmount("10");
-//        Event event = new Event("AmountAssigned", new Object[] { p });
-//        queue.publish(event);
-//    }
 
     public void handleMerchantAccountRegister(Event ev) {
         var merchant = ev.getArgument(0, Merchant.class);
@@ -42,6 +36,14 @@ public class MerchantBankService {
         var correlationId = ev.getArgument(1, CorrelationId.class);
         merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
         Event event = new Event(MERCHANT_GET_ACCOUNT, new Object[] { merchant, correlationId });
+        queue.publish(event);
+    }
+
+    public void handleMerchantAccountGetForTransfer(Event ev) {
+        var merchant = ev.getArgument(0, Merchant.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
+        Event event = new Event(MERCHANT_ACCOUNT_RESPONSE, new Object[] { merchant, correlationId });
         queue.publish(event);
     }
 }

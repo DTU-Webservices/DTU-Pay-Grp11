@@ -15,20 +15,16 @@ public class PaymentService {
 
     private static final String PAYMENT_CREATED = "PaymentCreated";
     private static final String AMOUNT_ASSIGNED = "AmountAssigned";
-    private static final String CUSTOMER_REQUEST = "CustomerAccGetReq";
-    private static final String MERCHANT_REQUEST = "MerchantAccGetReq";
-
-    private final Map<CorrelationId, CompletableFuture<Merchant>> merchantFuture = new ConcurrentHashMap<>();
-    private final Map<CorrelationId, CompletableFuture<Customer>> customerFuture = new ConcurrentHashMap<>();
-
+    private static final String CUSTOMER_REQUEST = "GetCustomerAccForTransferReq";
+    private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
 
     MessageQueue queue;
 
     public PaymentService(MessageQueue q) {
         this.queue = q;
         this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
-        this.queue.addHandler("MerchantAccGet", this::handleMerchantAccountIdGetReq);
-        this.queue.addHandler("CustomerAccGet", this::handleCustomerAccountIdGetReq);
+        this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
+        this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
     }
     public void handlePaymentRequested(Event ev) {
         var p = ev.getArgument(0, Payment.class);
@@ -72,6 +68,7 @@ public class PaymentService {
 
         //Kode til at lave bank overførsel her eller noget.
 
+        System.out.println("THIS IS NOISE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         Event event = new Event(PAYMENT_CREATED, new Object[] {mt, correlationId});
         queue.publish(event);
     };

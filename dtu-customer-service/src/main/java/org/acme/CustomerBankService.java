@@ -10,12 +10,15 @@ public class CustomerBankService {
     private static final String CUSTOMER_ACC_REGISTER = "CustomerAccRegistered";
     private static final String CUSTOMER_GET_ACCOUNT = "CustomerAccGet";
 
+    private static final String CUSTOMER_ACCOUTN_RESPONSE = "CustomerAccResponse";
+
     MessageQueue queue;
 
     public CustomerBankService(MessageQueue q) {
         this.queue = q;
         this.queue.addHandler("CustomerAccRegisterReq", this::handleCustomerAccountRegister);
         this.queue.addHandler("CustomerAccGetReq", this::handleCustomerAccountGet);
+        this.queue.addHandler("GetCustomerAccForTransferReq", this::handleCustomerAccountGetForTransfer);
     }
 
     public void handleCustomerAccountRegister(Event ev) {
@@ -28,10 +31,18 @@ public class CustomerBankService {
     }
 
     public void handleCustomerAccountGet(Event ev) {
-        var customer= ev.getArgument(0, Customer.class);
+        var customer = ev.getArgument(0, Customer.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         customer = CustomerRepo.getCustomer(customer.getCustomerId());
         Event event = new Event(CUSTOMER_GET_ACCOUNT, new Object[] { customer, correlationId });
+        queue.publish(event);
+    }
+
+    public void handleCustomerAccountGetForTransfer(Event ev) {
+        var customer = ev.getArgument(0, Customer.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        customer = CustomerRepo.getCustomer(customer.getCustomerId());
+        Event event = new Event(CUSTOMER_ACCOUTN_RESPONSE, new Object[] { customer, correlationId });
         queue.publish(event);
     }
 

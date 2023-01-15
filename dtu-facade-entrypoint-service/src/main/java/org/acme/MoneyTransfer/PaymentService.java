@@ -31,7 +31,16 @@ public class PaymentService {
 
     public void handlePaymentCreated(Event ev) {
         var mt = ev.getArgument(0, MoneyTransfer.class);
+
+        if (mt.getDescription() == null) {
+            mt.setDescription("No description");
+        }
+
         var correlationId = ev.getArgument(1, CorrelationId.class);
-        paymentFuture.get(correlationId).complete(mt);
+        try {
+            paymentFuture.get(correlationId).complete(mt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
