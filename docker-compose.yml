@@ -14,4 +14,8 @@ services:
     image: dtu-merchant
     container_name: dtu-merchant-service
 
+  dtu-customer-service:
+    image: dtu-customer
+    container_name: dtu-customer-service
+
  

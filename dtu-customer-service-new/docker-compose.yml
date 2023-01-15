@@ -1,0 +1,6 @@
+version: '3'
+services:
+  dtu-customer-service:
+    image: dtu-customer
+    build: .
+
