@@ -1,6 +1,5 @@
 version: '3'
 services:
-  dtu-moneyTransfer-service:
-    image: dtu-moneyTransfer
+  dtu-moneytransfer-service:
+    image: dtu-moneytransfer
     build: .
-

@@ -11,6 +11,10 @@ cd dtu-customer-service
 call ./build.bat
 cd..
 
+cd dtu-moneyTransfer-service
+call ./build.bat
+cd..
+
 cd dtu-facade-entrypoint-service
 call ./build.bat
 cd..
