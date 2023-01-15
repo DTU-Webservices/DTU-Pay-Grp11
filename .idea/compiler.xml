@@ -10,17 +10,17 @@
         <module name="code-with-quarkus" />
         <module name="tokenManagement" />
         <module name="code-with-quarkus (3)" />
-        <module name="code-with-quarkus (1)" />
         <module name="code-with-quarkus (2)" />
         <module name="merchant" />
         <module name="facade" />
         <module name="moneyTransfer" />
-        <module name="money-transfer-service" />
         <module name="dtu-merchant-service" />
         <module name="messaging-utils" />
         <module name="report" />
+        <module name="dtu-customer-service" />
         <module name="dtu-merchant-new" />
         <module name="customer" />
+        <module name="e2e-test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -54,13 +54,15 @@
       <module name="code-with-quarkus (2)" options="-parameters" />
       <module name="code-with-quarkus (3)" options="-parameters" />
       <module name="customer" options="-parameters" />
+      <module name="dtu-customer-service" options="-parameters" />
       <module name="dtu-merchant-new" options="-parameters" />
-      <module name="dtu-merchant-service" options="" />
+      <module name="dtu-merchant-service" options="-parameters" />
       <module name="e2e" options="-parameters" />
       <module name="facade" options="-parameters" />
       <module name="merchant" options="-parameters" />
       <module name="merchant-run" options="-parameters" />
       <module name="merchant2" options="-parameters" />
+      <module name="money-transfer-service" options="-parameters" />
       <module name="moneyTransfer" options="-parameters" />
       <module name="report" options="-parameters" />
       <module name="tokenManagement" options="-parameters" />

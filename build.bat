@@ -7,7 +7,7 @@ cd dtu-merchant-service
 call ./build.bat
 cd..
 
-cd dtu-customer-service-new
+cd dtu-customer-service
 call ./build.bat
 cd..
 

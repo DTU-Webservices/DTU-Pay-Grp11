@@ -4,16 +4,16 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DTU-Pay-Grp11.iml" filepath="$PROJECT_DIR$/.idea/DTU-Pay-Grp11.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/code-with-quarkus.iml" filepath="$PROJECT_DIR$/dtu-customer-service/code-with-quarkus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/code-with-quarkus (1).iml" filepath="$PROJECT_DIR$/dtu-customer-service/code-with-quarkus (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (2).iml" filepath="$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (2).iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (3).iml" filepath="$PROJECT_DIR$/dtu-moneyTransfer-service/code-with-quarkus (3).iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-customer-service/customer.iml" filepath="$PROJECT_DIR$/dtu-customer-service/customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dtu-customer-service-new/dtu-customer-service.iml" filepath="$PROJECT_DIR$/dtu-customer-service-new/dtu-customer-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-merchant-new/dtu-merchant-new.iml" filepath="$PROJECT_DIR$/dtu-merchant-new/dtu-merchant-new.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-merchant-service/dtu-merchant-service.iml" filepath="$PROJECT_DIR$/dtu-merchant-service/dtu-merchant-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/end-to-end-tests/e2e-test.iml" filepath="$PROJECT_DIR$/end-to-end-tests/e2e-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-facade-entrypoint-service/facade.iml" filepath="$PROJECT_DIR$/dtu-facade-entrypoint-service/facade.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-merchant-service/merchant.iml" filepath="$PROJECT_DIR$/dtu-merchant-service/merchant.iml" />
       <module fileurl="file://$PROJECT_DIR$/messaging-utils/messaging-utils.iml" filepath="$PROJECT_DIR$/messaging-utils/messaging-utils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dtu-customer-service-new/money-transfer-service.iml" filepath="$PROJECT_DIR$/dtu-customer-service-new/money-transfer-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-moneyTransfer-service/moneyTransfer.iml" filepath="$PROJECT_DIR$/dtu-moneyTransfer-service/moneyTransfer.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-report-service/report.iml" filepath="$PROJECT_DIR$/dtu-report-service/report.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-tokenManagement-service/tokenManagement.iml" filepath="$PROJECT_DIR$/dtu-tokenManagement-service/tokenManagement.iml" />
