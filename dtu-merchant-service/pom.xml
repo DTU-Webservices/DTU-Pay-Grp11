@@ -4,7 +4,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.acme</groupId>
+	<groupId>org.org.acme</groupId>
 	<artifactId>dtu-merchant-service</artifactId>
 	<name>Merchant</name>
 	<version>1.0.0</version>
@@ -119,7 +119,7 @@
 						<index>true</index>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>org.acme.Start</mainClass>
+							<mainClass>org.org.acme.Start</mainClass>
 							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>

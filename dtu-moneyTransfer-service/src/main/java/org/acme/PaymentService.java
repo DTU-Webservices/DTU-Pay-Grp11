@@ -3,41 +3,38 @@ package org.acme;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.Payment;
+import org.acme.Repo.PaymentRepo;
 
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-
-/**
- * SOURCE: HUBERT BAUMEISTER: STUDENT_REGISTRATION_CORRELATION PROJECT
- */
 
 public class PaymentService {
 
+    private static final String PAYMENT_REQ = "PaymentRequested";
+    private static final String AMOUNT_ASSIGNED = "AmountAssigned";
+    private static final String CUSTOMER_REQUEST = "CustomerBankAccRequested";
+    private static final String MERCHANT_REQUEST = "MerchantBankAccRequested";
+
     MessageQueue queue;
-    private Map<CorrelationId, CompletableFuture<Payment>> correlations = new ConcurrentHashMap<>();
-    public static final String AMOUNT_REQUESTED = "AmountRequested";
-    public static final String AMOUNT_ASSIGNED = "AmountAssigned";
 
     public PaymentService(MessageQueue q) {
-        queue = q;
-        queue.addHandler(AMOUNT_ASSIGNED, this::handleAmountAssigned);
+        this.queue = q;
+        this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
+        //this.queue.addHandler(AMOUNT_ASSIGNED, this::handleAmountAssigned);
     }
 
-    public Payment assignAmount(Payment p) {
-        var correlationId = CorrelationId.randomId();
-        correlations.put(correlationId, new CompletableFuture<>());
-        Event event = new Event(AMOUNT_REQUESTED, new Object[] { p, correlationId });
-        queue.publish(event);
-        return correlations.get(correlationId).join();
-
-    }
-
-    public void handleAmountAssigned(Event ev) {
+    public void handlePaymentRequested(Event ev) {
         var p = ev.getArgument(0, Payment.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
-        correlations.get(correlationId).complete(p);
+        p.setPaymentId(correlationId.getId());
+        PaymentRepo.addPayment(p);
+        Event event = new Event(CUSTOMER_REQUEST, new Object[] { p, correlationId });
+        queue.publish(event);
+        Event event2 = new Event(MERCHANT_REQUEST, new Object[] { p, correlationId });
+        queue.publish(event2);
+    }
+
+    public void handleAssigned(Event ev) {
+
+
     }
 
 }

@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.MoneyTransfer;
 
 import lombok.Data;
 

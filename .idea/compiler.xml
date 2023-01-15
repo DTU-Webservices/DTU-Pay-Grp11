@@ -14,6 +14,7 @@
         <module name="merchant" />
         <module name="facade" />
         <module name="moneyTransfer" />
+        <module name="dtu-moneyTransfer-service" />
         <module name="dtu-merchant-service" />
         <module name="messaging-utils" />
         <module name="report" />
@@ -32,6 +33,7 @@
       <module name="dtu-customer-service" target="11" />
       <module name="dtu-merchant-new" target="11" />
       <module name="dtu-merchant-service" target="11" />
+      <module name="dtu-moneyTransfer-service" target="11" />
       <module name="dtupay_client" target="11" />
       <module name="e2e" target="11" />
       <module name="e2e-test" target="11" />
@@ -56,7 +58,7 @@
       <module name="customer" options="-parameters" />
       <module name="dtu-customer-service" options="-parameters" />
       <module name="dtu-merchant-new" options="-parameters" />
-      <module name="dtu-merchant-service" options="-parameters" />
+      <module name="dtu-merchant-service" options="" />
       <module name="e2e" options="-parameters" />
       <module name="facade" options="-parameters" />
       <module name="merchant" options="-parameters" />
