@@ -17,4 +17,13 @@ public class PaymentRepo {
     public static Payment getPayment(UUID paymentId) {
         return Payments.get(paymentId);
     }
+
+    public static Payment getFromMerchantId(String merchantId) {
+        for (Payment payment : Payments.values()) {
+            if (payment.getMid().equals(merchantId)) {
+                return payment;
+            }
+        }
+        return null;
+    }
 }

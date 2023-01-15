@@ -14,17 +14,24 @@ public class PaymentService {
 
     private final MessageQueue queue;
 
-    private final Map<CorrelationId, CompletableFuture<Payment>> correlations = new ConcurrentHashMap<>();
+    private final Map<CorrelationId, CompletableFuture<MoneyTransfer>> paymentFuture = new ConcurrentHashMap<>();
 
     public PaymentService(MessageQueue q) {
         queue = q;
+        queue.addHandler("PaymentCreated", this::handlePaymentCreated);
     }
 
-    public Payment createPayment(Payment payment) {
+    public MoneyTransfer createPayment(Payment payment) {
         var correlationId = CorrelationId.randomId();
         System.out.println("PaymentService: create payment: " + payment);
         Event event = new Event(PAYMENT_CREATE_REQ, new Object[] {payment, correlationId});
         queue.publish(event);
-        return correlations.get(correlationId).join();
+        return paymentFuture.get(correlationId).join();
+    }
+
+    public void handlePaymentCreated(Event ev) {
+        var mt = ev.getArgument(0, MoneyTransfer.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        paymentFuture.get(correlationId).complete(mt);
     }
 }

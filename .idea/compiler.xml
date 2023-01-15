@@ -10,7 +10,6 @@
         <module name="code-with-quarkus" />
         <module name="tokenManagement" />
         <module name="code-with-quarkus (3)" />
-        <module name="code-with-quarkus (2)" />
         <module name="merchant" />
         <module name="facade" />
         <module name="moneyTransfer" />

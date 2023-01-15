@@ -12,7 +12,7 @@ public class PaymentResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Payment createPayment(Payment payment) {
+    public MoneyTransfer createPayment(Payment payment) {
         return ps.createPayment(payment);
     }
 }
