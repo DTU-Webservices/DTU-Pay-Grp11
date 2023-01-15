@@ -17,5 +17,18 @@ public class RegService {
                 .request()
                 .get(Merchant.class);
     }
+
+    public Customer registerCustomer(Customer customer) {
+        return WebTargetFactory.getWebTarget().path("customers")
+                .request()
+                .post(Entity.json(customer), Customer.class);
+    }
+
+    public Customer getCustomer(UUID customerId) {
+        return WebTargetFactory.getWebTarget().path("customers")
+                .path(customerId.toString())
+                .request()
+                .get(Customer.class);
+    }
 }
 
