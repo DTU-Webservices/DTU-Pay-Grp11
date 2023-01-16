@@ -10,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/dtu-moneyTransfer-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dtu-report-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dtu-reporting-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dtu-reporting-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dtu-tokenManagement-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dtu-tokenManagement-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/messaging-utils/src/main/java" charset="UTF-8" />
