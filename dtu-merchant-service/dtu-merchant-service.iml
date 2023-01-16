@@ -22,7 +22,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="code-with-quarkus (2)" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.9" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-java:7.10.1" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-core:7.10.1" level="project" />
