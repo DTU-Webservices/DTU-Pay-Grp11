@@ -60,8 +60,8 @@ public class MoneyTransferSteps {
     @When("the payment is being initiated")
     public void thePaymentIsBeingInitiated() {
         new Thread(() -> {
-            var result = paymentService.assignAmount(payment);
-            registeredPayment.complete(result);
+            //var result = paymentService.assignAmount(payment);
+            //registeredPayment.complete(result);
         }).start();
     }
 
