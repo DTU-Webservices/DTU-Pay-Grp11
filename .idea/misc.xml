@@ -8,8 +8,6 @@
         <option value="$PROJECT_DIR$/dtu-customer/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-merchant/pom.xml" />
         <option value="$PROJECT_DIR$/tokenMangement/pom.xml" />
-        <option value="$PROJECT_DIR$/dtu-tokenManagement-service/pom.xml" />
-        <option value="$PROJECT_DIR$/dtu-report-service/pom.xml" />
         <option value="$PROJECT_DIR$/messaging-utils/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-facade-entrypoint-service/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-moneyTransfer-service/pom.xml" />
@@ -19,6 +17,8 @@
         <option value="$PROJECT_DIR$/end-to-end-tests/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-customer-service-new/pom.xml" />
         <option value="$PROJECT_DIR$/dtu-customer-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-tokenManagement-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dtu-reporting-service/pom.xml" />
       </list>
     </option>
   </component>

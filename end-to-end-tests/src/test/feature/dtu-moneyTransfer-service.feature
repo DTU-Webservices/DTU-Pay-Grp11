@@ -11,5 +11,4 @@ Feature: DTU MoneyTransfer Service
     And a "CustomerBankAccAssigned" event for the payment is sent with non-empty token
     Then the payment is set with an amount, a token and a mid
     When the "MoneyTransferred" event for a payment is sent
-    Then the amount is deducted from the Customer bank account
-    And the amount is added to the Merchant bank account
+    Then the money has been transferred
