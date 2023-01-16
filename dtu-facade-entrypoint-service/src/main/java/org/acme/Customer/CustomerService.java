@@ -3,6 +3,7 @@ package org.acme.Customer;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
+import org.acme.TokenService.Token;
 
 import java.util.Map;
 import java.util.UUID;
@@ -20,6 +21,9 @@ public class CustomerService {
 
     private static final String CUSTOMER_REGISTER_REQ = "CustomerAccRegisterReq";
     private static final String CUSTOMER_GET_REQ = "CustomerAccGetReq";
+    private static final String TOKENS_CUSTOMER_GENERATE_REQ = "TokensCustomerGenerateReq";
+
+    private static final String TOKEN_CUSTOMER_GET_REQ = "TokenCustomerGetReq";
 
     private final MessageQueue queue;
 
@@ -54,6 +58,27 @@ public class CustomerService {
         return correlations.get(correlationId).join();
     }
 
+    public void generateCustomerTokens(Integer qty, String customerId) {
+        var correlationId = CorrelationId.randomId();
+        Token token = new Token();
+        token.setCustomerId(customerId);
+        token.setQty(qty);
+        correlations.put(correlationId, new CompletableFuture<>());
+        System.out.println("CustomerService: generateToken: " + qty + customerId);
+        Event event = new Event(TOKENS_CUSTOMER_GENERATE_REQ, new Object[] {token , correlationId});
+        queue.publish(event);
+    }
+
+    public void getCustomerToken(String customerId) {
+        var correlationId = CorrelationId.randomId();
+        Token token = new Token();
+        token.setCustomerId(customerId);
+        correlations.put(correlationId, new CompletableFuture<>());
+        System.out.println("CustomerService: getToken: " + customerId);
+        Event event = new Event(TOKEN_CUSTOMER_GET_REQ, new Object[] {token , correlationId});
+        queue.publish(event);
+    }
+
     public void handleCustomerRegister(Event ev) {
         var customer = ev.getArgument(0, Customer.class);
         var correlationid = ev.getArgument(1, CorrelationId.class);
@@ -65,5 +90,4 @@ public class CustomerService {
         var correlationid = ev.getArgument(1, CorrelationId.class);
         correlations.get(correlationid).complete(customer);
     }
-
 }

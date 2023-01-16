@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Token implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID tokenId = null;
-    private String accountId;
+    private String customerId = null;
 
     private Integer qty = 0;
 

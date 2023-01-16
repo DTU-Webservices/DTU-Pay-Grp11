@@ -11,14 +11,23 @@ public class TokenResource {
     @GET
     @Path("/{accountId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Token getToken(@PathParam("accountId") String accountId) {
-        return ts.getToken(accountId);
+    public Token getToken(@PathParam("accountId") String customerId) {
+        return ts.getToken(customerId);
     }
 
+    /*
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Token generateToken(Token token) {
         return ts.generateToken(token);
+    }
+
+     */
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Token getTokens() {
+        return ts.getTokens();
     }
 }

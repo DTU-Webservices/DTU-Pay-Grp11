@@ -16,18 +16,24 @@ import java.util.UUID;
 
 public class TokenGenerationService {
 
-    private static final String TOKEN_GENERATE = "TokenGenerated";
+    private static final String TOKENS_CUSTOMER_GENERATE = "TokensCustomerGenerate";
     private static final String TOKEN_GET_ACCOUNT = "TokenGetAccount";
+
+    private static final String TOKENS_GET_ALL = "TokensGetAll";
+
+    private static final String TOKEN_CUSTOMER_GET = "TokenCustomerGet";
 
     MessageQueue messageQueue;
 
     public TokenGenerationService(MessageQueue q) {
         this.messageQueue = q;
-        this.messageQueue.addHandler("TokenGenerateReq", this::handleTokenGenerate);
+        this.messageQueue.addHandler("TokensCustomerGenerateReq", this::handleTokensCustomerGenerate);
         this.messageQueue.addHandler("TokenGetAccountReq", this::handleTokenGetAccount);
+        this.messageQueue.addHandler("TokensGetAllReq", this::handleTokensGetAll);
+        this.messageQueue.addHandler("TokenCustomerGetReq", this::handleTokenCustomerGet);
     }
-
-    private void handleTokenGenerate(Event ev) {
+    // Customer Gets {qty} tokens assigned to his account.
+    private void handleTokensCustomerGenerate(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
@@ -36,15 +42,35 @@ public class TokenGenerationService {
             token.addToken(UUID.randomUUID().toString());
         }
         TokenRepo.addToken(token);
-        Event event = new Event(TOKEN_GENERATE, new Object[] {token, correlationId});
+        Event event = new Event(TOKENS_CUSTOMER_GENERATE, new Object[] {token, correlationId});
         messageQueue.publish(event);
     }
 
+    // Customer Gets all tokens assigned to his account.
     private void handleTokenGetAccount(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
-        token = TokenRepo.getToken(token.getAccountId());
+        token = TokenRepo.getToken(token.getCustomerId());
         Event event = new Event(TOKEN_GET_ACCOUNT, new Object[] {token, correlationId});
         messageQueue.publish(event);
+    }
+
+
+    private void handleTokensGetAll(Event ev) {
+        var token = ev.getArgument(0, Token.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        token = TokenRepo.getTokens();
+        Event event = new Event(TOKENS_GET_ALL, new Object[] {token, correlationId});
+        messageQueue.publish(event);
+    }
+
+    // Get one token to use for a payment
+    private void handleTokenCustomerGet(Event ev) {
+        var token = ev.getArgument(0, Token.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        token = TokenRepo.getToken(token.getTokens().get(0));
+        Event event = new Event(TOKEN_CUSTOMER_GET, new Object[] {token, correlationId});
+        messageQueue.publish(event);
+        token.removeToken(token.getTokens().get(0));
     }
 }

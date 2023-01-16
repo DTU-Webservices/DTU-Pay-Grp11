@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Token implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID tokenId;
-    private String accountId;
+    private String customerId;
 
     private Integer qty;
     // List of tokens customer has
@@ -17,5 +17,9 @@ public class Token implements Serializable {
 
     public void addToken(String token) {
         tokens.add(token);
+    }
+
+    public void removeToken(String token) {
+        tokens.remove(token);
     }
 }
