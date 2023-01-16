@@ -16,4 +16,8 @@ public class ReportResource {
     public Report createReportWithAllPayments() {
         return rs.getAllPayments();
     }
+
+    @Path("/{CAccountId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Report createReportWithCustomerPayments() { return rs.getAllPaymentsMadeByCustomer();}
 }
