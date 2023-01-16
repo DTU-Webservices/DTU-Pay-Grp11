@@ -4,6 +4,9 @@ import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ */
 @Path("/payments")
 public class PaymentResource {
 

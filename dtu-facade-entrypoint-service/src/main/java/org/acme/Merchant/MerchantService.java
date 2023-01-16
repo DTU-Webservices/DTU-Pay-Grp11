@@ -58,6 +58,8 @@ public class MerchantService {
     public void handleMerchantRegister(Event ev) {
         var merchant = ev.getArgument(0, Merchant.class);
         var correlationid = ev.getArgument(1, CorrelationId.class);
+        System.out.println(correlations);
+        System.out.println(correlations.get(correlationid));
         correlations.get(correlationid).complete(merchant);
     }
 

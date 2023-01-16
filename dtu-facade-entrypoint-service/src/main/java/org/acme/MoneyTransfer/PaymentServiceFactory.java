@@ -2,6 +2,10 @@ package org.acme.MoneyTransfer;
 
 import messaging.implementations.RabbitMqQueue;
 
+/**
+ * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ */
+
 public class PaymentServiceFactory {
 
     static PaymentService service = null;
