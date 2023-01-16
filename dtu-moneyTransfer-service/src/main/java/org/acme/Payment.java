@@ -5,6 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ */
+
 @Data
 public class Payment implements Serializable {
 

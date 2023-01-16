@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ */
 
 public class PaymentService {
 
@@ -23,7 +26,9 @@ public class PaymentService {
 
     public MoneyTransfer createPayment(Payment payment) {
         var correlationId = CorrelationId.randomId();
+        payment.setPaymentId(correlationId.getId());
         System.out.println("PaymentService: create payment: " + payment);
+        paymentFuture.put(correlationId, new CompletableFuture<>());
         Event event = new Event(PAYMENT_CREATE_REQ, new Object[] {payment, correlationId});
         queue.publish(event);
         return paymentFuture.get(correlationId).join();
@@ -31,11 +36,6 @@ public class PaymentService {
 
     public void handlePaymentCreated(Event ev) {
         var mt = ev.getArgument(0, MoneyTransfer.class);
-
-        if (mt.getDescription() == null) {
-            mt.setDescription("No description");
-        }
-
         var correlationId = ev.getArgument(1, CorrelationId.class);
         try {
             paymentFuture.get(correlationId).complete(mt);

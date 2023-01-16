@@ -13,5 +13,5 @@ public class MoneyTransfer implements Serializable {
     private String mAccountId;
     private String cAccountId;
     private String amount;
-    private String description = null; // optional
+    private String description = "No description"; // optional
 }
