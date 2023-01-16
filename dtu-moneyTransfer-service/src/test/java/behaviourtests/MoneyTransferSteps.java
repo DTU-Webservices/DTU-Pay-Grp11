@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.MerchantService;
 import org.acme.Payment;
 import org.acme.PaymentService;
 

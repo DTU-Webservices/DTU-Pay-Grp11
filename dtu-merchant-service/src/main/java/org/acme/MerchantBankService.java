@@ -5,8 +5,6 @@ import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Repo.MerchantRepo;
 
-import static io.quarkus.arc.ComponentsProvider.LOG;
-
 public class MerchantBankService {
 
     private static final String MERCHANT_ACC_REGISTER = "MerchantAccRegistered";

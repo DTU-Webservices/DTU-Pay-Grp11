@@ -14,4 +14,8 @@ services:
     image: dtu-merchant
     container_name: dtu-merchant-service
 
+  dtu-tokenManagement-service:
+    image: dtu-token
+    container_name: dtu-tokenManagement-service
+
  

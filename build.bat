@@ -7,6 +7,10 @@ cd dtu-merchant-service
 call ./build.bat
 cd..
 
+cd dtu-tokenManagement-service
+call ./build.bat
+cd..
+
 cd dtu-facade-entrypoint-service
 call ./build.bat
 cd..

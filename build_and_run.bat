@@ -1,6 +1,6 @@
 ./build.bat
 
-# Update the set of services and
+# Update the set# of services and
 # build and execute the system tests
 pushd end-to-end-tests
 ./deploy.bat

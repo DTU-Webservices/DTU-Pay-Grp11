@@ -1,0 +1,5 @@
+version: '3'
+services:
+  dtu-tokenManagement-service:
+    image: dtu-token
+    build: .
