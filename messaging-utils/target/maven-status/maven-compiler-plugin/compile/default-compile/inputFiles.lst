@@ -1,4 +1,4 @@
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\messaging-utils\src\main\java\messaging\CorrelationId.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\messaging-utils\src\main\java\messaging\Event.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\messaging-utils\src\main\java\messaging\MessageQueue.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\messaging-utils\src\main\java\messaging\implementations\RabbitMqQueue.java
+C:\Users\olive\IdeaProjects\DTU-Pay-Grp11\messaging-utils\src\main\java\messaging\implementations\RabbitMqQueue.java
+C:\Users\olive\IdeaProjects\DTU-Pay-Grp11\messaging-utils\src\main\java\messaging\Event.java
+C:\Users\olive\IdeaProjects\DTU-Pay-Grp11\messaging-utils\src\main\java\messaging\MessageQueue.java
+C:\Users\olive\IdeaProjects\DTU-Pay-Grp11\messaging-utils\src\main\java\messaging\CorrelationId.java
