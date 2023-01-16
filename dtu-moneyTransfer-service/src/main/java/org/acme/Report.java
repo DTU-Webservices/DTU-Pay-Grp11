@@ -1,7 +1,6 @@
-package org.acme.Report;
+package org.acme;
 
 import lombok.Data;
-import org.acme.MoneyTransfer.MoneyTransfer;
 
 import java.io.Serializable;
 import java.util.Set;

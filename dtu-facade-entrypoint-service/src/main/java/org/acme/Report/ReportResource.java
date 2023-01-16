@@ -1,17 +1,19 @@
 package org.acme.Report;
 
+import org.acme.MoneyTransfer.MoneyTransfer;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Set;
 
 @Path("/reports")
 public class ReportResource {
 
-    private ReportService rs = new ReportServiceFactory().getReportService();
+    private final ReportService rs = new ReportServiceFactory().getReportService();
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Report createReport(Report report) {
-        return rs.createReport(report);
+    public Report createReportWithAllPayments() {
+        return rs.getAllPayments();
     }
 }

@@ -32,18 +32,18 @@ public class MerchantBankService {
     }
 
     public void handleMerchantAccountGet(Event ev) {
-        var merchant = ev.getArgument(0, Merchant.class);
-        var correlationId = ev.getArgument(1, CorrelationId.class);
-        merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
-        Event event = new Event(MERCHANT_GET_ACCOUNT, new Object[] { merchant, correlationId });
-        queue.publish(event);
+        handleMerchantAccountRequestsForDifferentQueues(MERCHANT_GET_ACCOUNT, ev);
     }
 
     public void handleMerchantAccountGetForTransfer(Event ev) {
+        handleMerchantAccountRequestsForDifferentQueues(MERCHANT_ACCOUNT_RESPONSE, ev);
+    }
+
+    public void handleMerchantAccountRequestsForDifferentQueues(String responseHandler, Event ev) {
         var merchant = ev.getArgument(0, Merchant.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
-        Event event = new Event(MERCHANT_ACCOUNT_RESPONSE, new Object[] { merchant, correlationId });
+        Event event = new Event(responseHandler, new Object[] { merchant, correlationId });
         queue.publish(event);
     }
 }

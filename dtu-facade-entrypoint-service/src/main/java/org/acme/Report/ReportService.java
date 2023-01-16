@@ -6,33 +6,54 @@ import messaging.MessageQueue;
 import org.acme.MoneyTransfer.MoneyTransfer;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ReportService {
 
-    private static final String REPORT_REQ = "ReportReq";
+    private static final String REPORT_ALL_PAYMENTS_REQ = "ReportAllPayReq";
+    private static final String REPORT_ALL_CUSTOMER_PAYMENTS_REQ = "ReportAllCustomerPayReq";
+    private static final String REPORT_ALL_MERCHANT_PAYMENTS_INVOLVED_REQ = "ReportAllMerchantPayReq";
 
     private final MessageQueue queue;
 
-    private final Map<CorrelationId, CompletableFuture<MoneyTransfer>> reportFuture = new ConcurrentHashMap<>();
+    private final Map<CorrelationId, CompletableFuture<Report>> reportFuture = new ConcurrentHashMap<>();
 
     public ReportService(MessageQueue q) {
         queue = q;
-        queue.addHandler("ReportCreated", this::handleReportCreated);
+        queue.addHandler("ReportAllPayResp", this::handleAllPaymentsReportResponse);
     }
 
-    public void handleReportCreated(Event ev) {
-        var rep = ev.getArgument(0, Report.class);
-        var correlationId = ev.getArgument(1, CorrelationId.class);
+    public Report getAllPayments(){
+        return sendRequestForReportAndReturnResponse(REPORT_ALL_PAYMENTS_REQ);
     }
 
-    /*public Report createReport(Report report) {
-        var correlationId = new CorrelationId.randomId();
+    public Report getAllPaymentsMadeByCustomer(){
+        return sendRequestForReportAndReturnResponse(REPORT_ALL_CUSTOMER_PAYMENTS_REQ);
+    }
 
+    public Report getAllPaymentsWithMerchantInvolved(){
+        return sendRequestForReportAndReturnResponse(REPORT_ALL_MERCHANT_PAYMENTS_INVOLVED_REQ);
+    }
+
+    private Report sendRequestForReportAndReturnResponse(String requestHandler) {
+        var correlationId = CorrelationId.randomId();
         reportFuture.put(correlationId, new CompletableFuture<>());
-        Event event = new Event(REPORT_REQ, new Object[] { report });
+        Event event = new Event(requestHandler, new Object[] {correlationId});
         queue.publish(event);
-        return reportFuture.get()
-    }*/
+        return reportFuture.get(correlationId).join();
+    }
+
+    private void handleAllPaymentsReportResponse(Event event) {
+        var report = event.getArgument(0, Report.class);
+        var correlationId = event.getArgument(1, CorrelationId.class);
+        try {
+            reportFuture.get(correlationId).complete(report);
+        } catch (Exception e) {
+            System.out.println(report);
+            e.printStackTrace();
+        }
+
+    }
 }
