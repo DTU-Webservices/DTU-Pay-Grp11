@@ -9,6 +9,6 @@ import java.util.UUID;
 public class Merchant implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private UUID merchantId;
+    private UUID merchantId = null;
     private String accountId;
 }
