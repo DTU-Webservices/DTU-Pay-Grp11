@@ -18,7 +18,6 @@ services:
     image: dtu-token
     container_name: dtu-tokenManagement-service
 
-
   dtu-customer-service:
     image: dtu-customer
     container_name: dtu-customer-service
@@ -26,3 +25,7 @@ services:
   dtu-moneytransfer-service:
     image: dtu-moneytransfer
     container_name: dtu-moneytransfer-service
+
+  dtu-reporting-service:
+    image: dtu-reporting
+    container_name: dtu-reporting-service

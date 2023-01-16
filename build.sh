@@ -24,3 +24,11 @@ popd
 pushd dtu-tokenManagement-service
 ./build.sh
 popd
+
+pushd dtu-reporting-service
+./build.sh
+popd
+
+sleep 5
+
+./deploy.sh
