@@ -67,7 +67,7 @@
       <module name="money-transfer-service" options="-parameters" />
       <module name="moneyTransfer" options="-parameters" />
       <module name="report" options="-parameters" />
-      <module name="tokenManagement" options="-parameters" />
+      <module name="tokenManagement" options="" />
     </option>
   </component>
 </project>

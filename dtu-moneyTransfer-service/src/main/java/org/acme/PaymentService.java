@@ -68,6 +68,7 @@ public class PaymentService {
 
         //Kode til at lave bank overførsel her eller noget.
 
+        System.out.println("THIS IS NOISE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         Event event = new Event(PAYMENT_CREATED, new Object[] {mt, correlationId});
         queue.publish(event);
     };
