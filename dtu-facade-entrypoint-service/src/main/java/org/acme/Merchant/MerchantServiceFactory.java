@@ -1,6 +1,7 @@
 package org.acme.Merchant;
 
 import messaging.implementations.RabbitMqQueue;
+import org.acme.Demo.DemoService;
 
 /**
  * Inspiration drawn from Hubert Baumeiser 02267 Correlation Code Example
