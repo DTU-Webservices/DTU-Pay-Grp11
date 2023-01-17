@@ -30,7 +30,7 @@ public class BankServiceService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://fm-00.compute.dtu.dk/BankService?wsdl");
+            url = new URL("http://fm-00.compute.dtu.dk/BankService.wsdl.xml");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

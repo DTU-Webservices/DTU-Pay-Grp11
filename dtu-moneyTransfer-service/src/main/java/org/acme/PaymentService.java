@@ -1,6 +1,7 @@
 package org.acme;
 
 import dtu.ws.fastmoney.BankService;
+import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.BankServiceService;
 import messaging.CorrelationId;
 import messaging.Event;
@@ -9,6 +10,7 @@ import org.acme.Repo.MoneyTransferRepo;
 import org.acme.Repo.PaymentRepo;
 
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class PaymentService {
@@ -18,9 +20,11 @@ public class PaymentService {
     private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
     private static final String REPORT_ALL_PAYMENTS_RESP = "ReportAllPayResp";
 
+    private final BankService bankService = new BankServiceService().getBankServicePort();
+
     MessageQueue queue;
 
-    public PaymentService(MessageQueue q) {
+    public PaymentService(MessageQueue q)  {
         this.queue = q;
         this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
@@ -59,7 +63,7 @@ public class PaymentService {
         queue.publish(event);
     }
 
-    public void handleCustomerAccountIdGetReq(Event ev){
+    public void handleCustomerAccountIdGetReq(Event ev) {
         var customer = ev.getArgument(0, Customer.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
 
@@ -67,9 +71,16 @@ public class PaymentService {
         mt.setCAccountId(customer.getAccountId());
         MoneyTransferRepo.updateMoneyTransfer(mt);
 
-        //Kode til at lave bank overførsel her eller noget.
-        BankService bankService = new BankServiceService().getBankServicePort();
+        System.out.println("HERE CUSTOMER");
 
+        try {
+            System.out.println(new BigDecimal(mt.getAmount()));
+            bankService.transferMoneyFromTo(mt.getMAccountId(), mt.getCAccountId(),  new BigDecimal(mt.getAmount()), "Payment");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("HERE CUSTOMER");
         Event event = new Event(PAYMENT_CREATED, new Object[] {mt, correlationId});
         queue.publish(event);
     };
