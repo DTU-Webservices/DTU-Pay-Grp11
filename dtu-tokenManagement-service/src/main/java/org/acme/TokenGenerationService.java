@@ -63,8 +63,8 @@ public class TokenGenerationService {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token = TokenRepo.getToken(token.getCustomerId());
-        token.removeToken(token.getTokens().get(0));
         Event event = new Event(TOKENS_GET_TOKEN, new Object[] {token, correlationId});
         messageQueue.publish(event);
+        token.removeToken(token.getTokens().get(0));
     }
 }
