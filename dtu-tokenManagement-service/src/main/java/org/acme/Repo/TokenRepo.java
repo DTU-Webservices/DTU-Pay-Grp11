@@ -4,6 +4,7 @@ import lombok.Data;
 import org.acme.Token;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class TokenRepo {
@@ -27,6 +28,15 @@ public class TokenRepo {
 
     public static int getNumberOfTokens(String customerId) {
         return Tokens.get(customerId).getTokens().size();
+    }
+
+    public static String getCustomerIdFromToken(String token) {
+        for(Map.Entry<String, Token> entry: Tokens.entrySet()) {
+            if(entry.getValue().getTokens().contains(token)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
 }

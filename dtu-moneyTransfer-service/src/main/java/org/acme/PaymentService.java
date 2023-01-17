@@ -17,6 +17,7 @@ import java.util.UUID;
 public class PaymentService {
 
     private static final String PAYMENT_CREATED = "PaymentCreated";
+    private static final String CUSTOMER_REQUEST1 = "GetCustomerIdForTransferReq";
     private static final String CUSTOMER_REQUEST = "GetCustomerAccForTransferReq";
     private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
     private static final String REPORT_ALL_PAYMENTS_RESP = "ReportAllPayResp";
@@ -29,6 +30,7 @@ public class PaymentService {
         this.queue = q;
         this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
+        //this.queue.addHandler("CustomerIdResponse". this::handleCustomerIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
         this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
         this.queue.addHandler("MerchantPaymentCreate", this::handlePaymentRequested);
@@ -73,7 +75,6 @@ public class PaymentService {
 
         return payment;
     }
-
     public void handleCustomerAccountIdGetReq(Event ev) {
         Customer customer = ev.getArgument(0, Customer.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
