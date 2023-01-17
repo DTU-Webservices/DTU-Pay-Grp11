@@ -31,8 +31,6 @@ public class CustomerService {
 
     private final Map<CorrelationId, CompletableFuture<Token>> correlationsToken = new ConcurrentHashMap<>();
 
-
-
     public CustomerService(MessageQueue q) {
         queue = q;
         queue.addHandler("CustomerAccRegistered", this::handleCustomerRegister);

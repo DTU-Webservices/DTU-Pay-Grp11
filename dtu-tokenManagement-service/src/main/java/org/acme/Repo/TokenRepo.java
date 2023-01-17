@@ -1,7 +1,7 @@
 package org.acme.Repo;
 
 import lombok.Data;
-import org.acme.Token;
+import org.acme.Entity.Token;
 
 import java.util.HashMap;
 import java.util.Map;

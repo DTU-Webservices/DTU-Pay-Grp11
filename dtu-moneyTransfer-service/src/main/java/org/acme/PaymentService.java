@@ -9,7 +9,6 @@ import messaging.MessageQueue;
 import org.acme.Entity.*;
 import org.acme.Repo.MoneyTransferRepo;
 import org.acme.Repo.PaymentRepo;
-import org.acme.Repo.TokenRepo;
 
 
 import java.math.BigDecimal;
@@ -22,6 +21,7 @@ public class PaymentService {
     private static final String CUSTOMER_REQUEST = "GetCustomerAccForTransferReq";
     private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
     private static final String REPORT_ALL_PAYMENTS_RESP = "ReportAllPayResp";
+    private static final String GET_CUSTOMER_ID_FROM_TOKEN_REQ = "GetCustomerIdFromTokenReq";
 
     private final BankService bankService = new BankServiceService().getBankServicePort();
 
@@ -34,6 +34,7 @@ public class PaymentService {
         //this.queue.addHandler("CustomerIdResponse". this::handleCustomerIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
         this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
+        this.queue.addHandler("GetCustomerIdFromTokenRes", this::handleGetCustomerIdFromToken);
 
     }
 
@@ -59,15 +60,9 @@ public class PaymentService {
         System.out.println("HALLOO=OOOOOOOOOOOOOQWERTYUIOPASDFGHJKLZXCVBNMOOOOOOOOOOOOOQWERTYUIOPASDFGHJKLZXCVBNM");
         Payment payment = createMoneyTransferAndSave(merchant, correlationId);
 
-        var customer = new Customer();
-        customer.setCurrentToken(UUID.fromString(payment.getToken()));
-        System.out.println("cid: " + UUID.fromString(payment.getToken()));
-        System.out.println("cid: " + UUID.fromString(payment.getToken()));
-        System.out.println("cid: " + UUID.fromString(payment.getToken()));
-        var cid = TokenRepo.getCidToken(UUID.fromString(payment.getToken()));
-        System.out.println("cid: " + cid);
-        customer.setCustomerId(cid);
-        handleEventPublish(customer, CUSTOMER_REQUEST, correlationId);
+        handleEventPublish(payment, GET_CUSTOMER_ID_FROM_TOKEN_REQ, correlationId);
+
+        //handleEventPublish(customer, CUSTOMER_REQUEST, correlationId);
     }
 
     private Payment createMoneyTransferAndSave(Merchant merchant, CorrelationId correlationId) {
@@ -80,6 +75,12 @@ public class PaymentService {
         MoneyTransferRepo.addMoneyTransfer(mt);
 
         return payment;
+    }
+
+    public void handleGetCustomerIdFromToken(Event ev) {
+        Customer customer = ev.getArgument(0, Customer.class);
+        CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
+        handleEventPublish(customer, CUSTOMER_REQUEST, correlationId);
     }
     public void handleCustomerAccountIdGetReq(Event ev) {
         Customer customer = ev.getArgument(0, Customer.class);
@@ -117,7 +118,12 @@ public class PaymentService {
         return report;
     }
     private void handleEventPublish(Object object, String event, CorrelationId correlationId) {
-        Event e = new Event(event, new Object[] {object, correlationId});
-        queue.publish(e);
+
+        if (object != null) {
+            queue.publish(new Event(event, new Object[] {object, correlationId}));
+        } else {
+            queue.publish(new Event(event, new Object[] {correlationId}));
+        }
+
     }
 }

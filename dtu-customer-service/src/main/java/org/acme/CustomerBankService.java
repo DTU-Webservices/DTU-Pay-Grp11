@@ -45,8 +45,11 @@ public class CustomerBankService {
 
     public void handleCustomerRequestsForDifferentQueues(String responseHandler, Event ev) {
         var customer = ev.getArgument(0, Customer.class);
+        var token = customer.getCurrentToken();
         var correlationId = ev.getArgument(1, CorrelationId.class);
         customer = CustomerRepo.getCustomer(customer.getCustomerId());
+        customer.setCurrentToken(token);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CustomerBankService: " + customer);
         Event event = new Event(responseHandler, new Object[] { customer, correlationId });
         queue.publish(event);
     }
