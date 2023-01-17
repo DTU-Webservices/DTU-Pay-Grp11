@@ -11,5 +11,5 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID customerId = null;
     private String accountId;
-    private String currentToken;
+    private UUID currentToken;
 }

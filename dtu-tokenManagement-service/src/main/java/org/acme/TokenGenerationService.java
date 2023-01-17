@@ -42,20 +42,20 @@ public class TokenGenerationService {
         if (TokenRepo.getToken(token.getCustomerId()) != null) {
             if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0 && tokenQty <= 6) {
                 for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
+                    token.addToken(UUID.randomUUID());
                 }
                 TokenRepo.addToken(token);
             } else if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1 && tokenQty <= 5) {
 
                 for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
+                    token.addToken(UUID.randomUUID());
                 }
                 TokenRepo.addToken(token);
             }
         } else {
             if (tokenQty <=6) {
                 for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
+                    token.addToken(UUID.randomUUID());
                 }
                 TokenRepo.addToken(token);
             }
@@ -93,20 +93,20 @@ public class TokenGenerationService {
         if (TokenRepo.getToken(token.getCustomerId()) != null) {
             if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0 && tokenQty <= 6) {
                 for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
+                    token.addToken(UUID.randomUUID());
                 }
                 TokenRepo.addToken(token);
             } else if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1 && tokenQty <= 5) {
 
                 for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
+                    token.addToken(UUID.randomUUID());
                 }
                 TokenRepo.addToken(token);
             }
         } else {
             if (tokenQty <=6) {
                 for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
+                    token.addToken(UUID.randomUUID());
                 }
                 TokenRepo.addToken(token);
             }

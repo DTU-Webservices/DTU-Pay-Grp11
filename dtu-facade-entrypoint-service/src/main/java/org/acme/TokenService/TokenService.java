@@ -4,6 +4,7 @@ import messaging.CorrelationId;
 import messaging.MessageQueue;
 import messaging.Event;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class TokenService {
         queue.publish(event);
         return pendingRequests.get(correlationId).join();
     }
-    public Token getTokenByCustomerId(String customerId) {
+    public Token getTokenByCustomerId(UUID customerId) {
         var correlationId = CorrelationId.randomId();
         Token token = new Token();
         token.setCustomerId(customerId);
@@ -53,7 +54,7 @@ public class TokenService {
         return pendingRequests.get(correlationId).join();
     }
 
-    public Token getTokenForPayment(String customerId) {
+    public Token getTokenForPayment(UUID customerId) {
         var correlationId = CorrelationId.randomId();
         Token token = new Token();
         token.setCustomerId(customerId);

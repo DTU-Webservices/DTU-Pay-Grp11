@@ -3,6 +3,7 @@ package org.acme.TokenService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TokenResource {
     @Path("/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Token getToken(@PathParam("customerId") String customerId) {
-        return ts.getTokenByCustomerId(customerId);
+        return ts.getTokenByCustomerId(UUID.fromString(customerId));
     }
 
 
@@ -28,7 +29,7 @@ public class TokenResource {
     @Path("/payment/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTokenForPayment(@PathParam("customerId") String customerId) {
-        var token = ts.getTokenForPayment(customerId);
+        var token = ts.getTokenForPayment(UUID.fromString(customerId));
         if (token.getTokenId() == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

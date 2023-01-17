@@ -9,17 +9,17 @@ import java.util.UUID;
 public class Token implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID tokenId;
-    private String customerId;
+    private UUID customerId;
 
     private String qty;
     // List of tokens customer has
-    private List<String> tokens;
+    private List<UUID> tokens;
 
-    public void addToken(String token) {
+    public void addToken(UUID token) {
         tokens.add(token);
     }
 
-    public void removeToken(String token) {
+    public void removeToken(UUID token) {
         tokens.remove(token);
     }
 }

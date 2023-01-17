@@ -53,7 +53,7 @@ public class MoneyTransferSteps {
         payment.setAmount("10");
         publishedEvents.put(payment.getAmount(), new CompletableFuture<Event>());
         System.out.println("step 1: " + publishedEvents);
-        assertNull(payment.getCid());
+        //assertNull(payment.getCid());
         assertNull(payment.getMid());
     }
 

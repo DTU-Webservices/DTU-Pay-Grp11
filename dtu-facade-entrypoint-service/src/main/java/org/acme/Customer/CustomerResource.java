@@ -5,6 +5,7 @@ import org.acme.TokenService.Token;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 /**
  * @author Kristoffer T. Pedersen s205354.
@@ -47,7 +48,7 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTokensAmount(@PathParam("customerId") String customerId) {
         //var token = cs.getCustomerTokensAmount(customerId).getTokens().size();
-        var token = cs.getCustomerTokensAmount(customerId);
+        var token = cs.getCustomerTokensAmount(UUID.fromString(customerId));
         if (token == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {

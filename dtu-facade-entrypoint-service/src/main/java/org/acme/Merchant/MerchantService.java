@@ -22,7 +22,6 @@ public class MerchantService {
 
     private static final String MERCHANT_REGISTER_REQ = "MerchantAccRegisterReq";
     private static final String MERCHANT_GET_REQ = "MerchantAccGetReq";
-    private static final String MERCHANT_PAYMENT_CREATE = "MerchantPaymentCreate";
 
     private final MessageQueue queue;
 
@@ -59,15 +58,6 @@ public class MerchantService {
         return correlations.get(correlationId).join();
     }
 
-    public MoneyTransfer createPayment (Payment payment) {
-        var correlationId = CorrelationId.randomId();
-        payment.setPaymentId(correlationId.getId());
-        System.out.println("MerchantService: create payment: " + payment);
-        correlationsPayment.put(correlationId, new CompletableFuture<>());
-        Event event = new Event(MERCHANT_PAYMENT_CREATE, new Object[] {payment, correlationId});
-        queue.publish(event);
-        return correlationsPayment.get(correlationId).join();
-    }
 
     public void handleMerchantRegister(Event ev) {
         var merchant = ev.getArgument(0, Merchant.class);

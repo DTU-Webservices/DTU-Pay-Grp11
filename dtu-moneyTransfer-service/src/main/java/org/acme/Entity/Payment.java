@@ -14,7 +14,7 @@ public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID paymentId = null;
+    private String token;
     private String mid;
-    private String cid;
     private String amount;
 }

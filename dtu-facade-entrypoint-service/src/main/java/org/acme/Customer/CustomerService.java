@@ -72,7 +72,7 @@ public class CustomerService {
         return correlationsToken.get(correlationId).join();
     }
 
-    public Token getCustomerTokensAmount(String customerId) {
+    public Token getCustomerTokensAmount(UUID customerId) {
         var correlationId = CorrelationId.randomId();
         Token token = new Token();
         token.setCustomerId(customerId);

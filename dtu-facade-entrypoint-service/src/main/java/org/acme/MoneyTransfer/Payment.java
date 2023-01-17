@@ -15,6 +15,6 @@ public class Payment implements Serializable {
     private UUID paymentId = null;
     private String token;
     private String mid;
-    private String cid;
+    //private String cid;
     private String amount;
 }
