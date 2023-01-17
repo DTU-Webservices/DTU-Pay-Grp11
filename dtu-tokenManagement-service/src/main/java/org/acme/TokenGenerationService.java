@@ -31,6 +31,9 @@ public class TokenGenerationService {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
+        int maxTokens = 6;
+        int currentTokens = TokenRepo.getTokensAmount(token.getAccountId());
+        System.out.println("Current tokens: " + currentTokens);
         // loop through qty and generate tokens
         for (int i = 0; i < token.getQty(); i++) {
             token.addToken(UUID.randomUUID().toString());
@@ -40,6 +43,20 @@ public class TokenGenerationService {
         messageQueue.publish(event);
     }
 
+/*
+    private void handleTokenGenerate(Event ev) {
+        var token = ev.getArgument(0, Token.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        token.setTokenId(correlationId.getId());
+        // loop through qty and generate tokens
+        for (int i = 0; i < token.getQty(); i++) {
+            token.addToken(UUID.randomUUID().toString());
+        }
+        TokenRepo.addToken(token);
+        Event event = new Event(TOKEN_GENERATE, new Object[] {token, correlationId});
+        messageQueue.publish(event);
+    }
+*/
     private void handleTokenGetAccount(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);

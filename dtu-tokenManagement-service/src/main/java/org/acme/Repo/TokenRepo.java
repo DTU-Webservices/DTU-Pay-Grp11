@@ -13,9 +13,13 @@ public class TokenRepo {
         Tokens.put(token.getAccountId(), token);
     }
 
+    public static int getTokensAmount (String accountId) {
+        return Tokens.get(accountId).getTokens().size();
+    }
 
     public static Token getToken(String accountId) {
         return Tokens.get(accountId);
     }
-
 }
+
+
