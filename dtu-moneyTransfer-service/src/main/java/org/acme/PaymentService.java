@@ -5,6 +5,7 @@ import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Repo.MoneyTransferRepo;
 import org.acme.Repo.PaymentRepo;
+import org.acme.Repo.TokenRepo;
 
 import java.util.Set;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
 public class PaymentService {
 
     private static final String PAYMENT_CREATED = "PaymentCreated";
+    private static final String TOKEN_REQUEST = "GetCustomerIdForTransferReq";
     private static final String CUSTOMER_REQUEST = "GetCustomerAccForTransferReq";
     private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
     private static final String REPORT_ALL_PAYMENTS_RESP = "ReportAllPayResp";
@@ -23,7 +25,9 @@ public class PaymentService {
         this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
+        this.queue.addHandler("CustomerIdResponse", this::handleCustomerIdGetReq);
         this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
+        this.queue.addHandler("MerchantPaymentCreate", this::handlePaymentRequested);
     }
     public void handlePaymentRequested(Event ev) {
         var p = ev.getArgument(0, Payment.class);
@@ -51,10 +55,26 @@ public class PaymentService {
         MoneyTransferRepo.addMoneyTransfer(mt);
 
         var customer = new Customer();
-        customer.setCustomerId(UUID.fromString(p.getCid()));
+        customer.setCurrentToken(p.getToken());
+
+        Event event = new Event(TOKEN_REQUEST, new Object[] {customer, correlationId});
+        queue.publish(event);
+    }
+
+    public void handleCustomerIdGetReq(Event ev) {
+        var customer = ev.getArgument(0, Customer.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+
+        var mt = MoneyTransferRepo.getMoneyTransfer(correlationId.getId());
+        mt.setToken(customer.getCurrentToken());
+        MoneyTransferRepo.updateMoneyTransfer(mt);
+
+        var cid = TokenRepo.getCustomerIdFromToken(customer.getCurrentToken());
+        customer.setCustomerId(UUID.fromString(cid));
 
         Event event = new Event(CUSTOMER_REQUEST, new Object[] {customer, correlationId});
         queue.publish(event);
+
     }
 
     public void handleCustomerAccountIdGetReq(Event ev){
@@ -79,6 +99,7 @@ public class PaymentService {
         Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});
         queue.publish(event);
     }
+
 
 
 }

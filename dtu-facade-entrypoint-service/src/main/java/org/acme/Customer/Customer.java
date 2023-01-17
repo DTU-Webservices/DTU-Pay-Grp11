@@ -12,5 +12,5 @@ public class Customer implements Serializable {
     private UUID customerId = null;
     private String accountId;
 
-    private String currentToken = null;
+    private String currentToken;
 }

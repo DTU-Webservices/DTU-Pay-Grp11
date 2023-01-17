@@ -12,12 +12,15 @@ public class CustomerBankService {
 
     private static final String CUSTOMER_ACCOUTN_RESPONSE = "CustomerAccResponse";
 
+    private static final String CUSTOMER_ID_RESPONSE = "CustomerIdResponse";
+
     MessageQueue queue;
 
     public CustomerBankService(MessageQueue q) {
         this.queue = q;
         this.queue.addHandler("CustomerAccRegisterReq", this::handleCustomerAccountRegister);
         this.queue.addHandler("CustomerAccGetReq", this::handleCustomerAccountGet);
+        this.queue.addHandler("GetCustomerIdForTransferReq", this::handleGetCustomerIdForTransfer);
         this.queue.addHandler("GetCustomerAccForTransferReq", this::handleCustomerAccountGetForTransfer);
     }
 
@@ -31,18 +34,22 @@ public class CustomerBankService {
     }
 
     public void handleCustomerAccountGet(Event ev) {
-        var customer = ev.getArgument(0, Customer.class);
-        var correlationId = ev.getArgument(1, CorrelationId.class);
-        customer = CustomerRepo.getCustomer(customer.getCustomerId());
-        Event event = new Event(CUSTOMER_GET_ACCOUNT, new Object[] { customer, correlationId });
-        queue.publish(event);
+        handleCustomerAccountRequestsForDifferentQueues(CUSTOMER_GET_ACCOUNT, ev);
     }
 
     public void handleCustomerAccountGetForTransfer(Event ev) {
+       handleCustomerAccountRequestsForDifferentQueues(CUSTOMER_ACCOUTN_RESPONSE, ev);
+    }
+
+    public void handleGetCustomerIdForTransfer(Event ev) {
+        handleCustomerAccountRequestsForDifferentQueues(CUSTOMER_ID_RESPONSE, ev);
+    }
+
+    public void handleCustomerAccountRequestsForDifferentQueues(String responseHandler, Event ev) {
         var customer = ev.getArgument(0, Customer.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         customer = CustomerRepo.getCustomer(customer.getCustomerId());
-        Event event = new Event(CUSTOMER_ACCOUTN_RESPONSE, new Object[] { customer, correlationId });
+        Event event = new Event(responseHandler, new Object[] { customer, correlationId });
         queue.publish(event);
     }
 
