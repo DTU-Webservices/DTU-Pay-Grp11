@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.Payment;
+import org.acme.Entity.Payment;
 import org.acme.PaymentService;
 
 import java.util.HashMap;

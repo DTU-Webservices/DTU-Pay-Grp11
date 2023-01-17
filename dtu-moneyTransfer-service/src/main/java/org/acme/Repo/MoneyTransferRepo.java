@@ -1,6 +1,6 @@
 package org.acme.Repo;
 
-import org.acme.MoneyTransfer;
+import org.acme.Entity.MoneyTransfer;
 
 import java.util.*;
 import java.util.stream.Collectors;
