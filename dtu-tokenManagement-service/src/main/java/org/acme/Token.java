@@ -11,7 +11,7 @@ public class Token implements Serializable {
     private UUID tokenId;
     private String customerId;
 
-    private Integer qty;
+    private String qty;
     // List of tokens customer has
     private List<String> tokens;
 

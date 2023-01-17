@@ -16,33 +16,36 @@ import java.util.UUID;
 
 public class TokenGenerationService {
 
-    private static final String TOKENS_CUSTOMER_GENERATE = "TokensCustomerGenerate";
+    private static final String TOKENS_GENERATED = "TokensGenerated";
     private static final String TOKEN_GET_ACCOUNT = "TokenGetAccount";
 
-    private static final String TOKENS_GET_ALL = "TokensGetAll";
-
-    private static final String TOKEN_CUSTOMER_GET = "TokenCustomerGet";
+    private static final String TOKENS_GET_TOKEN = "TokensGetToken";
 
     MessageQueue messageQueue;
 
     public TokenGenerationService(MessageQueue q) {
         this.messageQueue = q;
-        this.messageQueue.addHandler("TokensCustomerGenerateReq", this::handleTokensCustomerGenerate);
+        this.messageQueue.addHandler("TokensGenerateReq", this::handleTokensGenerate);
         this.messageQueue.addHandler("TokenGetAccountReq", this::handleTokenGetAccount);
-        this.messageQueue.addHandler("TokensGetAllReq", this::handleTokensGetAll);
-        this.messageQueue.addHandler("TokenCustomerGetReq", this::handleTokenCustomerGet);
+        this.messageQueue.addHandler("TokensGetTokenReq", this::handleTokensGetToken);
     }
     // Customer Gets {qty} tokens assigned to his account.
-    private void handleTokensCustomerGenerate(Event ev) {
+    private void handleTokensGenerate(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
         // loop through qty and generate tokens
-        for (int i = 0; i < token.getQty(); i++) {
-            token.addToken(UUID.randomUUID().toString());
+        int tokenQty = Integer.parseInt(token.getQty());
+        if (tokenQty <= 6) {
+            for (int i = 0; i < tokenQty; i++) {
+                token.addToken(UUID.randomUUID().toString());
+            }
         }
+        //TODO: Can only generate tokens if customer has 0 or 1 token left
+        //TODO: If customer has 1 token left he can max generate 5 tokens
+        //TODO: If customer has 0 tokens left he can max generate 6 tokens
         TokenRepo.addToken(token);
-        Event event = new Event(TOKENS_CUSTOMER_GENERATE, new Object[] {token, correlationId});
+        Event event = new Event(TOKENS_GENERATED, new Object[] {token, correlationId});
         messageQueue.publish(event);
     }
 
@@ -55,22 +58,13 @@ public class TokenGenerationService {
         messageQueue.publish(event);
     }
 
-
-    private void handleTokensGetAll(Event ev) {
+    // Customer Gets a specific token assigned to his account.
+    private void handleTokensGetToken(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
-        token = TokenRepo.getTokens();
-        Event event = new Event(TOKENS_GET_ALL, new Object[] {token, correlationId});
-        messageQueue.publish(event);
-    }
-
-    // Get one token to use for a payment
-    private void handleTokenCustomerGet(Event ev) {
-        var token = ev.getArgument(0, Token.class);
-        var correlationId = ev.getArgument(1, CorrelationId.class);
-        token = TokenRepo.getToken(token.getTokens().get(0));
-        Event event = new Event(TOKEN_CUSTOMER_GET, new Object[] {token, correlationId});
-        messageQueue.publish(event);
+        token = TokenRepo.getToken(token.getCustomerId());
         token.removeToken(token.getTokens().get(0));
+        Event event = new Event(TOKENS_GET_TOKEN, new Object[] {token, correlationId});
+        messageQueue.publish(event);
     }
 }

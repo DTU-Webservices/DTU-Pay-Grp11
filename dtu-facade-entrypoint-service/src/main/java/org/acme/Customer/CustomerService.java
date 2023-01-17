@@ -21,13 +21,13 @@ public class CustomerService {
 
     private static final String CUSTOMER_REGISTER_REQ = "CustomerAccRegisterReq";
     private static final String CUSTOMER_GET_REQ = "CustomerAccGetReq";
-    private static final String TOKENS_CUSTOMER_GENERATE_REQ = "TokensCustomerGenerateReq";
 
-    private static final String TOKEN_CUSTOMER_GET_REQ = "TokenCustomerGetReq";
 
     private final MessageQueue queue;
 
     private final Map<CorrelationId, CompletableFuture<Customer>> correlations = new ConcurrentHashMap<>();
+
+
 
     public CustomerService(MessageQueue q) {
         queue = q;
@@ -56,27 +56,6 @@ public class CustomerService {
         Event event = new Event(CUSTOMER_GET_REQ, new Object[] { customer, correlationId });
         queue.publish(event);
         return correlations.get(correlationId).join();
-    }
-
-    public void generateCustomerTokens(Integer qty, String customerId) {
-        var correlationId = CorrelationId.randomId();
-        Token token = new Token();
-        token.setCustomerId(customerId);
-        token.setQty(qty);
-        correlations.put(correlationId, new CompletableFuture<>());
-        System.out.println("CustomerService: generateToken: " + qty + customerId);
-        Event event = new Event(TOKENS_CUSTOMER_GENERATE_REQ, new Object[] {token , correlationId});
-        queue.publish(event);
-    }
-
-    public void getCustomerToken(String customerId) {
-        var correlationId = CorrelationId.randomId();
-        Token token = new Token();
-        token.setCustomerId(customerId);
-        correlations.put(correlationId, new CompletableFuture<>());
-        System.out.println("CustomerService: getToken: " + customerId);
-        Event event = new Event(TOKEN_CUSTOMER_GET_REQ, new Object[] {token , correlationId});
-        queue.publish(event);
     }
 
     public void handleCustomerRegister(Event ev) {
