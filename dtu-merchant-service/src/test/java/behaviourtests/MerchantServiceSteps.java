@@ -29,7 +29,6 @@ public class MerchantServiceSteps {
     Merchant expected2;
     private CorrelationId correlationId1;
     private CorrelationId correlationId2;
-    private CompletableFuture<Merchant> registeredMerchant = new CompletableFuture<>();
 
 
     @When("a {string} event for a merchant is received")

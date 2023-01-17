@@ -1,8 +1,12 @@
 Feature: DTU Customer Service feature
 
-  Scenario: Customer Bank Account Assigned
-    When a "CustomerBankAccRequested" event is received
-    Then a "TokenValidationRequested" event is sent
-    When a "TokenValidated" event is received
-    Then the "CustomerBankAccAssigned" event is sent with non-empty id
-    And the payment gets a merchant bank account id
+  Scenario: Customer Account Registration
+    When a "CustomerAccRegisterReq" event for a customer is received
+    Then the "CustomerAccRegistered" event is sent with the same correlation id
+    And the customer account is registered
+
+  Scenario: Get Customer Account for Transfer
+    Given there is a customer registered
+    When a "CustomerAccForTransferReq" event for a transfer is received
+    Then a "CustomerAccResponse" event for a transfer is sent with the same correlation id
+    And the customer for a transfer is retrieved
