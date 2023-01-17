@@ -4,13 +4,39 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import messaging.Event;
+import messaging.MessageQueue;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class MoneyTransferSteps {
 
+    private CompletableFuture<Event> publishedEvent = new CompletableFuture<>();
 
+
+    private MessageQueue q = new MessageQueue() {
+
+        @Override
+        public void publish(Event event) {
+            publishedEvent.complete(event);
+        }
+
+        @Override
+        public void addHandler(String eventType, Consumer<Event> handler) {
+        }
+
+    };
+
+    private Payment payment;
 
     @Given("there is a payment with empty amount, token and mid")
     public void thereIsAPaymentWithEmptyAmountTokenAndMid() {
+        payment = new Payment();
+        payment.setAmount("125");
+        assertNull(payment.getPaymentId());
     }
 
     @When("the payment is being initiated")
@@ -41,11 +67,7 @@ public class MoneyTransferSteps {
     public void theEventForAPaymentIsSent(String arg0) {
     }
 
-    @Then("the amount is deducted from the Customer bank account")
-    public void theAmountIsDeductedFromTheCustomerBankAccount() {
-    }
-
-    @And("the amount is added to the Merchant bank account")
-    public void theAmountIsAddedToTheMerchantBankAccount() {
+    @Then("the transfer has been made")
+    public void theTransferHasBeenMade() {
     }
 }
