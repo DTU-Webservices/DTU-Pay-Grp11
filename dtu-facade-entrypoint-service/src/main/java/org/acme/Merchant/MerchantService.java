@@ -3,7 +3,6 @@ package org.acme.Merchant;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.Demo.Demo;
 
 import java.util.Map;
 import java.util.UUID;

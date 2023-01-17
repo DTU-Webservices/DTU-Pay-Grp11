@@ -1,12 +1,14 @@
 package org.acme;
 
+import dtu.ws.fastmoney.BankService;
+import dtu.ws.fastmoney.BankServiceService;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Repo.MoneyTransferRepo;
 import org.acme.Repo.PaymentRepo;
 
-import java.util.Set;
+
 import java.util.UUID;
 
 public class PaymentService {
@@ -66,6 +68,7 @@ public class PaymentService {
         MoneyTransferRepo.updateMoneyTransfer(mt);
 
         //Kode til at lave bank overførsel her eller noget.
+        BankService bankService = new BankServiceService().getBankServicePort();
 
         Event event = new Event(PAYMENT_CREATED, new Object[] {mt, correlationId});
         queue.publish(event);
