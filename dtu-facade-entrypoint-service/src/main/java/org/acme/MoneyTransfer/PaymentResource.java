@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/payments")
 public class PaymentResource {
 
-    private PaymentService ps = new PaymentServiceFactory().getPaymentService();
+    private final PaymentService ps = new PaymentServiceFactory().getPaymentService();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

@@ -1,7 +1,7 @@
 package org.acme.Repo;
 
 import lombok.Data;
-import org.acme.Payment;
+import org.acme.Entity.Payment;
 import java.util.HashMap;
 import java.util.UUID;
 

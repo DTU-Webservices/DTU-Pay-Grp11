@@ -1,4 +1,4 @@
-messaging/Event.class
-messaging/MessageQueue.class
-messaging/CorrelationId.class
-messaging/implementations/RabbitMqQueue.class
+messaging\implementations\RabbitMqQueue.class
+messaging\CorrelationId.class
+messaging\MessageQueue.class
+messaging\Event.class

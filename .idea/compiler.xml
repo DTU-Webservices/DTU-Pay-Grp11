@@ -8,13 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tokenManagement" />
+        <module name="dtu-moneyTransfer-service" />
         <module name="code-with-quarkus (3)" />
+        <module name="dtu-merchant-service" />
+        <module name="messaging-utils" />
         <module name="merchant" />
         <module name="facade" />
         <module name="dtu-reporting-service" />
-        <module name="dtu-moneyTransfer-service" />
-        <module name="dtu-merchant-service" />
-        <module name="messaging-utils" />
         <module name="dtu-customer-service" />
         <module name="e2e" />
         <module name="dtu-merchant-new" />
