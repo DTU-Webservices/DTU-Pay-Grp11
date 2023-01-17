@@ -36,24 +36,28 @@ public class TokenGenerationService {
         token.setTokenId(correlationId.getId());
         // loop through qty and generate tokens
         int tokenQty = Integer.parseInt(token.getQty());
-        if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0) {
+        if (TokenRepo.getToken(token.getCustomerId()) != null) {
+            if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0 && tokenQty <= 6) {
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID().toString());
+                }
+                TokenRepo.addToken(token);
+            } else if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1 && tokenQty <= 5) {
+
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID().toString());
+                }
+                TokenRepo.addToken(token);
+            }
+        } else {
             if (tokenQty <=6) {
                 for (int i = 0; i < tokenQty; i++) {
                     token.addToken(UUID.randomUUID().toString());
                 }
+                TokenRepo.addToken(token);
             }
+
         }
-        if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1) {
-            if (tokenQty <=5) {
-                for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID().toString());
-                }
-            }
-        }
-        //TODO: Can only generate tokens if customer has 0 or 1 token left
-        //TODO: If customer has 1 token left he can max generate 5 tokens
-        //TODO: If customer has 0 tokens left he can max generate 6 tokens
-        TokenRepo.addToken(token);
         Event event = new Event(TOKENS_GENERATED, new Object[] {token, correlationId});
         messageQueue.publish(event);
     }
