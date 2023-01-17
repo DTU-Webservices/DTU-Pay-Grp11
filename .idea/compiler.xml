@@ -8,13 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tokenManagement" />
+        <module name="dtu-moneyTransfer-service" />
         <module name="code-with-quarkus (3)" />
+        <module name="dtu-merchant-service" />
+        <module name="messaging-utils" />
         <module name="merchant" />
         <module name="facade" />
         <module name="dtu-reporting-service" />
-        <module name="dtu-moneyTransfer-service" />
-        <module name="dtu-merchant-service" />
-        <module name="messaging-utils" />
         <module name="dtu-customer-service" />
         <module name="e2e" />
         <module name="dtu-merchant-new" />
@@ -54,11 +54,11 @@
       <module name="code-with-quarkus (2)" options="-parameters" />
       <module name="code-with-quarkus (3)" options="-parameters" />
       <module name="customer" options="-parameters" />
-      <module name="dtu-customer-service" options="" />
+      <module name="dtu-customer-service" options="-parameters" />
       <module name="dtu-merchant-new" options="-parameters" />
-      <module name="dtu-merchant-service" options="" />
-      <module name="dtu-moneyTransfer-service" options="" />
-      <module name="dtu-reporting-service" options="" />
+      <module name="dtu-merchant-service" options="-parameters" />
+      <module name="dtu-moneyTransfer-service" options="-parameters" />
+      <module name="dtu-reporting-service" options="-parameters" />
       <module name="e2e" options="" />
       <module name="facade" options="-parameters" />
       <module name="merchant" options="-parameters" />
