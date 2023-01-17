@@ -43,6 +43,7 @@ public class MerchantBankService {
         var merchant = ev.getArgument(0, Merchant.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
+        System.out.println("prut: " + merchant);
         Event event = new Event(responseHandler, new Object[] { merchant, correlationId });
         queue.publish(event);
     }
