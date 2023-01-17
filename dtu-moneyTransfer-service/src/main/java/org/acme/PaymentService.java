@@ -31,6 +31,7 @@ public class PaymentService {
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
         this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
+        this.queue.addHandler("MerchantPaymentCreate", this::handlePaymentRequested);
     }
 
     public void handlePaymentRequested(Event ev) {

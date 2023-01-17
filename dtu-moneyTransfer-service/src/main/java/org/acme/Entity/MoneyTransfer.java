@@ -18,4 +18,5 @@ public class MoneyTransfer implements Serializable {
     private String cAccountId;
     private String amount;
     private String description = "No description"; // optional
+    private String token;
 }
