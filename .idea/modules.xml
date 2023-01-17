@@ -14,7 +14,6 @@
       <module fileurl="file://$PROJECT_DIR$/dtu-facade-entrypoint-service/facade.iml" filepath="$PROJECT_DIR$/dtu-facade-entrypoint-service/facade.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-merchant-service/merchant.iml" filepath="$PROJECT_DIR$/dtu-merchant-service/merchant.iml" />
       <module fileurl="file://$PROJECT_DIR$/messaging-utils/messaging-utils.iml" filepath="$PROJECT_DIR$/messaging-utils/messaging-utils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dtu-moneyTransfer-service/moneyTransfer.iml" filepath="$PROJECT_DIR$/dtu-moneyTransfer-service/moneyTransfer.iml" />
       <module fileurl="file://$PROJECT_DIR$/dtu-tokenManagement-service/tokenManagement.iml" filepath="$PROJECT_DIR$/dtu-tokenManagement-service/tokenManagement.iml" />
     </modules>
   </component>
