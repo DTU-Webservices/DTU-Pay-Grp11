@@ -36,9 +36,18 @@ public class TokenGenerationService {
         token.setTokenId(correlationId.getId());
         // loop through qty and generate tokens
         int tokenQty = Integer.parseInt(token.getQty());
-        if (tokenQty <= 6) {
-            for (int i = 0; i < tokenQty; i++) {
-                token.addToken(UUID.randomUUID().toString());
+        if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0) {
+            if (tokenQty <=6) {
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID().toString());
+                }
+            }
+        }
+        if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1) {
+            if (tokenQty <=5) {
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID().toString());
+                }
             }
         }
         //TODO: Can only generate tokens if customer has 0 or 1 token left
