@@ -2,10 +2,12 @@ package org.acme.Customer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * @author Kristoffer T. Pedersen s205354.
  * @author Lauritz Pepke s191179.
+ * @author Oliver Brink Klenum s193625
  */
 
 @Path("/customers")
@@ -26,4 +28,6 @@ public class CustomerResource {
     public Customer registerCustomer(Customer customer) {
         return cs.registerCustomer(customer);
     }
+
+
 }

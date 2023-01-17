@@ -3,6 +3,7 @@ package org.acme.Customer;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
+import org.acme.TokenService.Token;
 
 import java.util.Map;
 import java.util.UUID;
@@ -21,9 +22,12 @@ public class CustomerService {
     private static final String CUSTOMER_REGISTER_REQ = "CustomerAccRegisterReq";
     private static final String CUSTOMER_GET_REQ = "CustomerAccGetReq";
 
+
     private final MessageQueue queue;
 
     private final Map<CorrelationId, CompletableFuture<Customer>> correlations = new ConcurrentHashMap<>();
+
+
 
     public CustomerService(MessageQueue q) {
         queue = q;
@@ -65,5 +69,4 @@ public class CustomerService {
         var correlationid = ev.getArgument(1, CorrelationId.class);
         correlations.get(correlationid).complete(customer);
     }
-
 }
