@@ -9,8 +9,8 @@ public class CustomerBankService {
 
     private static final String CUSTOMER_ACC_REGISTER = "CustomerAccRegistered";
     private static final String CUSTOMER_GET_ACCOUNT = "CustomerAccGet";
-
-    private static final String CUSTOMER_ACCOUTN_RESPONSE = "CustomerAccResponse";
+    private static final String CUSTOMER_ACCOUNT_RESPONSE = "CustomerAccResponse";
+    private static final String CUSTOMER_ID_RESPONSE = "CustomerIdResponse";
 
     MessageQueue queue;
 
@@ -19,6 +19,7 @@ public class CustomerBankService {
         this.queue.addHandler("CustomerAccRegisterReq", this::handleCustomerAccountRegister);
         this.queue.addHandler("CustomerAccGetReq", this::handleCustomerAccountGet);
         this.queue.addHandler("GetCustomerAccForTransferReq", this::handleCustomerAccountGetForTransfer);
+        this.queue.addHandler("GetCustomerIdForTransferReq", this::handleCustomerIdGetForTransfer);
     }
 
     public void handleCustomerAccountRegister(Event ev) {
@@ -31,18 +32,25 @@ public class CustomerBankService {
     }
 
     public void handleCustomerAccountGet(Event ev) {
-        var customer = ev.getArgument(0, Customer.class);
-        var correlationId = ev.getArgument(1, CorrelationId.class);
-        customer = CustomerRepo.getCustomer(customer.getCustomerId());
-        Event event = new Event(CUSTOMER_GET_ACCOUNT, new Object[] { customer, correlationId });
-        queue.publish(event);
+        handleCustomerRequestsForDifferentQueues(CUSTOMER_GET_ACCOUNT, ev);
     }
 
     public void handleCustomerAccountGetForTransfer(Event ev) {
+        handleCustomerRequestsForDifferentQueues(CUSTOMER_ACCOUNT_RESPONSE, ev);
+    }
+
+    public void handleCustomerIdGetForTransfer(Event ev) {
+        handleCustomerRequestsForDifferentQueues(CUSTOMER_ID_RESPONSE, ev);
+    }
+
+    public void handleCustomerRequestsForDifferentQueues(String responseHandler, Event ev) {
         var customer = ev.getArgument(0, Customer.class);
+        var token = customer.getCurrentToken();
         var correlationId = ev.getArgument(1, CorrelationId.class);
         customer = CustomerRepo.getCustomer(customer.getCustomerId());
-        Event event = new Event(CUSTOMER_ACCOUTN_RESPONSE, new Object[] { customer, correlationId });
+        customer.setCurrentToken(token);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CustomerBankService: " + customer);
+        Event event = new Event(responseHandler, new Object[] { customer, correlationId });
         queue.publish(event);
     }
 
