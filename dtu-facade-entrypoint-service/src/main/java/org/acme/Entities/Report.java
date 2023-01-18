@@ -7,6 +7,11 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ *
+ * @author Oliver Brink Klenum s193625
+ *
+ */
 @Data
 public class Report implements Serializable {
 

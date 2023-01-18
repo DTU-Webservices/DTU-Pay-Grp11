@@ -15,18 +15,21 @@ import java.util.UUID;
  *
  */
 
-@Path("/tokens")
+//@Path("/tokens")
 public class TokenResource {
 
     private TokenService ts = new TokenServiceFactory().getTokenService();
 
     // Gets all tokens for a given customer
+    /*
     @GET
     @Path("/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Token getToken(@PathParam("customerId") String customerId) {
         return ts.getTokenByCustomerId(UUID.fromString(customerId));
     }
+
+
 
 
     @GET
@@ -46,5 +49,7 @@ public class TokenResource {
     public Token generateTokens(Token token) {
         return ts.generateTokens(token);
     }
+
+     */
 
 }

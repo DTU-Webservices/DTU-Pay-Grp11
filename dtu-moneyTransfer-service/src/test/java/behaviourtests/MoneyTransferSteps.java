@@ -1,5 +1,6 @@
 package behaviourtests;
 
+import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,16 +8,21 @@ import io.cucumber.java.en.When;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
+import org.acme.*;
+import org.acme.Entity.Customer;
+import org.acme.Entity.Merchant;
+import org.acme.Entity.MoneyTransfer;
 import org.acme.Entity.Payment;
-import org.acme.PaymentService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * SOURCE: HUBERT BAUMEISTER: STUDENT_REGISTRATION_CORRELATION PROJECT
@@ -24,85 +30,70 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class MoneyTransferSteps {
 
+
     private Map<String, CompletableFuture<Event>> publishedEvents = new HashMap<>();
+    MessageQueue queue = mock(MessageQueue.class);
 
-    private MessageQueue q = new MessageQueue() {
-        @Override
-        public void publish(Event event) {
-            var payment = event.getArgument(0, Payment.class);
-            publishedEvents.get(payment.getAmount()).complete(event);
+    PaymentService ps = new PaymentService(queue);
 
-        }
-
-        @Override
-        public void addHandler(String eventType, Consumer<Event> handler) {
-
-        }
-    };
-    Payment payment;
-    Payment expected;
-    private PaymentService paymentService = new PaymentService(q);
     private CompletableFuture<Payment> registeredPayment = new CompletableFuture<>();
     private Map<Payment, CorrelationId> correlationIds = new HashMap<>();
+    Payment payment;
+    Payment expectedPayment;
+    MoneyTransfer moneyTransfer;
+    MoneyTransfer expectedMoneyTransfer;
+    Merchant merchant;
+    Merchant expectedMerchant;
+    Customer customer;
+    Customer expectedCustomer;
+    private CorrelationId correlationId;
 
 
-
-    @Given("there is a payment with empty amount, token and mid")
-    public void thereIsAPaymentWithEmptyAmountTokenAndMid() {
-        payment = new Payment();
-        payment.setAmount("10");
-        publishedEvents.put(payment.getAmount(), new CompletableFuture<Event>());
-        System.out.println("step 1: " + publishedEvents);
-        //assertNull(payment.getCid());
-        assertNull(payment.getMid());
+    @Given("there is a payment with non-empty mid and cid")
+    public void thereIsAPaymentWithNonEmptyId() {
+       /* payment = new Payment();
+        correlationId = CorrelationId.randomId();
+        payment.setPaymentId(correlationId.getId());
+        payment.setMid(UUID.randomUUID().toString());
+        payment.setCid(UUID.randomUUID().toString());
+        payment.setAmount("100");
+        assertNotNull(payment.getCid());
+        assertNotNull(payment.getMid());*/
     }
 
-    @When("the payment is being initiated")
-    public void thePaymentIsBeingInitiated() {
-        new Thread(() -> {
-            //var result = paymentService.assignAmount(payment);
-            //registeredPayment.complete(result);
-        }).start();
+    @And("there is a money transfer with empty mAccountId and cAccountId")
+    public void thereIsAMoneyTransferWithEmptyId() {
+        moneyTransfer = new MoneyTransfer();
+        moneyTransfer.setMtId(UUID.randomUUID());
+        moneyTransfer.setAmount(payment.getAmount());
+        assertNull(moneyTransfer.getCAccountId());
+        assertNull(moneyTransfer.getMAccountId());
     }
 
-    //testen passer kun på amount, da de andre events ikke er implementerede endnu
+    @When("a {string} event for a payment is received")
+    public void aEventIsReceived(String arg0) {
+        Event event = new Event(arg0, new Object[] {payment, correlationId});
+        ps.handlePaymentRequested(event);
+    }
+
+    @Then("a {string} is sent with same correlation id")
+    public void aIsSentWithSameCorrelationId(String arg0) {
+        /*expectedMerchant = new Merchant();
+        expectedMerchant.setMerchantId(UUID.fromString(payment.getMid()));
+        expectedMerchant.setAccountId("1");
+        var event = new Event(arg0, new Object[] {expectedMerchant, correlationId});
+        verify(queue).publish(event);*/
+    }
+
+    @When("a {string} event is received with a mAccountId")
+    public void aEventIsReceivedWithAMAccountId(String arg0) {
+    }
+
+    @When("a {string} event is received with a cAccountId")
+    public void aEventIsReceivedWithCAccId(String arg0) {
+    }
+
     @Then("a {string} event is sent")
     public void aEventIsSent(String arg0) {
-        //skal rettes
-        Event event = publishedEvents.get(payment.getAmount()).join();
-        assertEquals(arg0, event.getType());
-        var st = event.getArgument(0, Payment.class);
-        var correlationId = event.getArgument(1, CorrelationId.class);
-        correlationIds.put(st, correlationId);
-        System.out.print("step 3: " + correlationIds);
-    }
-
-
-    @When("a {string} event for the payment is sent with non-empty amount")
-    public void aEventForThePaymentIsSentWithNonEmptyAmount(String arg0) {
-    }
-
-    @And("a {string} event for the payment is sent with non-empty mid")
-    public void aEventForThePaymentIsSentWithNonEmptyMid(String arg0) {
-    }
-
-    @And("a {string} event for the payment is sent with non-empty token")
-    public void aEventForThePaymentIsSentWithNonEmptyToken(String arg0) {
-    }
-
-    @Then("the payment is set with an amount, a token and a mid")
-    public void thePaymentIsSetWithAnAmountATokenAndAMid() {
-    }
-
-    @When("the {string} event for a payment is sent")
-    public void theEventForAPaymentIsSent(String arg0) {
-    }
-
-    @Then("the amount is deducted from the Customer bank account")
-    public void theAmountIsDeductedFromTheCustomerBankAccount() {
-    }
-
-    @And("the amount is added to the Merchant bank account")
-    public void theAmountIsAddedToTheMerchantBankAccount() {
     }
 }

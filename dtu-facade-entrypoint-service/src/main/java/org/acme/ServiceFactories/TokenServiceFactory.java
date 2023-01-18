@@ -5,11 +5,12 @@ import org.acme.Services.TokenService;
 
 /**
  * Inspiration drawn from Hubert Baumeiser 02267 Correlation Code Example
- *
+ * @author Oliver Brink Klenum s193625.
+ * @author Tobias Stærmose xxxxxxx.
  *
  */
-public class TokenServiceFactory {
 
+public class TokenServiceFactory {
     static TokenService tokenService = null;
     public TokenService getTokenService() {
         return (tokenService != null) ? tokenService : getNewTokenService();
