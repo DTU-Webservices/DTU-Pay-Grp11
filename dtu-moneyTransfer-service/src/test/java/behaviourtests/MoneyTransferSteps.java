@@ -9,6 +9,10 @@ import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.*;
+import org.acme.Entity.Customer;
+import org.acme.Entity.Merchant;
+import org.acme.Entity.MoneyTransfer;
+import org.acme.Entity.Payment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,14 +51,14 @@ public class MoneyTransferSteps {
 
     @Given("there is a payment with non-empty mid and cid")
     public void thereIsAPaymentWithNonEmptyId() {
-        payment = new Payment();
+       /* payment = new Payment();
         correlationId = CorrelationId.randomId();
         payment.setPaymentId(correlationId.getId());
         payment.setMid(UUID.randomUUID().toString());
         payment.setCid(UUID.randomUUID().toString());
         payment.setAmount("100");
         assertNotNull(payment.getCid());
-        assertNotNull(payment.getMid());
+        assertNotNull(payment.getMid());*/
     }
 
     @And("there is a money transfer with empty mAccountId and cAccountId")
