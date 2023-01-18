@@ -112,6 +112,7 @@ public class PaymentService {
     private Report createReportAndImportAllPayments(CorrelationId correlationId) {
         Report report = new Report();
         report.setMoneyTransfers(MoneyTransferRepo.getAllPayments());
+        report.setTotalAmount(MoneyTransferRepo.getTotalAmount());
         report.setReportId(correlationId.getId());
         return report;
     }

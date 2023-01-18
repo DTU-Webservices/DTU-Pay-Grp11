@@ -2,6 +2,7 @@ package org.acme.Repo;
 
 import org.acme.Entity.MoneyTransfer;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,15 @@ public class MoneyTransferRepo {
     public static Set<MoneyTransfer> getAllPayments() {
         try {
             return new HashSet<>(moneyTransfers.values());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static BigDecimal getTotalAmount() {
+        try {
+            return moneyTransfers.values().stream().map(MoneyTransfer::getAmount).map(BigDecimal::new).reduce(BigDecimal.ZERO, BigDecimal::add);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
