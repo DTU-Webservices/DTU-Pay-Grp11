@@ -132,11 +132,12 @@ public class TokenGenerationService {
     private void handleGetCustomerIdFromToken(Event ev) {
         Payment payment = ev.getArgument(0, Payment.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
-        UUID customerId = TokenRepo.getCidToken(UUID.fromString(payment.getToken()));
         Customer customer = new Customer();
+        UUID customerId = TokenRepo.getCidToken(UUID.fromString(payment.getToken()));
         customer.setCustomerId(customerId);
         customer.setCurrentToken(UUID.fromString(payment.getToken()));
         TokenRepo.getToken(customerId).removeToken(UUID.fromString(payment.getToken()));
+
         Event event = new Event(GET_CUSTOMER_ID_FROM_TOKEN_RES, new Object[] {customer, correlationId});
         messageQueue.publish(event);
     }

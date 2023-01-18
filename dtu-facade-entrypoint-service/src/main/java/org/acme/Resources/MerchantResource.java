@@ -1,8 +1,11 @@
-package org.acme.Merchant;
+package org.acme.Resources;
 
-import org.acme.MoneyTransfer.Payment;
-import org.acme.MoneyTransfer.PaymentService;
-import org.acme.MoneyTransfer.PaymentServiceFactory;
+import org.acme.Entities.Merchant;
+import org.acme.ServiceFactories.MerchantServiceFactory;
+import org.acme.Entities.Payment;
+import org.acme.Services.MerchantService;
+import org.acme.Services.PaymentService;
+import org.acme.ServiceFactories.PaymentServiceFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,7 +14,7 @@ import javax.ws.rs.core.Response;
 @Path("/merchants")
 public class MerchantResource {
 
-    private MerchantService ms = new MerchantServiceFactory().getMerchantService();
+    private final MerchantService ms = new MerchantServiceFactory().getMerchantService();
     private final PaymentService ps = new PaymentServiceFactory().getPaymentService();
 
     @GET
@@ -26,6 +29,16 @@ public class MerchantResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Merchant registerMerchant(Merchant merchant) {
         return ms.registerMerchant(merchant);
+    }
+
+    @DELETE
+    @Path("/{merchantId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteMerchant(@PathParam("merchantId") String merchantId) {
+        if (ms.deleteMerchant(merchantId)) {
+            return Response.ok("Merchant deleted").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST

@@ -1,8 +1,9 @@
-package org.acme.TokenService;
+package org.acme.Services;
 
 import messaging.CorrelationId;
 import messaging.MessageQueue;
 import messaging.Event;
+import org.acme.Entities.Token;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;

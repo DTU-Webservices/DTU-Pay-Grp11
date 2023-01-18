@@ -1,8 +1,11 @@
-package org.acme.MoneyTransfer;
+package org.acme.Services;
 
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
+import org.acme.Entities.MoneyTransfer;
+import org.acme.Entities.Payment;
+
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,6 +40,11 @@ public class PaymentService {
     public void handlePaymentCreated(Event ev) {
         var mt = ev.getArgument(0, MoneyTransfer.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
+
+        if (mt.getMtId() == null) {
+            mt.setDescription("Transaction failed");
+        }
+
         try {
             paymentFuture.get(correlationId).complete(mt);
         } catch (Exception e) {

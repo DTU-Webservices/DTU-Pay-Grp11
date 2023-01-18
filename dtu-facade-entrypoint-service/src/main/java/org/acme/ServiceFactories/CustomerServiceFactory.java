@@ -1,6 +1,7 @@
-package org.acme.Customer;
+package org.acme.ServiceFactories;
 
 import messaging.implementations.RabbitMqQueue;
+import org.acme.Services.CustomerService;
 
 
 /**

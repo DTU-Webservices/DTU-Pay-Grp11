@@ -1,6 +1,9 @@
-package org.acme.Customer;
+package org.acme.Resources;
 
-import org.acme.TokenService.Token;
+import org.acme.Entities.Customer;
+import org.acme.ServiceFactories.CustomerServiceFactory;
+import org.acme.Services.CustomerService;
+import org.acme.Entities.Token;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -41,6 +44,16 @@ public class CustomerResource {
         return Response.ok()
                 .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
                 .build();
+    }
+
+    @DELETE
+    @Path("/{customerId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteMerchant(@PathParam("customerId") String customerId) {
+        if (cs.deleteCustomer(customerId)) {
+            return Response.ok("Customer deleted").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @GET

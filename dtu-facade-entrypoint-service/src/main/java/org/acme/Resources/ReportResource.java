@@ -1,10 +1,11 @@
-package org.acme.Report;
+package org.acme.Resources;
 
-import org.acme.MoneyTransfer.MoneyTransfer;
+import org.acme.Entities.Report;
+import org.acme.ServiceFactories.ReportServiceFactory;
+import org.acme.Services.ReportService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Set;
 
 @Path("/reports")
 public class ReportResource {

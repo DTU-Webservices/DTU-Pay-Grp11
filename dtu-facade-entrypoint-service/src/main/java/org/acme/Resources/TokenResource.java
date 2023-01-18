@@ -1,4 +1,8 @@
-package org.acme.TokenService;
+package org.acme.Resources;
+
+import org.acme.Entities.Token;
+import org.acme.Services.TokenService;
+import org.acme.ServiceFactories.TokenServiceFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

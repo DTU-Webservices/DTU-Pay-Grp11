@@ -29,6 +29,3 @@ pushd dtu-reporting-service
 ./build.sh
 popd
 
-sleep 5
-
-./deploy.sh

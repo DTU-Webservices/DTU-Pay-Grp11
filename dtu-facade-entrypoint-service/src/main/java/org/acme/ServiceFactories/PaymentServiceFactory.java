@@ -1,6 +1,7 @@
-package org.acme.MoneyTransfer;
+package org.acme.ServiceFactories;
 
 import messaging.implementations.RabbitMqQueue;
+import org.acme.Services.PaymentService;
 
 /**
  * @Author Kristoffer T. Pedersen, Lauritz Pepke

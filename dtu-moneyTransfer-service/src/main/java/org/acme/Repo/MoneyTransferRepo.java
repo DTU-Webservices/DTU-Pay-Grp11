@@ -2,6 +2,7 @@ package org.acme.Repo;
 
 import org.acme.Entity.MoneyTransfer;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,14 @@ public class MoneyTransferRepo {
                         .getCAccountId()
                         .equals(cAccountId))
                 .collect(Collectors.toSet());
+    }
+
+    public static String calculateTotalAmountOfMoney() {
+        return moneyTransfers
+                .values()
+                .stream()
+                .map(MoneyTransfer::getAmount)
+                .reduce(String.valueOf(0), (a, b) -> a + b);
     }
 
 }

@@ -2,14 +2,12 @@ package org.acme;
 
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceService;
-import dtu.ws.fastmoney.TransferMoneyFromToResponse;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Entity.*;
 import org.acme.Repo.MoneyTransferRepo;
 import org.acme.Repo.PaymentRepo;
-
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -57,12 +55,17 @@ public class PaymentService {
     public void handleMerchantAccountIdGetReq(Event ev) {
         Merchant merchant = ev.getArgument(0, Merchant.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
-        System.out.println("HALLOO=OOOOOOOOOOOOOQWERTYUIOPASDFGHJKLZXCVBNMOOOOOOOOOOOOOQWERTYUIOPASDFGHJKLZXCVBNM");
+
+        //Terrible way of error handling...
+        if (merchant == null) {
+            System.out.println("Merchant not found");
+            merchant = new Merchant();
+            handleEventPublish(merchant, PAYMENT_CREATED, correlationId);
+            return;
+        }
+
         Payment payment = createMoneyTransferAndSave(merchant, correlationId);
-
         handleEventPublish(payment, GET_CUSTOMER_ID_FROM_TOKEN_REQ, correlationId);
-
-        //handleEventPublish(customer, CUSTOMER_REQUEST, correlationId);
     }
 
     private Payment createMoneyTransferAndSave(Merchant merchant, CorrelationId correlationId) {
@@ -115,10 +118,10 @@ public class PaymentService {
         Report report = new Report();
         report.setMoneyTransfers(MoneyTransferRepo.getAllPayments());
         report.setReportId(correlationId.getId());
+        report.setTotalAmount(MoneyTransferRepo.calculateTotalAmountOfMoney());
         return report;
     }
     private void handleEventPublish(Object object, String event, CorrelationId correlationId) {
-
         if (object != null) {
             queue.publish(new Event(event, new Object[] {object, correlationId}));
         } else {
