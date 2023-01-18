@@ -1,6 +1,6 @@
 e2eTest\Merchant.class
+e2eTest\Payment.class
 e2eTest\CucumberTest.class
-e2eTest\MoneyTransferSteps.class
 e2eTest\Customer.class
 e2eTest\AccountRegSteps.class
 e2eTest\WebTargetFactory.class
