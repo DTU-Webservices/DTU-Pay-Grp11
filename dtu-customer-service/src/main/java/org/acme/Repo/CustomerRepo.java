@@ -18,5 +18,9 @@ public class CustomerRepo {
     public static Customer getCustomer(UUID customerId) {
         return Customers.get(customerId);
     }
+
+    public static void deleteCustomer(UUID customerId) {
+        Customers.remove(customerId);
+    }
 }
 

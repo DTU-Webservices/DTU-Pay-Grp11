@@ -46,6 +46,16 @@ public class CustomerResource {
                 .build();
     }
 
+    @DELETE
+    @Path("/{customerId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteMerchant(@PathParam("customerId") String customerId) {
+        if (cs.deleteCustomer(customerId)) {
+            return Response.ok("Customer deleted").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
     @GET
     @Path("/tokens/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)

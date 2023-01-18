@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 @Path("/merchants")
 public class MerchantResource {
 
-    private MerchantService ms = new MerchantServiceFactory().getMerchantService();
+    private final MerchantService ms = new MerchantServiceFactory().getMerchantService();
     private final PaymentService ps = new PaymentServiceFactory().getPaymentService();
 
     @GET
@@ -29,6 +29,16 @@ public class MerchantResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Merchant registerMerchant(Merchant merchant) {
         return ms.registerMerchant(merchant);
+    }
+
+    @DELETE
+    @Path("/{merchantId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteMerchant(@PathParam("merchantId") String merchantId) {
+        if (ms.deleteMerchant(merchantId)) {
+            return Response.ok("Merchant deleted").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST

@@ -5,12 +5,15 @@ import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Repo.CustomerRepo;
 
+import java.util.UUID;
+
 public class CustomerBankService {
 
     private static final String CUSTOMER_ACC_REGISTER = "CustomerAccRegistered";
     private static final String CUSTOMER_GET_ACCOUNT = "CustomerAccGet";
     private static final String CUSTOMER_ACCOUNT_RESPONSE = "CustomerAccResponse";
     private static final String CUSTOMER_ID_RESPONSE = "CustomerIdResponse";
+    private static final String CUSTOMER_DELETE_RESPONSE = "CustomerAccDeleteResponse";
 
     MessageQueue queue;
 
@@ -20,6 +23,7 @@ public class CustomerBankService {
         this.queue.addHandler("CustomerAccGetReq", this::handleCustomerAccountGet);
         this.queue.addHandler("GetCustomerAccForTransferReq", this::handleCustomerAccountGetForTransfer);
         this.queue.addHandler("GetCustomerIdForTransferReq", this::handleCustomerIdGetForTransfer);
+        this.queue.addHandler("CustomerAccDeleteReq", this::handleCustomerAccountDelete);
     }
 
     public void handleCustomerAccountRegister(Event ev) {
@@ -49,8 +53,16 @@ public class CustomerBankService {
         var correlationId = ev.getArgument(1, CorrelationId.class);
         customer = CustomerRepo.getCustomer(customer.getCustomerId());
         customer.setCurrentToken(token);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CustomerBankService: " + customer);
         Event event = new Event(responseHandler, new Object[] { customer, correlationId });
+        queue.publish(event);
+    }
+
+    public void handleCustomerAccountDelete(Event ev) {
+        var customerId = ev.getArgument(0, String.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        var customer = CustomerRepo.getCustomer(UUID.fromString(customerId));
+        CustomerRepo.deleteCustomer(UUID.fromString(customerId));
+        Event event = new Event(CUSTOMER_DELETE_RESPONSE, new Object[] { customer, correlationId });
         queue.publish(event);
     }
 

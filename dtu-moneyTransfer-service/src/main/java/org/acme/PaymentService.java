@@ -113,10 +113,10 @@ public class PaymentService {
         Report report = new Report();
         report.setMoneyTransfers(MoneyTransferRepo.getAllPayments());
         report.setReportId(correlationId.getId());
+        report.setTotalAmount(MoneyTransferRepo.calculateTotalAmountOfMoney());
         return report;
     }
     private void handleEventPublish(Object object, String event, CorrelationId correlationId) {
-
         if (object != null) {
             queue.publish(new Event(event, new Object[] {object, correlationId}));
         } else {

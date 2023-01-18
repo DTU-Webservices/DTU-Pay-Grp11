@@ -19,4 +19,8 @@ public class MerchantRepo {
     public static Merchant getMerchant(UUID merchantId) {
         return Merchants.get(merchantId);
     }
+
+    public static void deleteMerchant(UUID merchantId) {
+        Merchants.remove(merchantId);
+    }
 }

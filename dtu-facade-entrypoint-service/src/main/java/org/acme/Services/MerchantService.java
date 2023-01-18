@@ -22,17 +22,17 @@ public class MerchantService {
 
     private static final String MERCHANT_REGISTER_REQ = "MerchantAccRegisterReq";
     private static final String MERCHANT_GET_REQ = "MerchantAccGetReq";
+    private static final String MERCHANT_DELETE_REQ = "MerchantAccDeleteReq";
 
     private final MessageQueue queue;
 
     private final Map<CorrelationId, CompletableFuture<Merchant>> correlations = new ConcurrentHashMap<>();
-    private final Map<CorrelationId, CompletableFuture<MoneyTransfer>> correlationsPayment = new ConcurrentHashMap<>();
 
     public MerchantService(MessageQueue q) {
         queue = q;
         queue.addHandler("MerchantAccRegistered", this::handleMerchantRegister);
         queue.addHandler("MerchantAccGet", this::handleMerchantGet);
-        queue.addHandler("PaymentCreated", this::handleMerchantPaymentCreate);
+        queue.addHandler("MerchantAccDeleteResponse", this::handleMerchantDelete);
     }
 
     public Merchant registerMerchant(Merchant merchant) {
@@ -45,6 +45,14 @@ public class MerchantService {
         Event event = new Event(MERCHANT_REGISTER_REQ, new Object[] { merchant, correlationId });
         queue.publish(event);
         return correlations.get(correlationId).join();
+    }
+
+    public boolean deleteMerchant(String merchantId) {
+        var correlationId = CorrelationId.randomId();
+        correlations.put(correlationId, new CompletableFuture<>());
+        Event event = new Event(MERCHANT_DELETE_REQ, new Object[] { merchantId, correlationId });
+        queue.publish(event);
+        return (correlations.get(correlationId).join() != null);
     }
 
     public Merchant getMerchant(String merchantId) {
@@ -67,20 +75,15 @@ public class MerchantService {
         correlations.get(correlationid).complete(merchant);
     }
 
+    public void handleMerchantDelete(Event ev) {
+        Merchant merchant = ev.getArgument(0, Merchant.class);
+        CorrelationId correlationid = ev.getArgument(1, CorrelationId.class);
+        correlations.get(correlationid).complete(merchant);
+    }
+
     public void handleMerchantGet(Event ev) {
         var merchant = ev.getArgument(0, Merchant.class);
         var correlationid = ev.getArgument(1, CorrelationId.class);
         correlations.get(correlationid).complete(merchant);
     }
-
-    public void handleMerchantPaymentCreate(Event ev) {
-        var mt = ev.getArgument(0, MoneyTransfer.class);
-        var correlationId = ev.getArgument(1, CorrelationId.class);
-        try {
-            correlationsPayment.get(correlationId).complete(mt);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }
