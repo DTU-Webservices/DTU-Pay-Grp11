@@ -1,6 +1,7 @@
-package org.acme.TokenService;
+package org.acme.ServiceFactories;
 
 import messaging.implementations.RabbitMqQueue;
+import org.acme.Services.TokenService;
 
 /**
  * Inspiration drawn from Hubert Baumeiser 02267 Correlation Code Example

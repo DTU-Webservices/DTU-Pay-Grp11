@@ -1,9 +1,10 @@
-package org.acme.Customer;
+package org.acme.Services;
 
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.TokenService.Token;
+import org.acme.Entities.Customer;
+import org.acme.Entities.Token;
 
 import java.util.Map;
 import java.util.UUID;

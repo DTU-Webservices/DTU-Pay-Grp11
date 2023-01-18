@@ -1,4 +1,4 @@
-package org.acme.Customer;
+package org.acme.Entities;
 
 import lombok.Data;
 

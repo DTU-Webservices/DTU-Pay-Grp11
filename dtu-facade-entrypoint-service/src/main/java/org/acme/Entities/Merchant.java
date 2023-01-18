@@ -1,4 +1,4 @@
-package org.acme.Merchant;
+package org.acme.Entities;
 
 import lombok.Data;
 

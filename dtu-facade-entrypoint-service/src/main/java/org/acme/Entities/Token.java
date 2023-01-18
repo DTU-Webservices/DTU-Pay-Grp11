@@ -1,4 +1,4 @@
-package org.acme.TokenService;
+package org.acme.Entities;
 
 import lombok.Data;
 

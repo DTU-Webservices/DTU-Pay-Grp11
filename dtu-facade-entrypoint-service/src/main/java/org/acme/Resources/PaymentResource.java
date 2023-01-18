@@ -1,6 +1,10 @@
-package org.acme.MoneyTransfer;
+package org.acme.Resources;
 
-import javax.print.attribute.standard.Media;
+import org.acme.Entities.MoneyTransfer;
+import org.acme.Entities.Payment;
+import org.acme.ServiceFactories.PaymentServiceFactory;
+import org.acme.Services.PaymentService;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 

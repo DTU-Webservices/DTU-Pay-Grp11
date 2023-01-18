@@ -1,12 +1,11 @@
-package org.acme.Report;
+package org.acme.Services;
 
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.MoneyTransfer.MoneyTransfer;
+import org.acme.Entities.Report;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 

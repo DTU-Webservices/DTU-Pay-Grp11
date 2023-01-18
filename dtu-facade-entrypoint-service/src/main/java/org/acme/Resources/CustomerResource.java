@@ -1,6 +1,9 @@
-package org.acme.Customer;
+package org.acme.Resources;
 
-import org.acme.TokenService.Token;
+import org.acme.Entities.Customer;
+import org.acme.ServiceFactories.CustomerServiceFactory;
+import org.acme.Services.CustomerService;
+import org.acme.Entities.Token;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

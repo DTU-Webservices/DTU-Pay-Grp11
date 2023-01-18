@@ -2,14 +2,12 @@ package org.acme;
 
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceService;
-import dtu.ws.fastmoney.TransferMoneyFromToResponse;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Entity.*;
 import org.acme.Repo.MoneyTransferRepo;
 import org.acme.Repo.PaymentRepo;
-
 
 import java.math.BigDecimal;
 import java.util.UUID;

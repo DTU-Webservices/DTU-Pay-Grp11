@@ -1,10 +1,10 @@
-package org.acme.Merchant;
+package org.acme.Services;
 
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.acme.MoneyTransfer.MoneyTransfer;
-import org.acme.MoneyTransfer.Payment;
+import org.acme.Entities.Merchant;
+import org.acme.Entities.MoneyTransfer;
 
 import java.util.Map;
 import java.util.UUID;

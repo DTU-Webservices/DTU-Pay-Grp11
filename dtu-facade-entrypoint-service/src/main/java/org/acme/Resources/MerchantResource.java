@@ -1,8 +1,11 @@
-package org.acme.Merchant;
+package org.acme.Resources;
 
-import org.acme.MoneyTransfer.Payment;
-import org.acme.MoneyTransfer.PaymentService;
-import org.acme.MoneyTransfer.PaymentServiceFactory;
+import org.acme.Entities.Merchant;
+import org.acme.ServiceFactories.MerchantServiceFactory;
+import org.acme.Entities.Payment;
+import org.acme.Services.MerchantService;
+import org.acme.Services.PaymentService;
+import org.acme.ServiceFactories.PaymentServiceFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
