@@ -40,6 +40,11 @@ public class PaymentService {
     public void handlePaymentCreated(Event ev) {
         var mt = ev.getArgument(0, MoneyTransfer.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
+
+        if (mt.getMtId() == null) {
+            mt.setDescription("Transaction failed");
+        }
+
         try {
             paymentFuture.get(correlationId).complete(mt);
         } catch (Exception e) {

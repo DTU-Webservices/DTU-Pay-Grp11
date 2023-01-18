@@ -55,12 +55,17 @@ public class PaymentService {
     public void handleMerchantAccountIdGetReq(Event ev) {
         Merchant merchant = ev.getArgument(0, Merchant.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
-        System.out.println("HALLOO=OOOOOOOOOOOOOQWERTYUIOPASDFGHJKLZXCVBNMOOOOOOOOOOOOOQWERTYUIOPASDFGHJKLZXCVBNM");
+
+        //Terrible way of error handling...
+        if (merchant == null) {
+            System.out.println("Merchant not found");
+            merchant = new Merchant();
+            handleEventPublish(merchant, PAYMENT_CREATED, correlationId);
+            return;
+        }
+
         Payment payment = createMoneyTransferAndSave(merchant, correlationId);
-
         handleEventPublish(payment, GET_CUSTOMER_ID_FROM_TOKEN_REQ, correlationId);
-
-        //handleEventPublish(customer, CUSTOMER_REQUEST, correlationId);
     }
 
     private Payment createMoneyTransferAndSave(Merchant merchant, CorrelationId correlationId) {
