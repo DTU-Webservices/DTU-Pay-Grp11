@@ -18,7 +18,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -65,7 +64,6 @@
     <orderEntry type="library" name="Maven: com.sun.xml.stream.buffer:streambuffer:1.5.9" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.mimepull:mimepull:1.9.13" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.18" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.activation:jakarta.activation:1.2.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.sun.xml.messaging.saaj:saaj-impl:1.5.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.woodstox:woodstox-core:5.1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.woodstox:stax2-api:4.1" level="project" />
@@ -82,7 +80,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.persistence:org.eclipse.persistence.sdo:2.7.6" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.persistence:commonj.sdo:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.ws:jakarta.xml.ws-api:2.3.3" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.soap:jakarta.xml.soap-api:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: jakarta.jws:jakarta.jws-api:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:1.3.5" level="project" />
@@ -134,13 +131,7 @@
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy-common:1.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-jsonb:1.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:yasson:1.0.8" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.json:jakarta.json-api:1.1.6" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-core:1.10.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.enterprise:jakarta.enterprise.cdi-api:2.0.2" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.el:jakarta.el-api:3.0.3" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.interceptor:jakarta.interceptor-api:1.2.5" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.ejb:jakarta.ejb-api:3.2.6" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.inject:jakarta.inject-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-ide-launcher:1.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-development-mode-spi:1.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logmanager:jboss-logmanager-embedded:1.0.6" level="project" />
@@ -153,25 +144,75 @@
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-io:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-arc:1.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus.arc:arc:1.10.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.transaction:jakarta.transaction-api:1.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.context-propagation:microprofile-context-propagation-api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-jsonp:1.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-json-binding-provider:4.5.8.Final" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:jakarta.json:1.1.6" level="project" />
     <orderEntry type="library" name="Maven: jakarta.json.bind:jakarta.json.bind-api:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-json-p-provider:4.5.8.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy-jaxb:1.10.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jaxb:1.10.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jaxp:1.10.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy-jaxb:2.15.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jaxb:2.15.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jaxp:2.15.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.3-b02" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.3-b02" level="project" />
     <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.10" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-jaxb-provider:4.5.8.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-jaxb-provider:4.7.7.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.activation:jakarta.activation:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.xml.bind:jboss-jaxb-api_2.3_spec:2.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
     <orderEntry type="module" module-name="messaging-utils" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: com.rabbitmq:amqp-client:5.10.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.platform:jakarta.jakartaee-api:10.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.platform:jakarta.jakartaee-web-api:10.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.servlet:jakarta.servlet-api:6.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.el:jakarta.el-api:5.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.faces:jakarta.faces-api:4.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.websocket:jakarta.websocket-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.websocket:jakarta.websocket-client-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.json:jakarta.json-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.ejb:jakarta.ejb-api:4.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.transaction:jakarta.transaction-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.interceptor:jakarta.interceptor-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.enterprise:jakarta.enterprise.lang-model:4.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.inject:jakarta.inject-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.authentication:jakarta.authentication-api:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.security.enterprise:jakarta.security.enterprise-api:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.jms:jakarta.jms-api:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.activation:jakarta.activation-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.mail:jakarta.mail-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.resource:jakarta.resource-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.authorization:jakarta.authorization-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.batch:jakarta.batch-api:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.mojo:jaxws-maven-plugin:maven-plugin:2.6" level="project" />
+    <orderEntry type="library" name="Maven: javax.jws:javax.jws-api:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-inject-plexus:1.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-inject-bean:1.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-guice:noaop:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-core:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-settings-builder:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-repository-metadata:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-model-builder:3.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven:maven-aether-provider:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.aether:aether-impl:1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.aether:aether-spi:1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.aether:aether-api:1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.aether:aether-util:1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interpolation:1.14" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-classworlds:2.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-component-annotations:1.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.plexus:plexus-sec-dispatcher:1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.sonatype.plexus:plexus-cipher:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-model:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-settings:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-artifact:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
   </component>
 </module>
