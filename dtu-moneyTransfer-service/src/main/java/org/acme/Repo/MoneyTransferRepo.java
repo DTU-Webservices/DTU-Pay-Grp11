@@ -79,13 +79,4 @@ public class MoneyTransferRepo {
             return null;
         }
     }
-
-    public static String calculateTotalAmountOfMoney() {
-        return moneyTransfers
-                .values()
-                .stream()
-                .map(MoneyTransfer::getAmount)
-                .reduce(String.valueOf(0), (a, b) -> a + b);
-    }
-
 }

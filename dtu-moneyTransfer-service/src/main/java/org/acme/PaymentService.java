@@ -156,7 +156,6 @@ public class PaymentService {
         report.setMoneyTransfers(MoneyTransferRepo.getAllPaymentsByMerchant(merchant.getAccountId()));
         report.setTotalAmount(MoneyTransferRepo.getTotalAmountByMerchant(merchant.getAccountId()));
         report.setReportId(correlationId.getId());
-        report.setTotalAmount(MoneyTransferRepo.calculateTotalAmountOfMoney());
         return report;
     }
     private void handleEventPublish(Object object, String event, CorrelationId correlationId) {
