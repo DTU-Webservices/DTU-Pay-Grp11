@@ -1,5 +1,4 @@
-package org.acme.Entities;
-
+package org.acme.Entity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,5 +17,5 @@ public class Report implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID reportId;
     private Set<MoneyTransfer> moneyTransfers;
-    private BigDecimal totalAmount = null;
+    private BigDecimal totalAmount = BigDecimal.ZERO;
 }

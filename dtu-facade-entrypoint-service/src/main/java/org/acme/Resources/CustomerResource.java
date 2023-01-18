@@ -1,9 +1,12 @@
 package org.acme.Resources;
 
 import org.acme.Entities.Customer;
+import org.acme.Entities.Report;
 import org.acme.ServiceFactories.CustomerServiceFactory;
+import org.acme.ServiceFactories.ReportServiceFactory;
 import org.acme.Services.CustomerService;
 import org.acme.Entities.Token;
+import org.acme.Services.ReportService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +23,7 @@ import java.util.UUID;
 public class CustomerResource {
 
     private CustomerService cs = new CustomerServiceFactory().getCustomerService();
+    private ReportService rs = new ReportServiceFactory().getReportService();
 
     @GET
     @Path("/{customerId}")
@@ -69,5 +73,12 @@ public class CustomerResource {
                     .entity(token.getTokens().size() + " tokens available for " + token.getCustomerId())
                     .build();
         }
+    }
+
+    @GET
+    @Path("/reports/{customerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Report createReportWithCustomerPayments(@PathParam("customerId") String customerId) {
+        return rs.getAllPaymentsMadeByCustomer(customerId);
     }
 }

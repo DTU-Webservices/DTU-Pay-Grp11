@@ -14,7 +14,7 @@ public class MerchantBankService {
     private static final String MERCHANT_GET_ACCOUNT = "MerchantAccGet";
     private static final String MERCHANT_ACCOUNT_RESPONSE = "MerchantAccResponse";
     private static final String MERCHANT_DELETE_RESPONSE = "MerchantAccDeleteResponse";
-
+    private static final String MERCHANT_ID_GET_RESPONSE = "MerchantIdGetResponse";
 
     MessageQueue queue;
 
@@ -23,6 +23,7 @@ public class MerchantBankService {
         this.queue.addHandler("MerchantAccRegisterReq", this::handleMerchantAccountRegister);
         this.queue.addHandler("MerchantAccGetReq", this::handleMerchantAccountGet);
         this.queue.addHandler("GetMerchantAccForTransferReq", this::handleMerchantAccountGetForTransfer);
+        this.queue.addHandler("ReportAllMerchantPayReq", this::handleReportAllMerchantPaymentsRequest);
         this.queue.addHandler("MerchantAccDeleteReq", this::handleMerchantAccountDelete);
     }
 
@@ -32,6 +33,15 @@ public class MerchantBankService {
         merchant.setMerchantId(correlationId.getId());
         MerchantRepo.addMerchant(merchant);
         Event event = new Event(MERCHANT_ACC_REGISTER, new Object[] { merchant, correlationId });
+        queue.publish(event);
+    }
+
+    public void handleReportAllMerchantPaymentsRequest(Event ev) {
+        var merchant = ev.getArgument(0, Merchant.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        merchant.setMerchantId(merchant.getMerchantId());
+        merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
+        Event event = new Event(MERCHANT_ID_GET_RESPONSE, new Object[] { merchant, correlationId });
         queue.publish(event);
     }
 

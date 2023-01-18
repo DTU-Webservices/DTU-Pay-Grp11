@@ -7,6 +7,14 @@ import org.acme.Repo.CustomerRepo;
 
 import java.util.UUID;
 
+/**
+ *
+ * @author Kristoffer T. Pedersen
+ * @author Oliver Brink Klenum
+ *
+ */
+
+
 public class CustomerBankService {
 
     private static final String CUSTOMER_ACC_REGISTER = "CustomerAccRegistered";
@@ -14,6 +22,7 @@ public class CustomerBankService {
     private static final String CUSTOMER_ACCOUNT_RESPONSE = "CustomerAccResponse";
     private static final String CUSTOMER_ID_RESPONSE = "CustomerIdResponse";
     private static final String CUSTOMER_DELETE_RESPONSE = "CustomerAccDeleteResponse";
+    private static final String CUSTOMER_ID_GET_RESPONSE = "CustomerIdGetResponse";
 
     MessageQueue queue;
 
@@ -23,6 +32,7 @@ public class CustomerBankService {
         this.queue.addHandler("CustomerAccGetReq", this::handleCustomerAccountGet);
         this.queue.addHandler("GetCustomerAccForTransferReq", this::handleCustomerAccountGetForTransfer);
         this.queue.addHandler("GetCustomerIdForTransferReq", this::handleCustomerIdGetForTransfer);
+        this.queue.addHandler("ReportAllCustomerPayReq", this::handleReportAllCustomerPaymentsRequest);
         this.queue.addHandler("CustomerAccDeleteReq", this::handleCustomerAccountDelete);
     }
 
@@ -32,6 +42,17 @@ public class CustomerBankService {
         customer.setCustomerId(correlationId.getId());
         CustomerRepo.addCustomer(customer);
         Event event = new Event(CUSTOMER_ACC_REGISTER, new Object[] { customer, correlationId });
+        queue.publish(event);
+    }
+
+    public void handleReportAllCustomerPaymentsRequest(Event ev) {
+        var customer = ev.getArgument(0, Customer.class);
+        var correlationId = ev.getArgument(1, CorrelationId.class);
+        System.out.println("BeforeSET!!!!!!!!!!!!!!!: " + customer);
+        customer.setCustomerId(customer.getCustomerId());
+        customer = CustomerRepo.getCustomer(customer.getCustomerId());
+        System.out.println("AfterSET!!!!!!!!!!!!!!!: " + customer);
+        Event event = new Event(CUSTOMER_ID_GET_RESPONSE, new Object[] { customer, correlationId });
         queue.publish(event);
     }
 

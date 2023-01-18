@@ -1,4 +1,4 @@
-Feature: DTU MoneyTransfer Service
+Feature: Transfer Money
 
   Scenario: Money is successfully Transferred from Customer to Merchant
     Given there is a payment with empty amount, token and mid
@@ -11,4 +11,4 @@ Feature: DTU MoneyTransfer Service
     And a "CustomerBankAccAssigned" event for the payment is sent with non-empty token
     Then the payment is set with an amount, a token and a mid
     When the "MoneyTransferred" event for a payment is sent
-    Then the money has been transferred
+    Then the transfer has been made
