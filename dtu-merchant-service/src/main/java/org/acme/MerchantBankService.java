@@ -10,7 +10,6 @@ public class MerchantBankService {
 
     private static final String MERCHANT_ACC_REGISTER = "MerchantAccRegistered";
     private static final String MERCHANT_GET_ACCOUNT = "MerchantAccGet";
-
     private static final String MERCHANT_ACCOUNT_RESPONSE = "MerchantAccResponse";
 
     private static final String MERCHANT_ID_GET_RESPONSE = "MerchantIdGetResponse";
@@ -55,7 +54,6 @@ public class MerchantBankService {
         var merchant = ev.getArgument(0, Merchant.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
-        System.out.println("prut: " + merchant);
         Event event = new Event(responseHandler, new Object[] { merchant, correlationId });
         queue.publish(event);
     }
