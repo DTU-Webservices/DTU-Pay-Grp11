@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ *
+ * @author Oliver Brink Klenum s193625
+ *
+ */
 @Data
 public class TokenRepo {
     private static HashMap<UUID, Token> Tokens = new HashMap<>();

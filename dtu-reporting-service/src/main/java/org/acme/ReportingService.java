@@ -3,17 +3,44 @@ package org.acme;
 import messaging.CorrelationId;
 import messaging.Event;
 import messaging.MessageQueue;
+import org.acme.Entity.Report;
 
+/**
+ *
+ * @author Oliver Brink Klenum s193625
+ *
+ */
 public class ReportingService {
 
+    private static final String REPORT_ALL_PAYMENTS_RESP = "ReportAllPayResp";
     MessageQueue queue;
 
     public ReportingService(MessageQueue q) {
-        queue = q;
+        this.queue = q;
+        this.queue.addHandler("ReportAllPay", this::handleAllPaymentsReport);
+        this.queue.addHandler("ReportAllCustomerPay", this::handleAllPaymentsMadeByCustomerReport);
+        this.queue.addHandler("ReportAllMerchantPay", this::handleAllPaymentsMadeByMerchantReport);
     }
 
-    public void handleAllPaymentsReportRequest(Event ev) {
-        var correlationId =  ev.getArgument(0, CorrelationId.class);
+    private void handleAllPaymentsReport(Event ev) {
+        Report report = ev.getArgument(0, Report.class);
+        CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
+        Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});
+        queue.publish(event);
+    }
+
+    private void handleAllPaymentsMadeByCustomerReport(Event ev) {
+        Report report = ev.getArgument(0, Report.class);
+        CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
+        Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});
+        queue.publish(event);
+    }
+
+    private void handleAllPaymentsMadeByMerchantReport(Event ev) {
+        Report report = ev.getArgument(0, Report.class);
+        CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
+        Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});
+        queue.publish(event);
     }
 
 }

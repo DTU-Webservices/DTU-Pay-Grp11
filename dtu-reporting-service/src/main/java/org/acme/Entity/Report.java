@@ -1,5 +1,4 @@
 package org.acme.Entity;
-
 import lombok.Data;
 
 import java.io.Serializable;

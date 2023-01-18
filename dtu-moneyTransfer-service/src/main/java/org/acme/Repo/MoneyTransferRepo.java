@@ -6,6 +6,11 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author Oliver Brink Klenum s193625
+ *
+ */
 public class MoneyTransferRepo {
     private static final HashMap<UUID, MoneyTransfer> moneyTransfers = new HashMap<>();
 
@@ -39,14 +44,40 @@ public class MoneyTransferRepo {
         }
     }
 
-    public static Set<MoneyTransfer> getAllPaymentsWhereCustomerIsInvolved(String cAccountId) {
-        return moneyTransfers
-                .values()
-                .stream()
-                .filter(moneyTransfer -> moneyTransfer
-                        .getCAccountId()
-                        .equals(cAccountId))
-                .collect(Collectors.toSet());
+    public static BigDecimal getTotalAmountByCustomer(String cAccountId) {
+        try {
+            return moneyTransfers.values().stream().filter(moneyTransfer -> moneyTransfer.getCAccountId().equals(cAccountId)).map(MoneyTransfer::getAmount).map(BigDecimal::new).reduce(BigDecimal.ZERO, BigDecimal::add);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static BigDecimal getTotalAmountByMerchant(String mAccountId) {
+        try {
+            return moneyTransfers.values().stream().filter(moneyTransfer -> moneyTransfer.getMAccountId().equals(mAccountId)).map(MoneyTransfer::getAmount).map(BigDecimal::new).reduce(BigDecimal.ZERO, BigDecimal::add);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Set<MoneyTransfer> getAllPaymentsByCustomer(String cAccountId) {
+        try {
+            return moneyTransfers.values().stream().filter(moneyTransfer -> moneyTransfer.getCAccountId().equals(cAccountId)).collect(Collectors.toSet());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Set<MoneyTransfer> getAllPaymentsByMerchant(String mAccountId) {
+        try {
+            return moneyTransfers.values().stream().filter(moneyTransfer -> moneyTransfer.getMAccountId().equals(mAccountId)).collect(Collectors.toSet());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
