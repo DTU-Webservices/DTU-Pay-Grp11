@@ -26,5 +26,3 @@ cd..
 cd dtu-reporting-service
 call ./build.bat
 cd..
-
-call ./deploy.bat
