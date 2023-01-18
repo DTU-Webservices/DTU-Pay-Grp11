@@ -4,9 +4,11 @@ import org.acme.Entities.Customer;
 import org.acme.Entities.Report;
 import org.acme.ServiceFactories.CustomerServiceFactory;
 import org.acme.ServiceFactories.ReportServiceFactory;
+import org.acme.ServiceFactories.TokenServiceFactory;
 import org.acme.Services.CustomerService;
 import org.acme.Entities.Token;
 import org.acme.Services.ReportService;
+import org.acme.Services.TokenService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,6 +26,7 @@ public class CustomerResource {
 
     private CustomerService cs = new CustomerServiceFactory().getCustomerService();
     private ReportService rs = new ReportServiceFactory().getReportService();
+    private TokenService ts = new TokenServiceFactory().getTokenService();
 
     @GET
     @Path("/{customerId}")
@@ -64,13 +67,15 @@ public class CustomerResource {
     @Path("/tokens/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTokensAmount(@PathParam("customerId") String customerId) {
-        //var token = cs.getCustomerTokensAmount(customerId).getTokens().size();
-        var token = cs.getCustomerTokensAmount(UUID.fromString(customerId));
-        if (token == null) {
+        var token = ts.getTokenForPayment(UUID.fromString(customerId));
+        var tokensAmount = cs.getCustomerTokensAmount(UUID.fromString(customerId));
+        if (tokensAmount == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
             return Response.ok()
-                    .entity(token.getTokens().size() + " tokens available for " + token.getCustomerId())
+                    .entity("Token ready for new payment: " + token.getTokens().get(0) +
+                            "\n" + tokensAmount.getTokens().size() +
+                            " tokens available for " + tokensAmount.getCustomerId())
                     .build();
         }
     }
