@@ -39,13 +39,13 @@ public class TokenService {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
-        addTokensToTokenList(token);
+        var tokenOut = addTokensToTokenList(token);
 
-        Event event = new Event(TOKENS_GENERATED, new Object[] {token, correlationId});
+        Event event = new Event(TOKENS_GENERATED, new Object[] {tokenOut, correlationId});
         messageQueue.publish(event);
     }
 
-    private void addTokensToTokenList(Token token) {
+    private Token addTokensToTokenList(Token token) {
         int tokenQty = Integer.parseInt(token.getQty());
         int maxTokens;
         if (TokenRepo.getToken(token.getCustomerId()) != null) {
@@ -59,6 +59,10 @@ public class TokenService {
             }
             TokenRepo.addToken(token);
         }
+
+        token.setQty("THIS IS A FUCKING IQWHEOIQHWE");
+
+        return token;
     }
     // Customer Gets a specific token assigned to his account.
     public void handleTokensGetToken(Event ev) {
