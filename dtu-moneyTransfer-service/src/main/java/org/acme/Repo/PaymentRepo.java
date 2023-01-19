@@ -5,6 +5,9 @@ import org.acme.Entity.Payment;
 import java.util.HashMap;
 import java.util.UUID;
 
+/**
+ * @author Kristoffer T. Pedersen s205354.
+ */
 @Data
 public class PaymentRepo {
 

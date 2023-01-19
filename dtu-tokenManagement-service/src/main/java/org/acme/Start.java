@@ -7,7 +7,7 @@ public class Start {
 
     private void start() {
         var mq = new RabbitMqQueue("rabbitMq");
-        new TokenGenerationService(mq);
+        new TokenService(mq);
     }
 
     public static void main(String[] args) {

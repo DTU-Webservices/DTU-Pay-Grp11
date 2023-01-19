@@ -1,13 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: e2eTest.CucumberTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.007 s <<< FAILURE! - in e2eTest.CucumberTest
-Cucumber  Time elapsed: 0 s  <<< ERROR!
-org.junit.platform.commons.JUnitException: TestEngine with ID 'cucumber' failed to execute tests
-Caused by: java.lang.NoClassDefFoundError: io/cucumber/core/runtime/TypeRegistryConfigurerSupplier
-Caused by: java.lang.ClassNotFoundException: io.cucumber.core.runtime.TypeRegistryConfigurerSupplier
-
-initializationError  Time elapsed: 0.004 s  <<< ERROR!
-java.lang.NoClassDefFoundError: io/cucumber/core/runtime/TypeRegistryConfigurerSupplier
-Caused by: java.lang.ClassNotFoundException: io.cucumber.core.runtime.TypeRegistryConfigurerSupplier
-
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.228 s - in e2eTest.CucumberTest

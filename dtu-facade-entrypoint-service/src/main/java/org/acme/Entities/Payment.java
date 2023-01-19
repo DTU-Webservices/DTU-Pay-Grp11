@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ * @author Kristoffer T. Pedersen s205354.
+ * @author Lauritz Pepke s191179
  */
 @Data
 public class Payment implements Serializable {

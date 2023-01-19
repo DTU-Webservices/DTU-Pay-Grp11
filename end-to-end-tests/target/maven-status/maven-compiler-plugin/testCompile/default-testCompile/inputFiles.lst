@@ -1,7 +1,12 @@
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\AccountRegSteps.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\WebTargetFactory.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\CucumberTest.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\Merchant.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\MoneyTransferSteps.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\RegService.java
-C:\Users\krist\OneDrive\SoftwareProjekter\DTU-Pay-Grp11-2\end-to-end-tests\src\test\java\e2eTest\Customer.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\Entities\Customer.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\Entities\Merchant.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\AccountRegSteps.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\Entities\Token.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\TestService.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\Entities\Payment.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\MerchantMakesPaymentSteps.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\Entities\Report.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\WebTargetFactory.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\CucumberTest.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\Entities\MoneyTransfer.java
+C:\Users\krist\Documents\Software Projects\DTU-Pay-Grp11-3\end-to-end-tests\src\test\java\e2eTest\ReportSteps.java

@@ -7,6 +7,9 @@ import org.acme.Repo.MerchantRepo;
 
 import java.util.UUID;
 
+/**
+ * @author Kristoffer Torngaard Pedersen s205354
+ */
 
 public class MerchantBankService {
 
@@ -41,6 +44,7 @@ public class MerchantBankService {
         var correlationId = ev.getArgument(1, CorrelationId.class);
         merchant.setMerchantId(merchant.getMerchantId());
         merchant = MerchantRepo.getMerchant(merchant.getMerchantId());
+        System.out.println(merchant);
         Event event = new Event(MERCHANT_ID_GET_RESPONSE, new Object[] { merchant, correlationId });
         queue.publish(event);
     }

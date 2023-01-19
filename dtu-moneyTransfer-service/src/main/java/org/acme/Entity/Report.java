@@ -9,6 +9,7 @@ import java.util.UUID;
 
 /**
  *
+ * @author Kristoffer T. Pedersen s205354.
  * @author Oliver Brink Klenum s193625
  *
  */

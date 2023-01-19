@@ -14,13 +14,13 @@ import java.util.UUID;
 
 /**
  *
+ * @author Kristoffer T. Pedersen s205354.
  * @author Oliver Brink Klenum s193625
  *
  */
 public class PaymentService {
 
     private static final String PAYMENT_CREATED = "PaymentCreated";
-    private static final String CUSTOMER_REQUEST1 = "GetCustomerIdForTransferReq";
     private static final String CUSTOMER_REQUEST = "GetCustomerAccForTransferReq";
     private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
     private static final String REPORT_ALL_PAYMENTS = "ReportAllPay";
@@ -36,10 +36,9 @@ public class PaymentService {
         this.queue = q;
         this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
-        //this.queue.addHandler("CustomerIdResponse". this::handleCustomerIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
-        this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
         this.queue.addHandler("GetCustomerIdFromTokenRes", this::handleGetCustomerIdFromToken);
+        this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
         this.queue.addHandler("CustomerIdGetResponse", this::handleAllPaymentsMadeByCustomerReportRequest);
         this.queue.addHandler("MerchantIdGetResponse", this::handleAllPaymentsMadeByMerchantReportRequest);
 
@@ -113,9 +112,9 @@ public class PaymentService {
 
     private void transferMoneyAtBank(MoneyTransfer mt) {
         try {
-            bankService.transferMoneyFromTo(mt.getMAccountId(), mt.getCAccountId(),  new BigDecimal(mt.getAmount()), "Payment");
+            bankService.transferMoneyFromTo(mt.getCAccountId(), mt.getMAccountId(),  new BigDecimal(mt.getAmount()), "Payment");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error in bankService transfer for FastMoney");
         }
     }
 

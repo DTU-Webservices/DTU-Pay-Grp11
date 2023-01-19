@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
+ * @author Kristoffer Torngaard Pedersen 205354
  * @author Oliver Brink Klenum s193625
  *
  */
