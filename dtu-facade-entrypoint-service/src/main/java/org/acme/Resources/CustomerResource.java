@@ -16,9 +16,12 @@ import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 /**
+ *
  * @author Kristoffer T. Pedersen s205354.
  * @author Lauritz Pepke s191179.
  * @author Oliver Brink Klenum s193625
+ * @author Tobias Stærmose s205356
+ *
  */
 
 @Path("/customers")

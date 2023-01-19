@@ -21,6 +21,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+
+/**
+ * @author Oliver Brink Klenum s193625
+ */
 public class TokenManagementServiceSteps {
 
     MessageQueue queue = mock(MessageQueue.class);

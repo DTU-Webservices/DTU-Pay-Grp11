@@ -11,9 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
 /**
+ * Inspiration drawn from Hubert Baumeister 02267 Correlation Code Example
  *
- * @author Oliver Brink Klenum s193625
- * @author Tobias Stærmose sxxxxxx
+ * @author Oliver Brink Klenum s193625.
+ * @author Kristoffer Torngaard Pedersen s205354
+ * @author Tobias Stærmose s205356
+ *
  */
 
 public class TokenService {

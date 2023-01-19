@@ -11,7 +11,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Kristoffer Torngaard Pedersen s205354
+ * Inspiration drawn from Hubert Baumeister 02267 Correlation Code Example
+ *
+ * @author Kristoffer T. Pedersen s205354.
+ *
  */
 
 public class PaymentService {
