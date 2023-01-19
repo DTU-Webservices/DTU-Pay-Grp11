@@ -12,7 +12,8 @@ import org.acme.MerchantBankService;
 import org.acme.Repo.MerchantRepo;
 
 
-import java.util.concurrent.CompletableFuture;
+import java.util.UUID;
+
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -25,10 +26,15 @@ public class MerchantServiceSteps {
     MerchantBankService ms = new MerchantBankService(queue);
     Merchant merchant1;
     Merchant merchant2;
+    Merchant merchant3;
+    Merchant merchant4;
     Merchant expected1;
     Merchant expected2;
+    Merchant expected3;
     private CorrelationId correlationId1;
     private CorrelationId correlationId2;
+    private CorrelationId correlationId3;
+    private CorrelationId correlationId4;
 
 
     @When("a {string} event for a merchant is received")
@@ -88,4 +94,64 @@ public class MerchantServiceSteps {
     }
 
 
+    @Given("there is a merchant with empty merchant id")
+    public void thereIsAMerchantWithEmptyMerchantId() {
+        merchant3 = new Merchant();
+        correlationId3 = CorrelationId.randomId();
+        merchant3.setAccountId("test300");
+        assertNull(merchant3.getMerchantId());
+    }
+
+    @When("a {string} event for a report is received")
+    public void aEventForAReportIsReceived(String arg0) {
+        //add merchant to repo as a simulation
+        merchant3.setMerchantId(UUID.randomUUID());
+        MerchantRepo.addMerchant(merchant3);
+        Event event = new Event(arg0, new Object[] {merchant3, correlationId3});
+        ms.handleReportAllMerchantPaymentsRequest(event);
+    }
+
+    @Then("a {string} event is sent for a merchant with merchant id assigned")
+    public void aEventIsSentWithMerchantId(String arg0) {
+        expected3 = new Merchant();
+        expected3.setAccountId(merchant3.getAccountId());
+        expected3.setMerchantId(merchant3.getMerchantId());
+        System.out.println(merchant3);
+        var event = new Event(arg0, new Object[] {expected3, correlationId3});
+        verify(queue).publish(event);
+    }
+
+    @And("the merchant has an id assigned")
+    public void theMerchantHasAnIdAssigned() {
+        assertNotNull(MerchantRepo.getMerchant(expected3.getMerchantId()));
+    }
+
+    @Given("there is a merchant registered with non-empty values")
+    public void thereIsAMerchantRegisteredWithNonEmptyValues() {
+        merchant4 = new Merchant();
+        merchant4.setMerchantId(UUID.randomUUID());
+        merchant4.setAccountId("test4");
+        correlationId4 = CorrelationId.randomId();
+        MerchantRepo.addMerchant(merchant4);
+        assertNotNull(merchant4.getMerchantId());
+        assertNotNull(merchant4.getAccountId());
+    }
+
+    @When("a {string} event is received for a merchant account")
+    public void aEventIsReceivedForAMerchantAccount(String arg0) {
+        Event event = new Event(arg0, new Object[] {merchant4.getMerchantId(), correlationId4});
+        ms.handleMerchantAccountDelete(event);
+    }
+
+    @Then("a {string} event is sent to delete")
+    public void aEventIsSentToDelete(String arg0) {
+        System.out.println(merchant4);
+        var event = new Event(arg0, new Object[] {merchant4, correlationId4});
+        verify(queue).publish(event);
+    }
+
+    @And("the merchant account is deleted")
+    public void theMerchantAccountIsDeleted() {
+        assertNull(MerchantRepo.getMerchant(merchant4.getMerchantId()));
+    }
 }
