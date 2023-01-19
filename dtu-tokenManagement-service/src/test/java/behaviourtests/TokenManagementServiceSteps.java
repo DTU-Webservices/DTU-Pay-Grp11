@@ -34,7 +34,7 @@ public class TokenManagementServiceSteps {
     @When("a {string} event for a token is received")
     public void aEventIsReceived(String string) {
         token1 = new Token();
-        token1.setCustomerId(UUID.fromString("123e2167-e89b-12t3-a456-42665544"));
+        token1.setCustomerId(UUID.fromString("d541aa85-6fa8-4b4a-9719-c67929d8acdf"));
         token1.setQty("4");
         assertNull(token1.getTokenId());
         correlationId1 = CorrelationId.randomId();
@@ -44,7 +44,7 @@ public class TokenManagementServiceSteps {
     @Then("a {string} event is sent with the same correlation id")
     public void aEventIsSent(String string) {
         expected1 = new Token();
-        expected1.setCustomerId(UUID.fromString("123e2167-e89b-12t3-a456-42665544"));
+        expected1.setCustomerId(UUID.fromString("d541aa85-6fa8-4b4a-9719-c67929d8acdf"));
         expected1.setTokenId(correlationId1.getId());
         System.out.println(expected1);
         var event = new Event(string, new Object[] {expected1, correlationId1});

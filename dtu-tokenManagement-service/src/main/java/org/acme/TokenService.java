@@ -42,32 +42,26 @@ public class TokenService {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
-        // loop through qty and generate tokens
-        int tokenQty = Integer.parseInt(token.getQty());
-        if (TokenRepo.getToken(token.getCustomerId()) != null) {
-            if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0 && tokenQty <= 6) {
-                for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID());
-                }
-                TokenRepo.addToken(token);
-            } else if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1 && tokenQty <= 5) {
+        addTokensToTokenList(token);
 
-                for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID());
-                }
-                TokenRepo.addToken(token);
-            }
-        } else {
-            if (tokenQty <=6) {
-                for (int i = 0; i < tokenQty; i++) {
-                    token.addToken(UUID.randomUUID());
-                }
-                TokenRepo.addToken(token);
-            }
-
-        }
         Event event = new Event(TOKENS_GENERATED, new Object[] {token, correlationId});
         messageQueue.publish(event);
+    }
+
+    private void addTokensToTokenList(Token token) {
+        int tokenQty = Integer.parseInt(token.getQty());
+        int maxTokens;
+        if (TokenRepo.getToken(token.getCustomerId()) != null) {
+            maxTokens = (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0) ? 6 : 5;
+        } else {
+            maxTokens = 6;
+        }
+        if (tokenQty <= maxTokens) {
+            for (int i = 0; i < tokenQty; i++) {
+                token.addToken(UUID.randomUUID());
+            }
+            TokenRepo.addToken(token);
+        }
     }
 
     // Customer Gets all tokens assigned to his account.
