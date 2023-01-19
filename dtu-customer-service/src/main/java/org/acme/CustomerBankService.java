@@ -11,6 +11,7 @@ import java.util.UUID;
  *
  * @author Kristoffer T. Pedersen
  * @author Oliver Brink Klenum
+ * @author Lauritz Pepke
  *
  */
 

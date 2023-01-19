@@ -39,8 +39,8 @@ public class PaymentService {
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
         //this.queue.addHandler("CustomerIdResponse". this::handleCustomerIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
-        this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
         this.queue.addHandler("GetCustomerIdFromTokenRes", this::handleGetCustomerIdFromToken);
+        this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
         this.queue.addHandler("CustomerIdGetResponse", this::handleAllPaymentsMadeByCustomerReportRequest);
         this.queue.addHandler("MerchantIdGetResponse", this::handleAllPaymentsMadeByMerchantReportRequest);
 

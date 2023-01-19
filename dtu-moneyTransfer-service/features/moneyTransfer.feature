@@ -12,3 +12,6 @@ Feature: Transfer Money
     When a "CustomerAccResponse" event is received with a cAccountId
     Then a "PaymentCreated" event is with the money transfer and correlation id
     And the money transfer has an mAccountId and cAccountId assigned
+
+  Scenario: A report is generated
+

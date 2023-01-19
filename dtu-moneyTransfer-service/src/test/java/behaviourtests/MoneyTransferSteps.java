@@ -37,9 +37,6 @@ public class MoneyTransferSteps {
     MessageQueue queue = mock(MessageQueue.class);
 
     PaymentService ps = new PaymentService(queue);
-
-    private CompletableFuture<Payment> registeredPayment = new CompletableFuture<>();
-    private Map<Payment, CorrelationId> correlationIds = new HashMap<>();
     Payment payment;
     MoneyTransfer moneyTransfer;
     Merchant merchant;
