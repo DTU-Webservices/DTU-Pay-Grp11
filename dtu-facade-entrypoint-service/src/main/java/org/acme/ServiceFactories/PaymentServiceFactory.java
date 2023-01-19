@@ -4,7 +4,9 @@ import messaging.implementations.RabbitMqQueue;
 import org.acme.Services.PaymentService;
 
 /**
- * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ * Inspiration drawn from Hubert Baumeister 02267 Correlation Code Example
+ *
+ * @author Kristoffer T. Pedersen s205354.
  */
 
 public class PaymentServiceFactory {

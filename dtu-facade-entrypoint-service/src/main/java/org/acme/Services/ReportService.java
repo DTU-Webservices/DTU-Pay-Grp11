@@ -13,9 +13,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * Inspiration drawn from Hubert Baumeister 02267 Correlation Code Example
  *
- * @author Kristoffer Torngaard Pedersen s205354
- * @author Oliver Brink Klenum s193625
+ * @author Kristoffer T. Pedersen s205354.
+ * @author Tobias Stærmose s205356
+ * @author Oliver Brink Klenum s193625.
  *
  */
 public class ReportService {

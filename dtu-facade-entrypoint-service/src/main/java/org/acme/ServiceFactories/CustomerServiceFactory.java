@@ -5,7 +5,7 @@ import org.acme.Services.CustomerService;
 
 
 /**
- * Inspiration drawn from Hubert Baumeiser 02267 Correlation Code Example
+ * Inspiration drawn from Hubert Baumeister 02267 Correlation Code Example
  *
  * @author Kristoffer T. Pedersen s205354.
  * @author Lauritz Pepke s191179.

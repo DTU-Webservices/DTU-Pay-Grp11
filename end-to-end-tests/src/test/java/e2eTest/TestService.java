@@ -5,6 +5,10 @@ import e2eTest.Entities.*;
 import javax.ws.rs.client.Entity;
 import java.util.UUID;
 
+/**
+ * @author Kristoffer T. Pedersen s205354
+ */
+
 public class TestService {
 
     public Merchant registerMerchant(Merchant merchant) {

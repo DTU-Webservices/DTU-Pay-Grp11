@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *  @author Kristoffer Torngaard Pedersen 205354
+ *  @author Lauritz Pepke s191179
  */
 
 @Path("/reports")

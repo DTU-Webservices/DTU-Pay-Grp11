@@ -25,6 +25,8 @@ import static org.mockito.Mockito.verify;
 
 /**
  * SOURCE: HUBERT BAUMEISTER: STUDENT_REGISTRATION_CORRELATION PROJECT
+ *
+ * @source Lauritz Pepke s191179.
  */
 
 public class MoneyTransferSteps {

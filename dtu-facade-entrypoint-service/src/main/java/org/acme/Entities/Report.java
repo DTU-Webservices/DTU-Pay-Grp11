@@ -9,9 +9,11 @@ import java.util.UUID;
 
 /**
  *
- * @author Oliver Brink Klenum s193625
+ * @author Kristoffer T. Pedersen s205354.
+ * @author Lauritz Pepke s191179.
  *
  */
+
 @Data
 public class Report implements Serializable {
 

@@ -24,7 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-
+/**
+ * @author Oliver Brink Klenum s193625
+ */
 
 public class ReportingServiceSteps {
     private static HashMap<UUID, MoneyTransfer> moneyTransferMap = new HashMap<>();
