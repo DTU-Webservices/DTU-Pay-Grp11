@@ -7,6 +7,10 @@ import org.acme.Services.ReportService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+/**
+ *  @author Kristoffer Torngaard Pedersen 205354
+ */
+
 @Path("/reports")
 public class ReportResource {
 

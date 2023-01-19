@@ -4,4 +4,5 @@ e2eTest\CucumberTest.class
 e2eTest\Customer.class
 e2eTest\AccountRegSteps.class
 e2eTest\WebTargetFactory.class
+e2eTest\MerchantMakesPaymentSteps.class
 e2eTest\RegService.class

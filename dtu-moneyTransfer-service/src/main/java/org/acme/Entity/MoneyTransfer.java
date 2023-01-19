@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * @Author Kristoffer T. Pedersen
+ * @author Kristoffer T. Pedersen s205354.
  */
 
 @Data

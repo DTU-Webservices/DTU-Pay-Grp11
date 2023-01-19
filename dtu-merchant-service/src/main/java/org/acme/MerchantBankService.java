@@ -7,6 +7,9 @@ import org.acme.Repo.MerchantRepo;
 
 import java.util.UUID;
 
+/**
+ * @author Kristoffer Torngaard Pedersen s205354
+ */
 
 public class MerchantBankService {
 

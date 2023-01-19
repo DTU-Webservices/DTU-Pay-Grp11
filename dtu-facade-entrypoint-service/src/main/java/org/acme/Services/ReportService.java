@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
+ * @author Kristoffer Torngaard Pedersen s205354
  * @author Oliver Brink Klenum s193625
  *
  */

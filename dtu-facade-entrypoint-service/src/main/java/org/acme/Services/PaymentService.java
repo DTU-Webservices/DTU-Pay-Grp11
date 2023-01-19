@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Author Kristoffer T. Pedersen, Lauritz Pepke
+ * @author Kristoffer Torngaard Pedersen s205354
  */
 
 public class PaymentService {

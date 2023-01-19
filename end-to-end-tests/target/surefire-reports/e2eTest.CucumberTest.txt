@@ -1,56 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: e2eTest.CucumberTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.851 s <<< FAILURE! - in e2eTest.CucumberTest
-Money is successfully Transferred from Customer to Merchant  Time elapsed: 0.047 s  <<< ERROR!
-io.cucumber.junit.UndefinedStepException: 
-The step 'there is a payment with empty amount, token and mid' and 10 other step(s) are undefined.
-You can implement these steps using the snippet(s) below:
-
-@Given("there is a payment with empty amount, token and mid")
-public void thereIsAPaymentWithEmptyAmountTokenAndMid() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@When("the payment is being initiated")
-public void thePaymentIsBeingInitiated() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@Then("a {string} event is sent")
-public void aEventIsSent(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@When("a {string} event for the payment is sent with non-empty amount")
-public void aEventForThePaymentIsSentWithNonEmptyAmount(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@When("a {string} event for the payment is sent with non-empty mid")
-public void aEventForThePaymentIsSentWithNonEmptyMid(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@When("a {string} event for the payment is sent with non-empty token")
-public void aEventForThePaymentIsSentWithNonEmptyToken(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@Then("the payment is set with an amount, a token and a mid")
-public void thePaymentIsSetWithAnAmountATokenAndAMid() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@When("the {string} event for a payment is sent")
-public void theEventForAPaymentIsSent(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-@Then("the transfer has been made")
-public void theTransferHasBeenMade() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.943 s <<< FAILURE! - in e2eTest.CucumberTest
+Merchant makes Payment  Time elapsed: 0.111 s  <<< ERROR!
+io.cucumber.java.PendingException: TODO: implement me
 

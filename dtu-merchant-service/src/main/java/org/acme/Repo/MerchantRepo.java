@@ -8,6 +8,9 @@ import org.acme.Merchant;
 import java.util.HashMap;
 import java.util.UUID;
 
+/**
+ * @author Kristoffer Torngaard Pedersen s205354
+ */
 @Data
 public class MerchantRepo {
     private static HashMap<UUID, Merchant> Merchants = new HashMap<>();
