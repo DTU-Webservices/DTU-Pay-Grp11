@@ -1,8 +1,12 @@
-e2eTest\Merchant.class
-e2eTest\Payment.class
+e2eTest\TestService.class
 e2eTest\CucumberTest.class
-e2eTest\Customer.class
+e2eTest\Entities\Merchant.class
+e2eTest\Entities\Customer.class
+e2eTest\Entities\Payment.class
 e2eTest\AccountRegSteps.class
+e2eTest\Entities\Report.class
 e2eTest\WebTargetFactory.class
 e2eTest\MerchantMakesPaymentSteps.class
-e2eTest\RegService.class
+e2eTest\Entities\Token.class
+e2eTest\Entities\MoneyTransfer.class
+e2eTest\ReportSteps.class
