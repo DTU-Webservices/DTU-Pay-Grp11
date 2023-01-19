@@ -13,6 +13,9 @@ import com.rabbitmq.client.DeliverCallback;
 import messaging.Event;
 import messaging.MessageQueue;
 
+/**
+ * @Source Hubert Baumeister Correlation Example provided in 02267
+ */
 public class RabbitMqQueue implements MessageQueue {
 
 	private static final String TOPIC = "events";
