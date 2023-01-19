@@ -47,7 +47,7 @@ public class CustomerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response generateTokens(Token token) {
-        cs.generateCustomerTokens(token);
+        ts.generateTokens(token);
         return Response.ok()
                 .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
                 .build();
@@ -68,7 +68,7 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTokensAmount(@PathParam("customerId") String customerId) {
         var token = ts.getTokenForPayment(UUID.fromString(customerId));
-        var tokensAmount = cs.getCustomerTokensAmount(UUID.fromString(customerId));
+        var tokensAmount = ts.getTokensAmount(UUID.fromString(customerId));
         if (tokensAmount == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {

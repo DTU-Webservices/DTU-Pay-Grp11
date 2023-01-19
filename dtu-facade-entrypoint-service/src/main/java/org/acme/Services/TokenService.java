@@ -20,9 +20,9 @@ public class TokenService {
 
     private static final String TOKENS_GENERATE_REQ = "TokensGenerateReq";
 
-    private static final String TOKEN_GET_ACCOUNT_REQ = "TokenGetAccountReq";
-
     private static final String TOKENS_GET_TOKEN_REQ = "TokensGetTokenReq";
+
+    private static final String TOKENS_AMOUNT_GET_REQ = "TokensAmountGetReq";
 
 
     private final MessageQueue queue;
@@ -32,25 +32,14 @@ public class TokenService {
     public TokenService(MessageQueue q) {
         queue = q;
         queue.addHandler("TokensGenerated", this::handleTokensGenerated);
-        queue.addHandler("TokenGetAccount", this::handleTokenGetAccount);
         queue.addHandler("TokensGetToken", this::handleTokensGetToken);
+        queue.addHandler("TokensAmountGet", this::handleTokensAmountGet);
     }
 
     public Token generateTokens(Token token) {
         var correlationId = CorrelationId.randomId();
         pendingRequests.put(correlationId, new CompletableFuture<>());
         Event event = new Event(TOKENS_GENERATE_REQ, new Object[] { token, correlationId });
-        queue.publish(event);
-        return pendingRequests.get(correlationId).join();
-    }
-    public Token getTokenByCustomerId(UUID customerId) {
-        var correlationId = CorrelationId.randomId();
-        Token token = new Token();
-        token.setCustomerId(customerId);
-        token.setTokenId(null);
-        token.setTokens(null);
-        pendingRequests.put(correlationId, new CompletableFuture<>());
-        Event event = new Event(TOKEN_GET_ACCOUNT_REQ, new Object[] {token, correlationId});
         queue.publish(event);
         return pendingRequests.get(correlationId).join();
     }
@@ -67,15 +56,21 @@ public class TokenService {
         return pendingRequests.get(correlationId).join();
     }
 
+    public Token getTokensAmount(UUID customerId) {
+        var correlationId = CorrelationId.randomId();
+        Token token = new Token();
+        token.setCustomerId(customerId);
+        token.setTokenId(null);
+        token.setTokens(null);
+        pendingRequests.put(correlationId, new CompletableFuture<>());
+        Event event = new Event(TOKENS_AMOUNT_GET_REQ, new Object[] { token, correlationId });
+        queue.publish(event);
+        return pendingRequests.get(correlationId).join();
+    }
+
     private void handleTokensGenerated(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
-        pendingRequests.get(correlationId).complete(token);
-    }
-
-    private void handleTokenGetAccount(Event event) {
-        var token = event.getArgument(0, Token.class);
-        var correlationId = event.getArgument(1, CorrelationId.class);
         pendingRequests.get(correlationId).complete(token);
     }
 
@@ -83,5 +78,11 @@ public class TokenService {
         var token = event.getArgument(0, Token.class);
         var correlationId = event.getArgument(1, CorrelationId.class);
         pendingRequests.get(correlationId).complete(token);
+    }
+
+    public void handleTokensAmountGet(Event ev) {
+        var token = ev.getArgument(0, Token.class);
+        var correlationid = ev.getArgument(1, CorrelationId.class);
+        pendingRequests.get(correlationid).complete(token);
     }
 }
