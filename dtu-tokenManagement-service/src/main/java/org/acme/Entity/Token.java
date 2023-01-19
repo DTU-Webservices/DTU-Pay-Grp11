@@ -3,6 +3,7 @@ package org.acme.Entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class Token implements Serializable {
 
     private String qty;
     // List of tokens customer has
-    private List<UUID> tokens;
+    private List<UUID> tokens = new ArrayList<>();
 
     public void addToken(UUID token) {
         tokens.add(token);
