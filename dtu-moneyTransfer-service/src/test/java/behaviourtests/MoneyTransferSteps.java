@@ -129,7 +129,7 @@ public class MoneyTransferSteps {
             ps.handleCustomerAccountIdGetReq(event);
             throw new BankServiceException_Exception("", faultInfo);
         } catch (BankServiceException_Exception e) {
-            System.out.println("Debtor or Creditor doesnt exits in this test");
+            System.out.println("Debtor or Creditor from this test does not exist in the bank");
         }
     }
 
