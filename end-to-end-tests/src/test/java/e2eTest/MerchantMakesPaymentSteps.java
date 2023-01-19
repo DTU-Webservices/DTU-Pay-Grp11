@@ -1,14 +1,32 @@
 package e2eTest;
 
+import dtu.ws.fastmoney.BankService;
+import dtu.ws.fastmoney.BankServiceException_Exception;
+import dtu.ws.fastmoney.BankServiceService;
+import dtu.ws.fastmoney.User;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.math.BigDecimal;
+import java.util.concurrent.CompletableFuture;
+
 public class MerchantMakesPaymentSteps {
+
+    private final BankService bs = new BankServiceService().getBankServicePort();
+
+    CompletableFuture completableFuture = new CompletableFuture<>();
+
     @Given("Given a user with a cprNumber of {string} and a firstName of {string} and a LastName of {string}")
-    public void givenAUserWithACprNumberOfAndAFirstNameOfAndALastNameOf(String arg0, String arg1, String arg2) {
-        throw new io.cucumber.java.PendingException();
+    public void givenAUserWithACprNumberOfAndAFirstNameOfAndALastNameOf(String arg0, String arg1, String arg2) throws BankServiceException_Exception {
+        System.out.println("AOQIWJEOQWJEIOJQWEOIJQWEOIJQWEOIJQWEOIJQWEOIJ");
+//        User user = new User();
+//        user.setCprNumber(arg0);
+//        user.setFirstName(arg1);
+//        user.setLastName(arg2);
+//        bs.createAccountWithBalance(user, BigDecimal.valueOf(1000));
     }
 
     @And("a user with a cprNumber of {string} and a firstName of {string} and a LastName of {string}")
@@ -54,5 +72,11 @@ public class MerchantMakesPaymentSteps {
     @Then("Paul can see his balance of {int}")
     public void paulCanSeeHisBalanceOf(int arg0) {
         throw new io.cucumber.java.PendingException();
+    }
+
+    @After("Delete")
+    public  void deleteAfterTest() {
+        System.out.println("Deleting Paul");
+
     }
 }

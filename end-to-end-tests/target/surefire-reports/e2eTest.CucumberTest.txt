@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: e2eTest.CucumberTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.943 s <<< FAILURE! - in e2eTest.CucumberTest
-Merchant makes Payment  Time elapsed: 0.111 s  <<< ERROR!
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.204 s <<< FAILURE! - in e2eTest.CucumberTest
+Merchant makes Payment  Time elapsed: 2.758 s  <<< ERROR!
 io.cucumber.java.PendingException: TODO: implement me
 
