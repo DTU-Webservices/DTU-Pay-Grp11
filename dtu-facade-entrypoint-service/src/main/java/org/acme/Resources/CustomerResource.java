@@ -47,10 +47,18 @@ public class CustomerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response generateTokens(Token token) {
+        var tokensAmountBeforeGenerate = ts.getTokensAmount(token.getCustomerId());
         ts.generateTokens(token);
-        return Response.ok()
-                .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
-                .build();
+        var tokensAmountAfterGenerate = ts.getTokensAmount(token.getCustomerId());
+        if (tokensAmountAfterGenerate.getTokens().size() != tokensAmountBeforeGenerate.getTokens().size()) {
+            return Response.ok()
+                    .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
+                    .build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Token generation not allowed (Use your existing tokens or request less tokens)")
+                    .build();
+        }
     }
 
     @DELETE
