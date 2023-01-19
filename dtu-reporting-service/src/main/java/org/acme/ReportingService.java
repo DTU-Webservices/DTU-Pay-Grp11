@@ -22,21 +22,21 @@ public class ReportingService {
         this.queue.addHandler("ReportAllMerchantPay", this::handleAllPaymentsMadeByMerchantReport);
     }
 
-    private void handleAllPaymentsReport(Event ev) {
+    public void handleAllPaymentsReport(Event ev) {
         Report report = ev.getArgument(0, Report.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
         Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});
         queue.publish(event);
     }
 
-    private void handleAllPaymentsMadeByCustomerReport(Event ev) {
+    public void handleAllPaymentsMadeByCustomerReport(Event ev) {
         Report report = ev.getArgument(0, Report.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
         Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});
         queue.publish(event);
     }
 
-    private void handleAllPaymentsMadeByMerchantReport(Event ev) {
+    public void handleAllPaymentsMadeByMerchantReport(Event ev) {
         Report report = ev.getArgument(0, Report.class);
         CorrelationId correlationId = ev.getArgument(1, CorrelationId.class);
         Event event = new Event(REPORT_ALL_PAYMENTS_RESP, new Object[] {report, correlationId});

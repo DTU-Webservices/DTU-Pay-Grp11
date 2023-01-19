@@ -1,4 +1,4 @@
-Feature: Token Generation Feature
+Feature: Token Service Feature
 
   Scenario: Token Generation
     When a "TokensGenerateReq" event for a token is received
