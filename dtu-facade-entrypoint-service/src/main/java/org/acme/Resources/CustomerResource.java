@@ -47,10 +47,26 @@ public class CustomerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response generateTokens(Token token) {
-        var tokensAmountBeforeGenerate = ts.getTokensAmount(token.getCustomerId());
+
+        var isAccountRegistered = ts.getTokensAmount((token.getCustomerId()));
+        System.out.println(isAccountRegistered + " isAccountRegistered Before if statement!!!!!!!!!!");
+        if (isAccountRegistered == null ) {
+            System.out.println("Account NULL!!!!!!!!!!!!!!!!!!!!d");
+            if (Integer.parseInt(token.getQty()) <= 6) {
+                return Response.ok()
+                        .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
+                        .build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Token generation not allowed (request less tokens e.g. \"4")
+                        .build();
+            }
+        }
+
+        int tokensAmountBeforeGenerate = ts.getTokensAmount(token.getCustomerId()).getTokens().size();
         ts.generateTokens(token);
-        var tokensAmountAfterGenerate = ts.getTokensAmount(token.getCustomerId());
-        if (tokensAmountAfterGenerate.getTokens().size() != tokensAmountBeforeGenerate.getTokens().size()) {
+        int tokensAmountAfterGenerate = ts.getTokensAmount(token.getCustomerId()).getTokens().size();
+        if (tokensAmountAfterGenerate > tokensAmountBeforeGenerate) {
             return Response.ok()
                     .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
                     .build();
