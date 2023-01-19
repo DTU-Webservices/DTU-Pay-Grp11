@@ -56,7 +56,7 @@ public class CustomerResource {
     @DELETE
     @Path("/{customerId}")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteMerchant(@PathParam("customerId") String customerId) {
+    public Response deleteCustomer(@PathParam("customerId") String customerId) {
         if (cs.deleteCustomer(customerId)) {
             return Response.ok("Customer deleted").build();
         }
