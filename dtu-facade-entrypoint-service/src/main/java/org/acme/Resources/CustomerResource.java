@@ -68,7 +68,7 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTokensAmount(@PathParam("customerId") String customerId) {
         var token = ts.getTokenForPayment(UUID.fromString(customerId));
-        var tokensAmount = cs.getCustomerTokensAmount(UUID.fromString(customerId));
+        var tokensAmount = ts.getTokensAmount(UUID.fromString(customerId));
         if (tokensAmount == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {

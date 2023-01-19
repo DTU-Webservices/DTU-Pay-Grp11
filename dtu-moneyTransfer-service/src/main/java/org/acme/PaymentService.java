@@ -20,7 +20,6 @@ import java.util.UUID;
 public class PaymentService {
 
     private static final String PAYMENT_CREATED = "PaymentCreated";
-    private static final String CUSTOMER_REQUEST1 = "GetCustomerIdForTransferReq";
     private static final String CUSTOMER_REQUEST = "GetCustomerAccForTransferReq";
     private static final String MERCHANT_REQUEST = "GetMerchantAccForTransferReq";
     private static final String REPORT_ALL_PAYMENTS = "ReportAllPay";
@@ -36,7 +35,6 @@ public class PaymentService {
         this.queue = q;
         this.queue.addHandler("PaymentCreateReq", this::handlePaymentRequested);
         this.queue.addHandler("MerchantAccResponse", this::handleMerchantAccountIdGetReq);
-        //this.queue.addHandler("CustomerIdResponse". this::handleCustomerIdGetReq);
         this.queue.addHandler("CustomerAccResponse", this::handleCustomerAccountIdGetReq);
         this.queue.addHandler("ReportAllPayReq", this::handleAllPaymentsReportRequest);
         this.queue.addHandler("GetCustomerIdFromTokenRes", this::handleGetCustomerIdFromToken);
