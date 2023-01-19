@@ -47,7 +47,7 @@ public class CustomerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response generateTokens(Token token) {
-        cs.generateCustomerTokens(token);
+        ts.generateTokens(token);
         return Response.ok()
                 .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
                 .build();

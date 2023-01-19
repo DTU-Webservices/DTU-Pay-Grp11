@@ -17,7 +17,7 @@ import java.util.UUID;
  *
  */
 
-public class TokenGenerationService {
+public class TokenService {
 
     private static final String TOKENS_GENERATED = "TokensGenerated";
     private static final String TOKEN_GET_ACCOUNT = "TokenGetAccount";
@@ -28,7 +28,7 @@ public class TokenGenerationService {
 
     MessageQueue messageQueue;
 
-    public TokenGenerationService(MessageQueue q) {
+    public TokenService(MessageQueue q) {
         this.messageQueue = q;
         this.messageQueue.addHandler("TokensGenerateReq", this::handleTokensGenerate);
         this.messageQueue.addHandler("TokenGetAccountReq", this::handleTokenGetAccount);
@@ -38,7 +38,7 @@ public class TokenGenerationService {
         this.messageQueue.addHandler("GetCustomerIdFromTokenReq", this::handleGetCustomerIdFromToken);
     }
     // Customer Gets {qty} tokens assigned to his account.
-    private void handleTokensGenerate(Event ev) {
+    public void handleTokensGenerate(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
