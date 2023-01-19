@@ -9,7 +9,7 @@ import java.util.UUID;
 /**
  *
  * @author Oliver Brink Klenum s193625
- *
+ * @author Tobias Stærmose s205356
  */
 @Data
 public class Token implements Serializable {
