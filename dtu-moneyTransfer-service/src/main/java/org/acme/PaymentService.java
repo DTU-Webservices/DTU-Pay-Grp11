@@ -114,7 +114,7 @@ public class PaymentService {
 
     private void transferMoneyAtBank(MoneyTransfer mt) {
         try {
-            bankService.transferMoneyFromTo(mt.getMAccountId(), mt.getCAccountId(),  new BigDecimal(mt.getAmount()), "Payment");
+            bankService.transferMoneyFromTo(mt.getCAccountId(), mt.getMAccountId(),  new BigDecimal(mt.getAmount()), "Payment");
         } catch (Exception e) {
             System.out.println("Error in bankService transfer for FastMoney");
         }

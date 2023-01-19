@@ -1,5 +1,7 @@
 package e2eTest;
 
+import e2eTest.Entities.Customer;
+import e2eTest.Entities.Merchant;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,9 +12,13 @@ import java.util.concurrent.CompletableFuture;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+/**
+ * @author Kristoffer T. Pedersen s205354
+ */
+
 public class AccountRegSteps {
 
-    RegService service = new RegService();
+    TestService service = new TestService();
 
     private Merchant merchant;
     private Customer customer;

@@ -73,9 +73,7 @@ public class CustomerResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
             return Response.ok()
-                    .entity("Token ready for new payment: " + token.getTokens().get(0) +
-                            "\n" + tokensAmount.getTokens().size() +
-                            " tokens available for " + tokensAmount.getCustomerId())
+                    .entity(token.getTokens().get(0))
                     .build();
         }
     }
