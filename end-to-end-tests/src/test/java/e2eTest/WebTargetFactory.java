@@ -13,4 +13,8 @@ public class WebTargetFactory {
         client = ClientBuilder.newClient();
         return client.target("http://localhost:8080/");
     }
+
+    public static void close() {
+        client.close();
+    }
 }
