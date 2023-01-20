@@ -17,7 +17,7 @@ public class Token implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID tokenId;
     private UUID customerId;
-
+    private String currentToken;
     private String qty;
     // List of tokens customer has
     private List<UUID> tokens = new ArrayList<>();

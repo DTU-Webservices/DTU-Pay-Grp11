@@ -70,14 +70,14 @@ public class CustomerResource {
     @GET
     @Path("/tokens/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTokensAmount(@PathParam("customerId") String customerId) {
+    public Response getTokenForPayment(@PathParam("customerId") String customerId) {
         var token = ts.getTokenForPayment(UUID.fromString(customerId));
         var tokensAmount = ts.getTokensAmount(UUID.fromString(customerId));
-        if (tokensAmount == null) {
+        if (tokensAmount == null || customerId.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
             return Response.ok()
-                    .entity(token.getTokens().get(0))
+                    .entity(token.getCurrentToken())
                     .build();
         }
     }

@@ -84,6 +84,8 @@ public class TokenManagementServiceSteps {
         correlationId2 = CorrelationId.randomId();
         token2.setTokenId(correlationId2.getId());
         token2.addToken(UUID.fromString("d843aa85-6fa8-4b4a-9719-c67929d8acdf"));
+        token2.setQty("1");
+        token2.setCurrentToken(String.valueOf(token2.getTokens().get(0)));
         TokenRepo.addToken(token2);
         assertNotNull(TokenRepo.getToken(token2.getCustomerId()));
     }
@@ -100,6 +102,8 @@ public class TokenManagementServiceSteps {
         expected2.setCustomerId(UUID.fromString("d007aa85-6fa8-4b4a-9719-c67929d8acdf"));
         expected2.setTokenId(correlationId2.getId());
         expected2.addToken(UUID.fromString("d843aa85-6fa8-4b4a-9719-c67929d8acdf"));
+        expected2.setQty("1");
+        expected2.setCurrentToken(String.valueOf(expected2.getTokens().get(0)));
         var event = new Event(string, new Object[] {expected2, correlationId2});
         verify(queue).publish(event);
     }
