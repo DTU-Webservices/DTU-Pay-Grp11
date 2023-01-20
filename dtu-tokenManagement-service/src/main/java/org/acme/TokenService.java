@@ -14,6 +14,7 @@ import java.util.UUID;
  *
  * @author Oliver Brink Klenum s193625
  * @author Tobias Stærmose s205356
+ * @author Kristoffer T. Pedersen s205354
  *
  */
 
@@ -38,35 +39,62 @@ public class TokenService {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
         token.setTokenId(correlationId.getId());
-        addTokensToTokenList(token);
+        var tokenOut = addTokensToTokenList(token);
 
-        Event event = new Event(TOKENS_GENERATED, new Object[] {token, correlationId});
+        Event event = new Event(TOKENS_GENERATED, new Object[] {tokenOut, correlationId});
         messageQueue.publish(event);
     }
 
-    private void addTokensToTokenList(Token token) {
+    private Token addTokensToTokenList(Token token) {
         int tokenQty = Integer.parseInt(token.getQty());
-        int maxTokens;
         if (TokenRepo.getToken(token.getCustomerId()) != null) {
-            maxTokens = (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0) ? 6 : 5;
-        } else {
-            maxTokens = 6;
-        }
-        if (tokenQty <= maxTokens) {
-            for (int i = 0; i < tokenQty; i++) {
-                token.addToken(UUID.randomUUID());
+            if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 0 && tokenQty <= 6) {
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID());
+                }
+                TokenRepo.addToken(token);
+                token.setQty(Integer.toString(tokenQty));
+            } else if (TokenRepo.getNumberOfTokens(token.getCustomerId()) == 1 && tokenQty <= 5) {
+
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID());
+                }
+                TokenRepo.addToken(token);
+                token.setQty(Integer.toString(tokenQty));
+            } else {
+                token.setQty("0");
+
             }
-            TokenRepo.addToken(token);
+        } else {
+            if (tokenQty <= 6) {
+                for (int i = 0; i < tokenQty; i++) {
+                    token.addToken(UUID.randomUUID());
+                }
+                TokenRepo.addToken(token);
+                token.setQty(Integer.toString(tokenQty));
+            } else {
+                token.setQty("0");
+            }
         }
+        return token;
     }
     // Customer Gets a specific token assigned to his account.
     public void handleTokensGetToken(Event ev) {
         var token = ev.getArgument(0, Token.class);
         var correlationId = ev.getArgument(1, CorrelationId.class);
-        token = TokenRepo.getToken(token.getCustomerId());
-        Event event = new Event(TOKENS_GET_TOKEN, new Object[] {token, correlationId});
+        var tokenOut = checkIfTokenExistsInList(token);
+        Event event = new Event(TOKENS_GET_TOKEN, new Object[] {tokenOut, correlationId});
         messageQueue.publish(event);
+    }
 
+    private Token checkIfTokenExistsInList(Token token) {
+        token = TokenRepo.getToken(token.getCustomerId());
+        if (token.getTokens().isEmpty()) {
+            token.setCurrentToken("No tokens available");
+        } else {
+            token.setCurrentToken(token.getTokens().get(0).toString());
+        }
+        return token;
     }
 
     public void handleTokensAmountGet(Event ev) {

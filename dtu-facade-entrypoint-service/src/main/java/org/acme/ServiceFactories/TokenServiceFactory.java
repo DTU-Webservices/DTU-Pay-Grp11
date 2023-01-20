@@ -4,9 +4,10 @@ import messaging.implementations.RabbitMqQueue;
 import org.acme.Services.TokenService;
 
 /**
- * Inspiration drawn from Hubert Baumeiser 02267 Correlation Code Example
+ * Inspiration drawn from Hubert Baumeister 02267 Correlation Code Example
+ *
  * @author Oliver Brink Klenum s193625.
- * @author Tobias Stærmose xxxxxxx.
+ * @author Tobias Stærmose s205356.
  *
  */
 

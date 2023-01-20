@@ -8,6 +8,8 @@ import org.acme.Entity.Report;
 /**
  *
  * @author Oliver Brink Klenum s193625
+ * @author Kristoffer Torngaard Pedersen
+ * @author Tobias Stærmose
  *
  */
 public class ReportingService {

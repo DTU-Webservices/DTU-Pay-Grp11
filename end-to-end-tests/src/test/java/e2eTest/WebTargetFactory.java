@@ -4,6 +4,9 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
+/**
+ * @author Kristoffer T. Pedersen s205354
+ */
 
 public class WebTargetFactory {
     static Client client;

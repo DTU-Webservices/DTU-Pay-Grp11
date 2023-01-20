@@ -5,6 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * @author Oliver Brink Klenum s193625.
+ */
 @Data
 public class MoneyTransfer implements Serializable {
 

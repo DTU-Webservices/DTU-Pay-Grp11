@@ -16,9 +16,12 @@ import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 /**
+ *
  * @author Kristoffer T. Pedersen s205354.
  * @author Lauritz Pepke s191179.
  * @author Oliver Brink Klenum s193625
+ * @author Tobias Stærmose s205356
+ *
  */
 
 @Path("/customers")
@@ -47,9 +50,10 @@ public class CustomerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response generateTokens(Token token) {
-        ts.generateTokens(token);
+        var tokenRes = ts.generateTokens(token);
+        System.out.println(tokenRes);
         return Response.ok()
-                .entity(token.getQty() +" tokens generated to " + token.getCustomerId())
+                .entity(tokenRes.getQty() +" tokens generated to " + tokenRes.getCustomerId())
                 .build();
     }
 
@@ -66,14 +70,14 @@ public class CustomerResource {
     @GET
     @Path("/tokens/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTokensAmount(@PathParam("customerId") String customerId) {
+    public Response getTokenForPayment(@PathParam("customerId") String customerId) {
         var token = ts.getTokenForPayment(UUID.fromString(customerId));
         var tokensAmount = ts.getTokensAmount(UUID.fromString(customerId));
-        if (tokensAmount == null) {
+        if (tokensAmount == null || customerId.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
             return Response.ok()
-                    .entity(token.getTokens().get(0))
+                    .entity(token.getCurrentToken())
                     .build();
         }
     }
